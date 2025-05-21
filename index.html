@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Festival Schedule</title>
+    <style>
+        /* Base styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Archivo Narrow', Arial, sans-serif;
+        }
+        
+        body {
+            font-family: 'Archivo Narrow', Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* Color palette */
+        :root {
+            --dark-blue-1: #000814;
+            --dark-blue-2: #001D3D;
+            --dark-blue-3: #003566;
+            --yellow-1: #FFC300;
+            --yellow-2: #FFD60A;
+            --white: #ffffff;
+            --light-gray: #f5f5f5;
+            --gray: #dddddd;
+        }
+        
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .header h1 {
+            color: var(--dark-blue-1);
+            margin-bottom: 10px;
+        }
+        
+        /* Filters */
+        .filters {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: var(--light-gray);
+            border-radius: 5px;
+        }
+        
+        .filter-group {
+            display: flex;
+            align-items: center;
+        }
+        
+        .filter-select {
+            padding: 8px 12px;
+            border: 1px solid var(--gray);
+            border-radius: 4px;
+            margin-right: 10px;
+            background-color: white;
+            position: relative;
+            min-width: 150px;
+        }
+        
+        .search-box {
+            padding: 8px 12px;
+            border: 1px solid var(--gray);
+            border-radius: 4px;
+            width: 200px;
+        }
+        
+        /* Schedule grid */
+        .schedule-container {
+            display: flex;
+            overflow-x: auto;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            border: 1px solid var(--gray);
+        }
+        
+        .time-column {
+            min-width: 100px;
+            background-color: var(--light-gray);
+            border-right: 1px solid var(--gray);
+        }
+        
+        .stage-column {
+            min-width: 300px;
+            flex-grow: 1;
+            border-right: 1px solid var(--gray);
+            position: relative;
+        }
+        
+        .stage-column:last-child {
+            border-right: none;
+        }
+        
+        .column-header {
+            padding: 15px;
+            text-align: center;
+            font-weight: bold;
+            background-color: var(--dark-blue-2);
+            color: white;
+            position: sticky;
+            top: 0;
+        }
+        
+        .time-slot {
+            padding: 10px;
+            text-align: center;
+            border-bottom: 1px solid var(--gray);
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .stage-slot {
+            height: 60px;
+            border-bottom: 1px solid var(--gray);
+            padding: 5px;
+            position: relative;
+        }
+        
+        /* Event cards */
+        .event {
+            background-color: var(--white);
+            border-radius: 5px;
+            border-left: 4px solid var(--yellow-1);
+            padding: 8px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: absolute;
+            width: calc(100% - 10px);
+            left: 5px;
+        }
+        
+        .event.folk {
+            border-left: 4px solid var(--yellow-1);
+        }
+        
+        .event.rock {
+            border-left: 4px solid var(--dark-blue-3);
+        }
+        
+        .event.pop {
+            border-left: 4px solid var(--yellow-2);
+        }
+        
+        .event.hiphop {
+            border-left: 4px solid var(--dark-blue-2);
+        }
+        
+        .event.indie {
+            border-left: 4px solid var(--dark-blue-1);
+        }
+        
+        .event.jazz {
+            border-left: 4px solid var(--dark-blue-3);
+        }
+        
+        .event.electronic {
+            border-left: 4px solid var(--yellow-2);
+        }
+        
+        .event.dance {
+            border-left: 4px solid var(--dark-blue-2);
+        }
+        
+        .event.rap {
+            border-left: 4px solid var(--dark-blue-1);
+        }
+        
+        .event-title {
+            font-weight: bold;
+            margin-bottom: 2px;
+        }
+        
+        .event-time {
+            font-size: 0.8em;
+            color: #666;
+        }
+        
+        .event-genre {
+            font-size: 0.8em;
+            font-style: italic;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .filters {
+                flex-direction: column;
+            }
+            
+            .filter-group {
+                margin-bottom: 10px;
+            }
+            
+            .stage-column {
+                min-width: 250px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Program festivalu</h1>
+    </div>
+    
+    <div class="filters">
+        <div class="filter-group">
+            <select class="filter-select" id="genreFilter">
+                <option value="">Filtr podle žánru</option>
+                <option value="rock">Rock/Alternative</option>
+                <option value="folk">Folk</option>
+                <option value="pop">Pop</option>
+                <option value="hiphop">Hip Hop</option>
+                <option value="indie">Indie</option>
+                <option value="jazz">Jazz</option>
+                <option value="electronic">Electronic</option>
+                <option value="dance">Dance</option>
+                <option value="rap">Rap</option>
+            </select>
+            
+            <select class="filter-select" id="stageFilter">
+                <option value="">Filtr podle pódia</option>
+                <option value="hlavni">Hlavní pódium</option>
+                <option value="stage2">Stage 2</option>
+                <option value="stage3">Stage 3</option>
+            </select>
+        </div>
+        
+        <div class="filter-group">
+            <input type="text" class="search-box" id="searchBox" placeholder="Hledat interpreta...">
+        </div>
+    </div>
+    
+    <div class="schedule-container">
+        <div class="time-column">
+            <div class="column-header">ČAS</div>
+            <div class="time-slot">14:00</div>
+            <div class="time-slot">15:00</div>
+            <div class="time-slot">16:00</div>
+            <div class="time-slot">17:00</div>
+            <div class="time-slot">18:00</div>
+            <div class="time-slot">19:00</div>
+            <div class="time-slot">20:00</div>
+            <div class="time-slot">21:00</div>
+            <div class="time-slot">22:00</div>
+            <div class="time-slot">23:00</div>
+            <div class="time-slot">00:00</div>
+            <div class="time-slot">01:00</div>
+            <div class="time-slot">02:00</div>
+        </div>
+        
+        <div class="stage-column" data-stage="hlavni">
+            <div class="column-header">HLAVNÍ PÓDIUM</div>
+            <div class="stage-slot"></div>
+            <div class="stage-slot"></div>
+            <div class="stage-slot"></div>
+            <div class="stage-slot"></div>
+            <div class="stage-slot"></div>
+            <div class="stage-slot"></div>
+            <div class="stage-slot"></div>
+            <div class="stage-slot"></div>
+            <div class="stage-slot"></div>
+            <div class="stage-slot"></div>
+            <div class="stage-slot"></div>
+            <div class="stage-slot"></div>
+            <div class="stage-slot"></div>
+            
+            <!-- Interpret A - 15:00-16:00 -->
+            <div class="event rock" data-artist="interpret-a" data-genre="rock" style="top: 120px; height: 60px;">
+                <div class="event-title">INTERPRET A</div>
+                <div class="event-time">15:00 - 16:00</div>
+                <div class="event-genre">Rock/Alternative</div>
+            </div>
+            
+            <!-- Interpret B - 17:00-18:00 -->
+            <div class="event pop" data-artist="interpret-b" data-genre="pop" style="top: 240px; height: 120px;">
+                <div class="event-title">INTERPRET B</div>
+                <div class="event-time">17:00 - 19:00</div>
+                <div class="event-genre">Pop</div>
+            </div>
+            
+            <!-- Headliner - 20:00-23:00 -->
+            <div class="event rock" data-artist="headliner" data-genre="rock" style="top: 420px; height: 180px;">
+                <div class="event-title">HEADLINER</div>
+                <div class="event-time">20:00 - 23:00</div>
+                <div class="event-genre">Rock</div>
+            </div>
+        </div>
+        
+        <div class="stage-column" data-stage="stage2">
+            <div class="column-header">STAGE 2</div>
+            <div class="stage-slot"></div>
+            <div class="stage-slot"></div>
+            <div class="stage-slot"></div>
+            <div class="stage-slot"></div>
+            <div class="stage-slot"></div>
+            <div class="stage-slot"></div>
+            <div class="stage-slot"></div>
+            <div class="stage-slot"></div>
+            <div class="stage-slot"></div>
+            <div class="stage-slot"></div>
+            <div class="stage-slot"></div>
+            <div class="stage-slot"></div>
+            <div class="stage-slot"></div>
+            
+            <!-- Interpret C - 14:00-15:00 -->
+            <div class="event folk" data-artist="interpret-c" data-genre="folk" style="top: 60px; height: 60px;">
+                <div class="event-title">INTERPRET C</div>
+                <div class="event-time">14:00 - 15:00</div>
+                <div class="event-genre">Folk</div>
+            </div>
+            
+            <!-- Interpret D - 16:00-17:00 -->
+            <div class="event indie" data-artist="interpret-d" data-genre="indie" style="top: 180px; height: 60px;">
+                <div class="event-title">INTERPRET D</div>
+                <div class="event-time">16:00 - 17:00</div>
+                <div class="event-genre">Indie</div>
+            </div>
+            
+            <!-- Interpret E - 19:00-20:00 -->
+            <div class="event electronic" data-artist="interpret-e" data-genre="electronic" style="top: 360px; height: 60px;">
+                <div class="event-title">INTERPRET E</div>
+                <div class="event-time">19:00 - 20:00</div>
+                <div class="event-genre">Electronic</div>
+            </div>
+            
+            <!-- Interpret G - 23:00-0:00 -->
+            <div class="event pop" data-artist="interpret-g" data-genre="pop" style="top: 600px; height: 60px;">
+                <div class="event-title">INTERPRET G</div>
+                <div class="event-time">23:00 - 0:00</div>
+                <div class="event-genre">Pop</div>
+            </div>
+        </div>
+        
+        <div class="stage-column" data-stage="stage3">
+            <div class="column-header">STAGE 3</div>
+            <div class="stage-slot"></div>
+            <div class="stage-slot"></div>
+            <div class="stage-slot"></div>
+            <div class="stage-slot"></div>
+            <div class="stage-slot"></div>
+            <div class="stage-slot"></div>
+            <div class="stage-slot"></div>
+            <div class="stage-slot"></div>
+            <div class="stage-slot"></div>
+            <div class="stage-slot"></div>
+            <div class="stage-slot"></div>
+            <div class="stage-slot"></div>
+            <div class="stage-slot"></div>
+            
+            <!-- Interpret E - 15:00-16:00 -->
+            <div class="event hiphop" data-artist="interpret-f" data-genre="hiphop" style="top: 120px; height: 60px;">
+                <div class="event-title">INTERPRET F</div>
+                <div class="event-time">15:00 - 16:00</div>
+                <div class="event-genre">Hip Hop</div>
+            </div>
+            
+            <!-- Interpret F - 18:00-19:00 -->
+            <div class="event rap" data-artist="interpret-f" data-genre="rap" style="top: 300px; height: 60px;">
+                <div class="event-title">INTERPRET F</div>
+                <div class="event-time">18:00 - 19:00</div>
+                <div class="event-genre">Rap</div>
+            </div>
+            
+            <!-- Interpret G - 19:00-20:00 -->
+            <div class="event jazz" data-artist="interpret-g" data-genre="jazz" style="top: 360px; height: 60px;">
+                <div class="event-title">INTERPRET G</div>
+                <div class="event-time">19:00 - 20:00</div>
+                <div class="event-genre">Jazz</div>
+            </div>
+            
+            <!-- Interpret H - 22:00-23:00 -->
+            <div class="event dance" data-artist="interpret-h" data-genre="dance" style="top: 540px; height: 60px;">
+                <div class="event-title">INTERPRET H</div>
+                <div class="event-time">22:00 - 23:00</div>
+                <div class="event-genre">Dance</div>
+            </div>
+            
+            <!-- Interpret H - 0:00-2:00 -->
+            <div class="event rap" data-artist="interpret-h" data-genre="rap" style="top: 660px; height: 120px;">
+                <div class="event-title">INTERPRET H</div>
+                <div class="event-time">0:00 - 2:00</div>
+                <div class="event-genre">Rap</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const genreFilter = document.getElementById('genreFilter');
+            const stageFilter = document.getElementById('stageFilter');
+            const searchBox = document.getElementById('searchBox');
+            const events = document.querySelectorAll('.event');
+            
+            // Filter function
+            function filterEvents() {
+                const genreValue = genreFilter.value.toLowerCase();
+                const stageValue = stageFilter.value.toLowerCase();
+                const searchValue = searchBox.value.toLowerCase();
+                
+                events.forEach(event => {
+                    const genre = event.getAttribute('data-genre').toLowerCase();
+                    const artist = event.getAttribute('data-artist').toLowerCase();
+                    const stage = event.closest('.stage-column').getAttribute('data-stage').toLowerCase();
+                    
+                    // Check if event matches all filter criteria
+                    const matchesGenre = genreValue === '' || genre === genreValue;
+                    const matchesStage = stageValue === '' || stage === stageValue;
+                    const matchesSearch = searchValue === '' || 
+                                         artist.includes(searchValue) || 
+                                         event.textContent.toLowerCase().includes(searchValue);
+                    
+                    // Show or hide based on filter match
+                    if (matchesGenre && matchesStage && matchesSearch) {
+                        event.style.display = 'flex';
+                    } else {
+                        event.style.display = 'none';
+                    }
+                });
+            }
+            
+            // Add event listeners to filters
+            genreFilter.addEventListener('change', filterEvents);
+            stageFilter.addEventListener('change', filterEvents);
+            searchBox.addEventListener('input', filterEvents);
+            
+            // Initial filter application
+            filterEvents();
+        });
+    </script>
+</body>
+</html>
