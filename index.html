@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Info - Festival Alesto</title>
+    <title>Program - Festival Alesto</title>
     <link href="https://fonts.googleapis.com/css2?family=Archivo+Narrow:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * {
@@ -133,18 +133,18 @@
             background-clip: text;
         }
 
-        /* Secondary Navigation */
-        .secondary-nav {
+        /* Date Tabs - stylované jako na domovské stránce */
+        .date-tabs {
             display: flex;
             background: rgba(0, 0, 0, 0.6);
             border-radius: 15px;
-            margin-bottom: 40px;
+            margin-bottom: 30px;
             overflow: hidden;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
             border: 1px solid rgba(255, 214, 10, 0.3);
         }
 
-        .secondary-nav-btn {
+        .date-tab {
             flex: 1;
             padding: 20px;
             text-align: center;
@@ -153,327 +153,272 @@
             color: white;
             font-family: 'Archivo Narrow', sans-serif;
             font-weight: 600;
-            font-size: 16px;
+            font-size: 18px;
             cursor: pointer;
             transition: all 0.3s ease;
             text-transform: uppercase;
             letter-spacing: 1px;
         }
 
-        .secondary-nav-btn.active {
+        .date-tab.active {
             background: linear-gradient(45deg, #ffd60a, #ffb700);
             color: #001d3d;
             font-weight: 700;
+            text-shadow: none;
         }
 
-        .secondary-nav-btn:hover:not(.active) {
+        .date-tab:hover:not(.active) {
             background: rgba(255, 214, 10, 0.2);
             transform: translateY(-2px);
         }
 
-        /* Festival Info Section */
-        .festival-info {
-            display: grid;
-            grid-template-columns: 1fr 2fr;
-            gap: 40px;
+        .tab-subtitle {
+            font-size: 14px;
+            opacity: 0.8;
+            margin-top: 8px;
+            font-weight: 400;
+        }
+
+        /* Filters - stylované jako na domovské stránce */
+        .filters {
+            display: flex;
+            gap: 25px;
+            margin-bottom: 40px;
+            align-items: flex-end;
             background: rgba(0, 0, 0, 0.4);
-            padding: 40px;
+            padding: 25px;
             border-radius: 15px;
             border: 1px solid rgba(255, 214, 10, 0.2);
-            margin-bottom: 50px;
         }
 
-        .festival-photo {
-            background: rgba(255, 214, 10, 0.1);
-            border: 2px solid rgba(255, 214, 10, 0.3);
-            border-radius: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 300px;
-            font-size: 18px;
-            font-weight: 600;
-            color: #ffd60a;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            background-image: url('https://images.unsplash.com/photo-1459749411175-04bf5292ceea?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');
-            background-size: cover;
-            background-position: center;
-            position: relative;
-        }
-
-        .festival-photo::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.3);
-            border-radius: 13px;
-        }
-
-        .festival-details {
+        .filter-group {
             display: flex;
             flex-direction: column;
-            justify-content: center;
+            gap: 8px;
         }
 
-        .festival-title {
-            font-size: 36px;
-            font-weight: 700;
+        .filter-label {
+            font-size: 14px;
             color: #ffd60a;
-            margin-bottom: 25px;
             text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
-        .festival-description {
-            font-size: 18px;
-            line-height: 1.8;
-            color: #ccc;
-            margin-bottom: 30px;
-        }
-
-        .festival-details-list {
-            list-style: none;
-        }
-
-        .festival-details-list li {
-            font-size: 18px;
             font-weight: 600;
-            margin-bottom: 10px;
+            letter-spacing: 1px;
+        }
+
+        .filter-select {
+            background: rgba(0, 0, 0, 0.6);
+            border: 2px solid rgba(255, 214, 10, 0.3);
             color: white;
+            padding: 12px 15px;
+            border-radius: 8px;
+            font-family: 'Archivo Narrow', sans-serif;
+            font-size: 16px;
+            min-width: 180px;
+            transition: all 0.3s ease;
         }
 
-        .festival-details-list li strong {
-            color: #ffd60a;
-            margin-right: 10px;
+        .filter-select:focus {
+            border-color: #ffd60a;
+            outline: none;
+            box-shadow: 0 0 10px rgba(255, 214, 10, 0.3);
         }
 
-        /* Map Section */
-        .map-section {
-            margin-bottom: 50px;
+        .search-box {
+            background: rgba(0, 0, 0, 0.6);
+            border: 2px solid rgba(255, 214, 10, 0.3);
+            color: white;
+            padding: 12px 15px;
+            border-radius: 8px;
+            font-family: 'Archivo Narrow', sans-serif;
+            font-size: 16px;
+            min-width: 250px;
+            transition: all 0.3s ease;
         }
 
-        .section-title {
-            font-size: 32px;
-            font-weight: 700;
-            color: #ffd60a;
-            margin-bottom: 30px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
+        .search-box::placeholder {
+            color: #999;
         }
 
-        .map-container {
+        .search-box:focus {
+            border-color: #ffd60a;
+            outline: none;
+            box-shadow: 0 0 10px rgba(255, 214, 10, 0.3);
+        }
+
+        /* Program Schedule - přesné pozicování podle wireframu */
+        .program-schedule {
             display: grid;
-            grid-template-columns: 300px 1fr;
-            gap: 30px;
+            grid-template-columns: 100px 1fr 1fr 1fr;
+            gap: 20px;
             background: rgba(0, 0, 0, 0.4);
             padding: 30px;
             border-radius: 15px;
             border: 1px solid rgba(255, 214, 10, 0.2);
+            margin-bottom: 40px;
         }
 
-        .map-legend {
-            background: rgba(0, 0, 0, 0.6);
-            padding: 25px;
-            border-radius: 12px;
-            border: 2px solid rgba(255, 214, 10, 0.3);
-        }
-
-        .legend-title {
-            font-size: 20px;
+        .time-header {
             font-weight: 700;
+            font-size: 18px;
             color: #ffd60a;
-            margin-bottom: 20px;
             text-transform: uppercase;
             letter-spacing: 1px;
+            text-align: center;
+            padding: 15px 0;
+            border-bottom: 2px solid rgba(255, 214, 10, 0.3);
+        }
+
+        .stage-header {
+            background: linear-gradient(45deg, rgba(255, 214, 10, 0.3), rgba(255, 214, 10, 0.1));
+            padding: 15px;
+            text-align: center;
+            font-weight: 700;
+            font-size: 18px;
+            text-transform: uppercase;
+            border-radius: 10px;
+            border: 2px solid rgba(255, 214, 10, 0.4);
+            letter-spacing: 1px;
+        }
+
+        .time-slot {
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 16px;
+            color: #ffd60a;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            margin-bottom: 5px;
+        }
+
+        .performance-slot {
+            height: 100px;
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+        }
+
+        .performance-card {
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.8), rgba(0, 29, 61, 0.6));
+            border: 2px solid rgba(255, 214, 10, 0.3);
+            border-radius: 12px;
+            padding: 20px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            backdrop-filter: blur(5px);
+        }
+
+        .performance-card:hover {
+            border-color: #ffd60a;
+            background: linear-gradient(135deg, rgba(255, 214, 10, 0.2), rgba(255, 214, 10, 0.1));
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(255, 214, 10, 0.3);
+        }
+
+        .performance-card.headliner {
+            background: linear-gradient(135deg, rgba(255, 214, 10, 0.4), rgba(255, 183, 0, 0.2));
+            border-color: #ffd60a;
+            border-width: 3px;
+            height: 200px;
+        }
+
+        .performance-card.headliner:hover {
+            box-shadow: 0 15px 35px rgba(255, 214, 10, 0.5);
+            transform: translateY(-5px);
+        }
+
+        .performance-card.double-slot {
+            height: 200px;
+        }
+
+        .performance-name {
+            font-weight: 700;
+            font-size: 18px;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .performance-time {
+            font-size: 14px;
+            color: #ffd60a;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+
+        .performance-genre {
+            font-size: 13px;
+            color: #ccc;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .empty-slot {
+            height: 100px;
+            margin-bottom: 5px;
+        }
+
+        /* Legend - stylované jako na domovské stránce */
+        .legend {
+            margin-top: 50px;
+            padding: 30px;
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.6), rgba(0, 29, 61, 0.4));
+            border-radius: 15px;
+            border: 1px solid rgba(255, 214, 10, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        .legend h3 {
+            margin-bottom: 20px;
+            font-size: 24px;
+            color: #ffd60a;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 700;
+        }
+
+        .legend-items {
+            display: flex;
+            gap: 40px;
+            flex-wrap: wrap;
         }
 
         .legend-item {
             display: flex;
             align-items: center;
-            margin-bottom: 15px;
+            gap: 15px;
             font-size: 16px;
-            font-weight: 600;
+            font-weight: 500;
         }
 
         .legend-color {
-            width: 20px;
-            height: 20px;
-            border-radius: 4px;
-            margin-right: 12px;
+            width: 25px;
+            height: 25px;
+            border-radius: 6px;
             border: 2px solid rgba(255, 255, 255, 0.3);
         }
 
-        .legend-color.main-stage { background: #dc3545; }
-        .legend-color.stage2 { background: #28a745; }
-        .legend-color.stage3 { background: #007bff; }
-        .legend-color.food { background: #fd7e14; }
-        .legend-color.toilets { background: #6c757d; }
-
-        .map-area {
-            position: relative;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
-            min-height: 400px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 2px solid rgba(255, 214, 10, 0.3);
-            overflow: hidden;
-        }
-
-        .map-controls {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .map-control-btn {
-            width: 40px;
-            height: 40px;
-            background: rgba(0, 0, 0, 0.8);
-            border: 2px solid #ffd60a;
-            color: #ffd60a;
-            border-radius: 8px;
-            font-size: 20px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .map-control-btn:hover {
-            background: #ffd60a;
-            color: #001d3d;
-            transform: scale(1.1);
-        }
-
-        .interactive-map {
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(45deg, rgba(255, 214, 10, 0.1), rgba(255, 183, 0, 0.05));
-            position: relative;
-            font-size: 24px;
-            font-weight: 700;
-            color: #ffd60a;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
-        /* Basic Info Cards */
-        .basic-info {
-            margin-bottom: 50px;
-        }
-
-        .info-cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
-
-        .info-card {
-            background: linear-gradient(135deg, rgba(0, 0, 0, 0.8), rgba(0, 29, 61, 0.6));
-            border: 2px solid rgba(255, 214, 10, 0.3);
-            border-radius: 15px;
-            padding: 30px;
-            text-align: center;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(5px);
-        }
-
-        .info-card:hover {
-            border-color: #ffd60a;
-            background: linear-gradient(135deg, rgba(255, 214, 10, 0.2), rgba(255, 214, 10, 0.1));
-            transform: translateY(-5px);
-            box-shadow: 0 15px 35px rgba(255, 214, 10, 0.3);
-        }
-
-        .info-icon {
-            width: 80px;
-            height: 80px;
+        .legend-color.headliner {
             background: linear-gradient(45deg, #ffd60a, #ffb700);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 20px;
-            font-size: 36px;
-            color: #001d3d;
         }
 
-        .info-card-title {
-            font-size: 24px;
-            font-weight: 700;
-            color: #ffd60a;
-            margin-bottom: 15px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+        .legend-color.sold-out {
+            background: linear-gradient(45deg, #dc3545, #c82333);
         }
 
-        .info-card-value {
-            font-size: 20px;
-            font-weight: 600;
-            color: white;
+        .legend-color.info {
+            background: linear-gradient(45deg, #17a2b8, #138496);
         }
 
-        /* Partners Section */
-        .partners-section {
-            margin-bottom: 50px;
-        }
-
-        .partners-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 25px;
-        }
-
-        .partner-card {
-            background: rgba(255, 255, 255, 0.95);
-            border: 2px solid rgba(255, 214, 10, 0.3);
-            border-radius: 12px;
-            padding: 30px;
-            text-align: center;
-            transition: all 0.3s ease;
-            min-height: 150px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .partner-card:hover {
-            border-color: #ffd60a;
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(255, 214, 10, 0.3);
-        }
-
-        .partner-logo {
-            font-size: 24px;
-            font-weight: 700;
-            color: #001d3d;
-            margin-bottom: 10px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .partner-name {
-            font-size: 14px;
-            color: #666;
-            font-weight: 600;
-        }
-
-        /* Footer */
+        /* Footer - stejný jako na domovské stránce */
         .footer {
             background: linear-gradient(135deg, rgba(0, 0, 0, 0.8), rgba(0, 29, 61, 0.6));
             padding: 40px 20px;
@@ -481,26 +426,6 @@
             margin-top: 80px;
             border-top: 2px solid rgba(255, 214, 10, 0.3);
             backdrop-filter: blur(15px);
-        }
-
-        .footer-links {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
-        }
-
-        .footer-link {
-            color: #ffd60a;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 16px;
-            transition: color 0.3s ease;
-        }
-
-        .footer-link:hover {
-            color: white;
         }
 
         .footer-text {
@@ -520,31 +445,32 @@
                 font-size: 16px;
             }
 
-            .secondary-nav {
+            .date-tabs {
                 flex-direction: column;
             }
 
-            .festival-info {
-                grid-template-columns: 1fr;
-                gap: 30px;
+            .filters {
+                flex-direction: column;
+                align-items: stretch;
             }
 
-            .map-container {
-                grid-template-columns: 1fr;
+            .program-schedule {
+                grid-template-columns: 80px 1fr;
+                gap: 10px;
+            }
+
+            .stage-header:nth-child(3),
+            .stage-header:nth-child(4) {
+                display: none;
+            }
+
+            .performance-slot:nth-child(4n+3),
+            .performance-slot:nth-child(4n+4) {
+                display: none;
+            }
+
+            .legend-items {
                 gap: 20px;
-            }
-
-            .map-legend {
-                order: 2;
-            }
-
-            .partners-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .footer-links {
-                flex-direction: column;
-                gap: 15px;
             }
 
             .page-title {
@@ -558,10 +484,10 @@
         <nav class="nav-container">
             <div class="logo">ALESTO</div>
             <ul class="nav-menu">
-                <li><a href="#">PROGRAM</a></li>
+                <li><a href="#" class="active">PROGRAM</a></li>
                 <li><a href="#">VSTUPENKY</a></li>
                 <li><a href="#">INTERPRETI</a></li>
-                <li><a href="#" class="active">INFO</a></li>
+                <li><a href="#">INFO</a></li>
                 <li><a href="#">KONTAKT</a></li>
             </ul>
         </nav>
@@ -569,236 +495,262 @@
 
     <main class="main-container">
         <div class="breadcrumb">
-            <a href="#">Domů</a> > Informace o festivalu<br>
-            Drobečková navigace pro přehled o pozici na webu
+            <a href="#">Domů</a> > Program festivalu<br>
+            Podrobná navigace pro přehled o pozici na webu
         </div>
 
-        <h1 class="page-title">Informace o festivalu</h1>
+        <h1 class="page-title">Program Festivalu</h1>
 
-        <!-- Secondary Navigation -->
-        <div class="secondary-nav">
-            <button class="secondary-nav-btn active">O FESTIVALU</button>
-            <button class="secondary-nav-btn">DOPRAVA</button>
-            <button class="secondary-nav-btn">UBYTOVÁNÍ</button>
-            <button class="secondary-nav-btn">OBČERSTVENÍ</button>
-            <button class="secondary-nav-btn">PRAVIDLA</button>
-            <button class="secondary-nav-btn">FAQ</button>
+        <div class="date-tabs">
+            <button class="date-tab active">
+                <div>PÁTEK 15.7.</div>
+                <div class="tab-subtitle">První den programu / mezní jezdecký den festivalu</div>
+            </button>
+            <button class="date-tab">
+                <div>SOBOTA 16.7.</div>
+                <div class="tab-subtitle"></div>
+            </button>
+            <button class="date-tab">
+                <div>NEDĚLE 17.7.</div>
+                <div class="tab-subtitle"></div>
+            </button>
         </div>
-        <p style="font-size: 14px; color: #ccc; margin-bottom: 40px;">
-            Sekundární panelová navigace pro přepínání mezi informačními sekcemi
-        </p>
 
-        <!-- Festival Info Section -->
-        <section class="festival-info">
-            <div class="festival-photo">
-                <!-- Background image set in CSS -->
+        <div class="filters">
+            <div class="filter-group">
+                <label class="filter-label">Filtr podle pódia</label>
+                <select class="filter-select">
+                    <option>Všechna pódia</option>
+                    <option>Hlavní pódium</option>
+                    <option>Stage 2</option>
+                    <option>Stage 3</option>
+                </select>
             </div>
-            <div class="festival-details">
-                <h2 class="festival-title">Hudební festival 2025</h2>
-                <p class="festival-description">
-                    Hudební festival v pořadí již 10. ročník patří mezi nejoblíbenější letní akce v ČR. 
-                    Každý rok přináší to nejlepší ze světové i domácí hudební scény, skvělou atmosféru 
-                    a nezapomenutelné zážitky.
-                </p>
-                <ul class="festival-details-list">
-                    <li><strong>Datum:</strong> 15. - 17. července 2025</li>
-                    <li><strong>Místo:</strong> Festival Park, Hradec Králové</li>
-                </ul>
+            <div class="filter-group">
+                <label class="filter-label">Filtr podle žánru</label>
+                <select class="filter-select">
+                    <option>Všechny žánry</option>
+                    <option>Rock</option>
+                    <option>Pop</option>
+                    <option>Electronic</option>
+                    <option>Folk</option>
+                    <option>Jazz</option>
+                    <option>Dance</option>
+                </select>
             </div>
-        </section>
-        <p style="font-size: 14px; color: #ccc; margin-bottom: 50px;">
-            Základní informace o festivalu s fotografií a popisem
-        </p>
+            <div class="filter-group">
+                <label class="filter-label">Hledat interpreta</label>
+                <input type="text" class="search-box" placeholder="Název interpreta...">
+            </div>
+        </div>
 
-        <!-- Map Section -->
-        <section class="map-section">
-            <h2 class="section-title">Mapa festivalového areálu</h2>
-            <div class="map-container">
-                <div class="map-legend">
-                    <h3 class="legend-title">Legenda</h3>
-                    <div class="legend-item">
-                        <div class="legend-color main-stage"></div>
-                        <span>Hlavní pódium</span>
-                    </div>
-                    <div class="legend-item">
-                        <div class="legend-color stage2"></div>
-                        <span>Stage 2</span>
-                    </div>
-                    <div class="legend-item">
-                        <div class="legend-color stage3"></div>
-                        <span>Stage 3</span>
-                    </div>
-                    <div class="legend-item">
-                        <div class="legend-color food"></div>
-                        <span>Občerstvení</span>
-                    </div>
-                    <div class="legend-item">
-                        <div class="legend-color toilets"></div>
-                        <span>Toalety</span>
-                    </div>
-                </div>
-                <div class="map-area">
-                    <div class="map-controls">
-                        <button class="map-control-btn" onclick="zoomIn()">+</button>
-                        <button class="map-control-btn" onclick="zoomOut()">−</button>
-                    </div>
-                    <div class="interactive-map" id="festivalMap">
-                        Interaktivní mapa areálu
-                    </div>
+        <div class="program-schedule">
+            <!-- Headers -->
+            <div class="time-header">ČAS</div>
+            <div class="stage-header">HLAVNÍ PÓDIUM</div>
+            <div class="stage-header">STAGE 2</div>
+            <div class="stage-header">STAGE 3</div>
+
+            <!-- 14:00 -->
+            <div class="time-slot">14:00</div>
+            <div class="empty-slot"></div>
+            <div class="performance-slot">
+                <div class="performance-card">
+                    <div class="performance-name">INTERPRET C</div>
+                    <div class="performance-time">14:00 - 15:00</div>
+                    <div class="performance-genre">Folk</div>
                 </div>
             </div>
-            <p style="font-size: 14px; color: #ccc; margin-top: 20px;">
-                Interaktivní mapa festivalového areálu s legendou a ovládacími prvky
+            <div class="empty-slot"></div>
+
+            <!-- 15:00 -->
+            <div class="time-slot">15:00</div>
+            <div class="empty-slot"></div>
+            <div class="empty-slot"></div>
+            <div class="performance-slot">
+                <div class="performance-card">
+                    <div class="performance-name">INTERPRET F</div>
+                    <div class="performance-time">15:00 - 16:00</div>
+                    <div class="performance-genre">Hip Hop</div>
+                </div>
+            </div>
+
+            <!-- 16:00 -->
+            <div class="time-slot">16:00</div>
+            <div class="performance-slot">
+                <div class="performance-card">
+                    <div class="performance-name">INTERPRET A</div>
+                    <div class="performance-time">16:00 - 16:00</div>
+                    <div class="performance-genre">Rock/Alternative</div>
+                </div>
+            </div>
+            <div class="performance-slot">
+                <div class="performance-card">
+                    <div class="performance-name">INTERPRET D</div>
+                    <div class="performance-time">16:00 - 17:00</div>
+                    <div class="performance-genre">Indie</div>
+                </div>
+            </div>
+            <div class="empty-slot"></div>
+
+            <!-- 17:00 -->
+            <div class="time-slot">17:00</div>
+            <div class="performance-slot">
+                <div class="performance-card">
+                    <div class="performance-name">INTERPRET B</div>
+                    <div class="performance-time">17:00 - 18:00</div>
+                    <div class="performance-genre">Pop</div>
+                </div>
+            </div>
+            <div class="empty-slot"></div>
+            <div class="empty-slot"></div>
+
+            <!-- 18:00 -->
+            <div class="time-slot">18:00</div>
+            <div class="empty-slot"></div>
+            <div class="empty-slot"></div>
+            <div class="performance-slot">
+                <div class="performance-card">
+                    <div class="performance-name">INTERPRET G</div>
+                    <div class="performance-time">18:00 - 19:00</div>
+                    <div class="performance-genre">Jazz</div>
+                </div>
+            </div>
+
+            <!-- 19:00 -->
+            <div class="time-slot">19:00</div>
+            <div class="empty-slot"></div>
+            <div class="performance-slot">
+                <div class="performance-card">
+                    <div class="performance-name">INTERPRET E</div>
+                    <div class="performance-time">19:00 - 20:00</div>
+                    <div class="performance-genre">Electronic</div>
+                </div>
+            </div>
+            <div class="empty-slot"></div>
+
+            <!-- 20:00 -->
+            <div class="time-slot">20:00</div>
+            <div class="empty-slot"></div>
+            <div class="empty-slot"></div>
+            <div class="empty-slot"></div>
+
+            <!-- 21:00 -->
+            <div class="time-slot">21:00</div>
+            <div class="performance-slot">
+                <div class="performance-card headliner">
+                    <div class="performance-name">HEADLINER</div>
+                    <div class="performance-time">21:00 - 23:00</div>
+                    <div class="performance-genre">Rock</div>
+                </div>
+            </div>
+            <div class="empty-slot"></div>
+            <div class="empty-slot"></div>
+
+            <!-- 22:00 -->
+            <div class="time-slot">22:00</div>
+            <div class="empty-slot"></div>
+            <div class="empty-slot"></div>
+            <div class="performance-slot">
+                <div class="performance-card">
+                    <div class="performance-name">INTERPRET H</div>
+                    <div class="performance-time">22:00 - 23:00</div>
+                    <div class="performance-genre">Dance</div>
+                </div>
+            </div>
+
+            <!-- 23:00 -->
+            <div class="time-slot">23:00</div>
+            <div class="empty-slot"></div>
+            <div class="performance-slot">
+                <div class="performance-card double-slot">
+                    <div class="performance-name">INTERPRET CH</div>
+                    <div class="performance-time">23:00 - 01:00</div>
+                    <div class="performance-genre">Dance</div>
+                </div>
+            </div>
+            <div class="empty-slot"></div>
+
+            <!-- 00:00 -->
+            <div class="time-slot">00:00</div>
+            <div class="empty-slot"></div>
+            <div class="empty-slot"></div>
+            <div class="empty-slot"></div>
+
+            <!-- 01:00 -->
+            <div class="time-slot">01:00</div>
+            <div class="performance-slot">
+                <div class="performance-card">
+                    <div class="performance-name">INTERPRET I</div>
+                    <div class="performance-time">01:00 - 02:00</div>
+                    <div class="performance-genre">Electronic</div>
+                </div>
+            </div>
+            <div class="empty-slot"></div>
+            <div class="empty-slot"></div>
+
+            <!-- 02:00 -->
+            <div class="time-slot">02:00</div>
+            <div class="empty-slot"></div>
+            <div class="empty-slot"></div>
+            <div class="empty-slot"></div>
+        </div>
+
+        <div class="legend">
+            <h3>Legenda</h3>
+            <div class="legend-items">
+                <div class="legend-item">
+                    <div class="legend-color headliner"></div>
+                    <span>Hvězdička - Přidat do mého programu</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color sold-out"></div>
+                    <span>Sold out - Sold out vystoupení na sociální síti</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color info"></div>
+                    <span>Info - Detailní informace o interpretovi</span>
+                </div>
+            </div>
+            <p style="margin-top: 20px; font-size: 14px; color: #999;">
+                Legenda u vypracování leáků a funkcí v programu.
             </p>
-        </section>
-
-        <!-- Basic Info Cards -->
-        <section class="basic-info">
-            <h2 class="section-title">Základní informace</h2>
-            <div class="info-cards">
-                <div class="info-card">
-                    <div class="info-icon">👥</div>
-                    <h3 class="info-card-title">Kapacita</h3>
-                    <p class="info-card-value">20 000 návštěvníků</p>
-                </div>
-                <div class="info-card">
-                    <div class="info-icon">⚠️</div>
-                    <h3 class="info-card-title">Věkové omezení</h3>
-                    <p class="info-card-value">15+ (s doprovodem)</p>
-                </div>
-                <div class="info-card">
-                    <div class="info-icon">🎵</div>
-                    <h3 class="info-card-title">Pódia</h3>
-                    <p class="info-card-value">3 pódia, 60+ interpretů</p>
-                </div>
-            </div>
-            <p style="font-size: 14px; color: #ccc; margin-top: 30px;">
-                Ikonické zobrazení základních informací pro rychlou orientaci
-            </p>
-        </section>
-
-        <!-- Partners Section -->
-        <section class="partners-section">
-            <h2 class="section-title">Partneři festivalu</h2>
-            <div class="partners-grid">
-                <div class="partner-card">
-                    <div class="partner-logo">LOGO</div>
-                    <div class="partner-name">Partner 1</div>
-                </div>
-                <div class="partner-card">
-                    <div class="partner-logo">LOGO</div>
-                    <div class="partner-name">Partner 2</div>
-                </div>
-                <div class="partner-card">
-                    <div class="partner-logo">LOGO</div>
-                    <div class="partner-name">Partner 3</div>
-                </div>
-                <div class="partner-card">
-                    <div class="partner-logo">LOGO</div>
-                    <div class="partner-name">Partner 4</div>
-                </div>
-            </div>
-            <p style="font-size: 14px; color: #ccc; margin-top: 30px;">
-                Loga partnerů a sponzorů festivalu
-            </p>
-        </section>
+        </div>
     </main>
 
     <footer class="footer">
-        <div class="footer-links">
-            <a href="#" class="footer-link">Kontakt</a>
-            <a href="#" class="footer-link">Podmínky použití</a>
-            <a href="#" class="footer-link">O nás</a>
-            <a href="#" class="footer-link">Pro média</a>
-        </div>
         <div class="footer-text">
             © 2025 Hudební festival | Kontakt | Podmínky použití | O nás | Pro média<br>
-            Patička s copyright informacemi a odkazy
+            Platforma a copyright informačních a odkazy
         </div>
     </footer>
 
     <script>
-        // Secondary navigation functionality
-        document.querySelectorAll('.secondary-nav-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                document.querySelectorAll('.secondary-nav-btn').forEach(b => b.classList.remove('active'));
+        // Tab switching functionality
+        document.querySelectorAll('.date-tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                document.querySelectorAll('.date-tab').forEach(t => t.classList.remove('active'));
                 this.classList.add('active');
-                console.log('Section changed to:', this.textContent);
             });
         });
 
-        // Map control functions
-        let mapZoom = 1;
-
-        function zoomIn() {
-            mapZoom = Math.min(mapZoom + 0.2, 3);
-            updateMapZoom();
-            console.log('Zoom in:', mapZoom);
-        }
-
-        function zoomOut() {
-            mapZoom = Math.max(mapZoom - 0.2, 0.5);
-            updateMapZoom();
-            console.log('Zoom out:', mapZoom);
-        }
-
-        function updateMapZoom() {
-            const mapElement = document.getElementById('festivalMap');
-            mapElement.style.transform = `scale(${mapZoom})`;
-            mapElement.style.fontSize = `${24 / mapZoom}px`;
-        }
-
-        // Map interaction
-        document.getElementById('festivalMap').addEventListener('click', function(e) {
-            const rect = this.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-            console.log('Map clicked at:', x, y);
-            
-            // Simulate showing location info
-            this.style.background = 'linear-gradient(45deg, rgba(255, 214, 10, 0.3), rgba(255, 183, 0, 0.1))';
-            setTimeout(() => {
-                this.style.background = 'linear-gradient(45deg, rgba(255, 214, 10, 0.1), rgba(255, 183, 0, 0.05))';
-            }, 500);
-        });
-
-        // Info cards hover effects
-        document.querySelectorAll('.info-card').forEach(card => {
-            card.addEventListener('mouseenter', function() {
-                this.style.transform = 'translateY(-8px) scale(1.02)';
-            });
-            
-            card.addEventListener('mouseleave', function() {
-                this.style.transform = 'translateY(-5px) scale(1)';
-            });
-        });
-
-        // Partner cards interaction
-        document.querySelectorAll('.partner-card').forEach(card => {
+        // Performance card hover effects
+        document.querySelectorAll('.performance-card').forEach(card => {
             card.addEventListener('click', function() {
-                const partnerName = this.querySelector('.partner-name').textContent;
-                console.log('Partner clicked:', partnerName);
-                
-                // Simulate partner info popup
-                this.style.background = 'rgba(255, 214, 10, 0.2)';
-                setTimeout(() => {
-                    this.style.background = 'rgba(255, 255, 255, 0.95)';
-                }, 300);
+                console.log('Performance clicked:', this.querySelector('.performance-name').textContent);
             });
         });
 
-        // Smooth scroll for internal links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
+        // Filter functionality
+        document.querySelectorAll('.filter-select, .search-box').forEach(filter => {
+            filter.addEventListener('change', function() {
+                console.log('Filter changed:', this.value);
             });
+        });
+
+        // Search functionality
+        document.querySelector('.search-box').addEventListener('input', function() {
+            console.log('Search term:', this.value);
         });
     </script>
 </body>
