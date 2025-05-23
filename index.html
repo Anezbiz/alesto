@@ -3,443 +3,749 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Festival Schedule</title>
+    <title>Program - Festival Alesto</title>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Narrow:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        /* Base styles */
         * {
-            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Archivo Narrow', Arial, sans-serif;
+            box-sizing: border-box;
         }
-        
+
         body {
-            font-family: 'Archivo Narrow', Arial, sans-serif;
-            line-height: 1.6;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        
-        /* Color palette */
-        :root {
-            --dark-blue-1: #000814;
-            --dark-blue-2: #001D3D;
-            --dark-blue-3: #003566;
-            --yellow-1: #FFC300;
-            --yellow-2: #FFD60A;
-            --white: #ffffff;
-            --light-gray: #f5f5f5;
-            --gray: #dddddd;
-        }
-        
-        /* Header */
-        .header {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-        
-        .header h1 {
-            color: var(--dark-blue-1);
-            margin-bottom: 10px;
-        }
-        
-        /* Filters */
-        .filters {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 20px;
-            padding: 15px;
-            background-color: var(--light-gray);
-            border-radius: 5px;
-        }
-        
-        .filter-group {
-            display: flex;
-            align-items: center;
-        }
-        
-        .filter-select {
-            padding: 8px 12px;
-            border: 1px solid var(--gray);
-            border-radius: 4px;
-            margin-right: 10px;
-            background-color: white;
-            position: relative;
-            min-width: 150px;
-        }
-        
-        .search-box {
-            padding: 8px 12px;
-            border: 1px solid var(--gray);
-            border-radius: 4px;
-            width: 200px;
-        }
-        
-        /* Schedule grid */
-        .schedule-container {
-            display: flex;
-            overflow-x: auto;
-            margin-bottom: 20px;
-            border-radius: 5px;
-            border: 1px solid var(--gray);
-        }
-        
-        .time-column {
-            min-width: 100px;
-            background-color: var(--light-gray);
-            border-right: 1px solid var(--gray);
-        }
-        
-        .stage-column {
-            min-width: 300px;
-            flex-grow: 1;
-            border-right: 1px solid var(--gray);
-            position: relative;
-        }
-        
-        .stage-column:last-child {
-            border-right: none;
-        }
-        
-        .column-header {
-            padding: 15px;
-            text-align: center;
-            font-weight: bold;
-            background-color: var(--dark-blue-2);
+            font-family: 'Archivo Narrow', sans-serif;
+            background: linear-gradient(135deg, #001d3d 0%, #003566 50%, #000814 100%);
             color: white;
+            min-height: 100vh;
+            background-attachment: fixed;
+        }
+
+        /* Header - stejný jako na domovské stránce */
+        .header {
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 15px 0;
+            border-bottom: 2px solid #ffd60a;
             position: sticky;
             top: 0;
+            z-index: 100;
         }
-        
-        .time-slot {
-            padding: 10px;
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-weight: 700;
+            font-size: 28px;
+            color: #ffd60a;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .logo::before {
+            content: "♪";
+            margin-right: 12px;
+            font-size: 32px;
+            color: #ffd60a;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 40px;
+        }
+
+        .nav-menu a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 18px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-menu a:hover,
+        .nav-menu a.active {
+            color: #ffd60a;
+            text-shadow: 0 0 10px rgba(255, 214, 10, 0.5);
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #ffd60a;
+            transition: width 0.3s ease;
+        }
+
+        .nav-menu a:hover::after,
+        .nav-menu a.active::after {
+            width: 100%;
+        }
+
+        /* Main Content */
+        .main-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 50px 20px;
+        }
+
+        .breadcrumb {
+            color: #ccc;
+            margin-bottom: 30px;
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        .breadcrumb a {
+            color: #ffd60a;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .breadcrumb a:hover {
+            color: white;
+        }
+
+        .page-title {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 40px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
             text-align: center;
-            border-bottom: 1px solid var(--gray);
-            height: 60px;
+            background: linear-gradient(45deg, #ffd60a, #ffb700);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Date Tabs - stylované jako na domovské stránce */
+        .date-tabs {
+            display: flex;
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 15px;
+            margin-bottom: 30px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 214, 10, 0.3);
+        }
+
+        .date-tab {
+            flex: 1;
+            padding: 20px;
+            text-align: center;
+            background: transparent;
+            border: none;
+            color: white;
+            font-family: 'Archivo Narrow', sans-serif;
+            font-weight: 600;
+            font-size: 18px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .date-tab.active {
+            background: linear-gradient(45deg, #ffd60a, #ffb700);
+            color: #001d3d;
+            font-weight: 700;
+            text-shadow: none;
+        }
+
+        .date-tab:hover:not(.active) {
+            background: rgba(255, 214, 10, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .tab-subtitle {
+            font-size: 14px;
+            opacity: 0.8;
+            margin-top: 8px;
+            font-weight: 400;
+        }
+
+        /* Filters - stylované jako na domovské stránce */
+        .filters {
+            display: flex;
+            gap: 25px;
+            margin-bottom: 40px;
+            align-items: flex-end;
+            background: rgba(0, 0, 0, 0.4);
+            padding: 25px;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 214, 10, 0.2);
+        }
+
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .filter-label {
+            font-size: 14px;
+            color: #ffd60a;
+            text-transform: uppercase;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .filter-select {
+            background: rgba(0, 0, 0, 0.6);
+            border: 2px solid rgba(255, 214, 10, 0.3);
+            color: white;
+            padding: 12px 15px;
+            border-radius: 8px;
+            font-family: 'Archivo Narrow', sans-serif;
+            font-size: 16px;
+            min-width: 180px;
+            transition: all 0.3s ease;
+        }
+
+        .filter-select:focus {
+            border-color: #ffd60a;
+            outline: none;
+            box-shadow: 0 0 10px rgba(255, 214, 10, 0.3);
+        }
+
+        .search-box {
+            background: rgba(0, 0, 0, 0.6);
+            border: 2px solid rgba(255, 214, 10, 0.3);
+            color: white;
+            padding: 12px 15px;
+            border-radius: 8px;
+            font-family: 'Archivo Narrow', sans-serif;
+            font-size: 16px;
+            min-width: 250px;
+            transition: all 0.3s ease;
+        }
+
+        .search-box::placeholder {
+            color: #999;
+        }
+
+        .search-box:focus {
+            border-color: #ffd60a;
+            outline: none;
+            box-shadow: 0 0 10px rgba(255, 214, 10, 0.3);
+        }
+
+        /* Program Schedule - přesné pozicování podle wireframu */
+        .program-schedule {
+            display: grid;
+            grid-template-columns: 100px 1fr 1fr 1fr;
+            gap: 20px;
+            background: rgba(0, 0, 0, 0.4);
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 214, 10, 0.2);
+            margin-bottom: 40px;
+        }
+
+        .time-header {
+            font-weight: 700;
+            font-size: 18px;
+            color: #ffd60a;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-align: center;
+            padding: 15px 0;
+            border-bottom: 2px solid rgba(255, 214, 10, 0.3);
+        }
+
+        .stage-header {
+            background: linear-gradient(45deg, rgba(255, 214, 10, 0.3), rgba(255, 214, 10, 0.1));
+            padding: 15px;
+            text-align: center;
+            font-weight: 700;
+            font-size: 18px;
+            text-transform: uppercase;
+            border-radius: 10px;
+            border: 2px solid rgba(255, 214, 10, 0.4);
+            letter-spacing: 1px;
+        }
+
+        .time-slot {
+            height: 100px;
             display: flex;
             align-items: center;
             justify-content: center;
+            font-weight: 600;
+            font-size: 16px;
+            color: #ffd60a;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            margin-bottom: 5px;
         }
-        
-        .stage-slot {
-            height: 60px;
-            border-bottom: 1px solid var(--gray);
-            padding: 5px;
-            position: relative;
+
+        .performance-slot {
+            height: 100px;
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
         }
-        
-        /* Event cards */
-        .event {
-            background-color: var(--white);
-            border-radius: 5px;
-            border-left: 4px solid var(--yellow-1);
-            padding: 8px;
+
+        .performance-card {
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.8), rgba(0, 29, 61, 0.6));
+            border: 2px solid rgba(255, 214, 10, 0.3);
+            border-radius: 12px;
+            padding: 20px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            width: 100%;
             height: 100%;
             display: flex;
             flex-direction: column;
             justify-content: center;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            position: absolute;
-            width: calc(100% - 10px);
-            left: 5px;
+            backdrop-filter: blur(5px);
         }
-        
-        .event.folk {
-            border-left: 4px solid var(--yellow-1);
+
+        .performance-card:hover {
+            border-color: #ffd60a;
+            background: linear-gradient(135deg, rgba(255, 214, 10, 0.2), rgba(255, 214, 10, 0.1));
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(255, 214, 10, 0.3);
         }
-        
-        .event.rock {
-            border-left: 4px solid var(--dark-blue-3);
+
+        .performance-card.headliner {
+            background: linear-gradient(135deg, rgba(255, 214, 10, 0.4), rgba(255, 183, 0, 0.2));
+            border-color: #ffd60a;
+            border-width: 3px;
+            height: 200px;
         }
-        
-        .event.pop {
-            border-left: 4px solid var(--yellow-2);
+
+        .performance-card.headliner:hover {
+            box-shadow: 0 15px 35px rgba(255, 214, 10, 0.5);
+            transform: translateY(-5px);
         }
-        
-        .event.hiphop {
-            border-left: 4px solid var(--dark-blue-2);
+
+        .performance-card.double-slot {
+            height: 200px;
         }
-        
-        .event.indie {
-            border-left: 4px solid var(--dark-blue-1);
+
+        .performance-name {
+            font-weight: 700;
+            font-size: 18px;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
-        
-        .event.jazz {
-            border-left: 4px solid var(--dark-blue-3);
+
+        .performance-time {
+            font-size: 14px;
+            color: #ffd60a;
+            margin-bottom: 5px;
+            font-weight: 600;
         }
-        
-        .event.electronic {
-            border-left: 4px solid var(--yellow-2);
+
+        .performance-genre {
+            font-size: 13px;
+            color: #ccc;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
-        
-        .event.dance {
-            border-left: 4px solid var(--dark-blue-2);
+
+        .empty-slot {
+            height: 100px;
+            margin-bottom: 5px;
         }
-        
-        .event.rap {
-            border-left: 4px solid var(--dark-blue-1);
+
+        /* Legend - stylované jako na domovské stránce */
+        .legend {
+            margin-top: 50px;
+            padding: 30px;
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.6), rgba(0, 29, 61, 0.4));
+            border-radius: 15px;
+            border: 1px solid rgba(255, 214, 10, 0.3);
+            backdrop-filter: blur(10px);
         }
-        
-        .event-title {
-            font-weight: bold;
-            margin-bottom: 2px;
+
+        .legend h3 {
+            margin-bottom: 20px;
+            font-size: 24px;
+            color: #ffd60a;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 700;
         }
-        
-        .event-time {
-            font-size: 0.8em;
-            color: #666;
+
+        .legend-items {
+            display: flex;
+            gap: 40px;
+            flex-wrap: wrap;
         }
-        
-        .event-genre {
-            font-size: 0.8em;
-            font-style: italic;
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 16px;
+            font-weight: 500;
         }
-        
+
+        .legend-color {
+            width: 25px;
+            height: 25px;
+            border-radius: 6px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .legend-color.headliner {
+            background: linear-gradient(45deg, #ffd60a, #ffb700);
+        }
+
+        .legend-color.sold-out {
+            background: linear-gradient(45deg, #dc3545, #c82333);
+        }
+
+        .legend-color.info {
+            background: linear-gradient(45deg, #17a2b8, #138496);
+        }
+
+        /* Footer - stejný jako na domovské stránce */
+        .footer {
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.8), rgba(0, 29, 61, 0.6));
+            padding: 40px 20px;
+            text-align: center;
+            margin-top: 80px;
+            border-top: 2px solid rgba(255, 214, 10, 0.3);
+            backdrop-filter: blur(15px);
+        }
+
+        .footer-text {
+            font-size: 14px;
+            color: #999;
+            font-weight: 500;
+            letter-spacing: 1px;
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
-            .filters {
+            .nav-menu {
+                gap: 20px;
+            }
+
+            .nav-menu a {
+                font-size: 16px;
+            }
+
+            .date-tabs {
                 flex-direction: column;
             }
-            
-            .filter-group {
-                margin-bottom: 10px;
+
+            .filters {
+                flex-direction: column;
+                align-items: stretch;
             }
-            
-            .stage-column {
-                min-width: 250px;
+
+            .program-schedule {
+                grid-template-columns: 80px 1fr;
+                gap: 10px;
+            }
+
+            .stage-header:nth-child(3),
+            .stage-header:nth-child(4) {
+                display: none;
+            }
+
+            .performance-slot:nth-child(4n+3),
+            .performance-slot:nth-child(4n+4) {
+                display: none;
+            }
+
+            .legend-items {
+                gap: 20px;
+            }
+
+            .page-title {
+                font-size: 36px;
             }
         }
     </style>
 </head>
 <body>
-    <div class="header">
-        <h1>Program festivalu</h1>
-    </div>
-    
-    <div class="filters">
-        <div class="filter-group">
-            <select class="filter-select" id="genreFilter">
-                <option value="">Filtr podle žánru</option>
-                <option value="rock">Rock/Alternative</option>
-                <option value="folk">Folk</option>
-                <option value="pop">Pop</option>
-                <option value="hiphop">Hip Hop</option>
-                <option value="indie">Indie</option>
-                <option value="jazz">Jazz</option>
-                <option value="electronic">Electronic</option>
-                <option value="dance">Dance</option>
-                <option value="rap">Rap</option>
-            </select>
-            
-            <select class="filter-select" id="stageFilter">
-                <option value="">Filtr podle pódia</option>
-                <option value="hlavni">Hlavní pódium</option>
-                <option value="stage2">Stage 2</option>
-                <option value="stage3">Stage 3</option>
-            </select>
+    <header class="header">
+        <nav class="nav-container">
+            <div class="logo">ALESTO</div>
+            <ul class="nav-menu">
+                <li><a href="#" class="active">PROGRAM</a></li>
+                <li><a href="#">VSTUPENKY</a></li>
+                <li><a href="#">INTERPRETI</a></li>
+                <li><a href="#">KONTAKT</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="main-container">
+        <div class="breadcrumb">
+            <a href="#">Domů</a> > Program festivalu<br>
         </div>
-        
-        <div class="filter-group">
-            <input type="text" class="search-box" id="searchBox" placeholder="Hledat interpreta...">
+
+        <h1 class="page-title">Program Festivalu</h1>
+
+        <div class="date-tabs">
+            <button class="date-tab active">
+                <div>PÁTEK 15.7.</div>
+            </button>
+            <button class="date-tab">
+                <div>SOBOTA 16.7.</div>
+            </button>
+            <button class="date-tab">
+                <div>NEDĚLE 17.7.</div>
+            </button>
         </div>
-    </div>
-    
-    <div class="schedule-container">
-        <div class="time-column">
-            <div class="column-header">ČAS</div>
+
+        <div class="filters">
+            <div class="filter-group">
+                <label class="filter-label">Filtr podle pódia</label>
+                <select class="filter-select">
+                    <option>Všechna pódia</option>
+                    <option>Hlavní pódium</option>
+                    <option>Stage 2</option>
+                    <option>Stage 3</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label class="filter-label">Filtr podle žánru</label>
+                <select class="filter-select">
+                    <option>Všechny žánry</option>
+                    <option>Rock</option>
+                    <option>Pop</option>
+                    <option>Electronic</option>
+                    <option>Folk</option>
+                    <option>Jazz</option>
+                    <option>Dance</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label class="filter-label">Hledat interpreta</label>
+                <input type="text" class="search-box" placeholder="Název interpreta...">
+            </div>
+        </div>
+
+        <div class="program-schedule">
+            <!-- Headers -->
+            <div class="time-header">ČAS</div>
+            <div class="stage-header">HLAVNÍ PÓDIUM</div>
+            <div class="stage-header">STAGE 2</div>
+            <div class="stage-header">STAGE 3</div>
+
+            <!-- 14:00 -->
             <div class="time-slot">14:00</div>
+            <div class="empty-slot"></div>
+            <div class="performance-slot">
+                <div class="performance-card">
+                    <div class="performance-name">INTERPRET C</div>
+                    <div class="performance-time">14:00 - 15:00</div>
+                    <div class="performance-genre">Folk</div>
+                </div>
+            </div>
+            <div class="empty-slot"></div>
+
+            <!-- 15:00 -->
             <div class="time-slot">15:00</div>
+            <div class="empty-slot"></div>
+            <div class="empty-slot"></div>
+            <div class="performance-slot">
+                <div class="performance-card">
+                    <div class="performance-name">INTERPRET F</div>
+                    <div class="performance-time">15:00 - 16:00</div>
+                    <div class="performance-genre">Hip Hop</div>
+                </div>
+            </div>
+
+            <!-- 16:00 -->
             <div class="time-slot">16:00</div>
+            <div class="performance-slot">
+                <div class="performance-card">
+                    <div class="performance-name">INTERPRET A</div>
+                    <div class="performance-time">16:00 - 16:00</div>
+                    <div class="performance-genre">Rock/Alternative</div>
+                </div>
+            </div>
+            <div class="performance-slot">
+                <div class="performance-card">
+                    <div class="performance-name">INTERPRET D</div>
+                    <div class="performance-time">16:00 - 17:00</div>
+                    <div class="performance-genre">Indie</div>
+                </div>
+            </div>
+            <div class="empty-slot"></div>
+
+            <!-- 17:00 -->
             <div class="time-slot">17:00</div>
+            <div class="performance-slot">
+                <div class="performance-card">
+                    <div class="performance-name">INTERPRET B</div>
+                    <div class="performance-time">17:00 - 18:00</div>
+                    <div class="performance-genre">Pop</div>
+                </div>
+            </div>
+            <div class="empty-slot"></div>
+            <div class="empty-slot"></div>
+
+            <!-- 18:00 -->
             <div class="time-slot">18:00</div>
+            <div class="empty-slot"></div>
+            <div class="empty-slot"></div>
+            <div class="performance-slot">
+                <div class="performance-card">
+                    <div class="performance-name">INTERPRET G</div>
+                    <div class="performance-time">18:00 - 19:00</div>
+                    <div class="performance-genre">Jazz</div>
+                </div>
+            </div>
+
+            <!-- 19:00 -->
             <div class="time-slot">19:00</div>
+            <div class="empty-slot"></div>
+            <div class="performance-slot">
+                <div class="performance-card">
+                    <div class="performance-name">INTERPRET E</div>
+                    <div class="performance-time">19:00 - 20:00</div>
+                    <div class="performance-genre">Electronic</div>
+                </div>
+            </div>
+            <div class="empty-slot"></div>
+
+            <!-- 20:00 -->
             <div class="time-slot">20:00</div>
+            <div class="empty-slot"></div>
+            <div class="empty-slot"></div>
+            <div class="empty-slot"></div>
+
+            <!-- 21:00 -->
             <div class="time-slot">21:00</div>
+            <div class="performance-slot">
+                <div class="performance-card headliner">
+                    <div class="performance-name">HEADLINER</div>
+                    <div class="performance-time">21:00 - 23:00</div>
+                    <div class="performance-genre">Rock</div>
+                </div>
+            </div>
+            <div class="empty-slot"></div>
+            <div class="empty-slot"></div>
+
+            <!-- 22:00 -->
             <div class="time-slot">22:00</div>
+            <div class="empty-slot"></div>
+            <div class="empty-slot"></div>
+            <div class="performance-slot">
+                <div class="performance-card">
+                    <div class="performance-name">INTERPRET H</div>
+                    <div class="performance-time">22:00 - 23:00</div>
+                    <div class="performance-genre">Dance</div>
+                </div>
+            </div>
+
+            <!-- 23:00 -->
             <div class="time-slot">23:00</div>
+            <div class="empty-slot"></div>
+            <div class="performance-slot">
+                <div class="performance-card double-slot">
+                    <div class="performance-name">INTERPRET CH</div>
+                    <div class="performance-time">23:00 - 01:00</div>
+                    <div class="performance-genre">Dance</div>
+                </div>
+            </div>
+            <div class="empty-slot"></div>
+
+            <!-- 00:00 -->
             <div class="time-slot">00:00</div>
+            <div class="empty-slot"></div>
+            <div class="empty-slot"></div>
+            <div class="empty-slot"></div>
+
+            <!-- 01:00 -->
             <div class="time-slot">01:00</div>
+            <div class="performance-slot">
+                <div class="performance-card">
+                    <div class="performance-name">INTERPRET I</div>
+                    <div class="performance-time">01:00 - 02:00</div>
+                    <div class="performance-genre">Electronic</div>
+                </div>
+            </div>
+            <div class="empty-slot"></div>
+            <div class="empty-slot"></div>
+
+            <!-- 02:00 -->
             <div class="time-slot">02:00</div>
+            <div class="empty-slot"></div>
+            <div class="empty-slot"></div>
+            <div class="empty-slot"></div>
         </div>
-        
-        <div class="stage-column" data-stage="hlavni">
-            <div class="column-header">HLAVNÍ PÓDIUM</div>
-            <div class="stage-slot"></div>
-            <div class="stage-slot"></div>
-            <div class="stage-slot"></div>
-            <div class="stage-slot"></div>
-            <div class="stage-slot"></div>
-            <div class="stage-slot"></div>
-            <div class="stage-slot"></div>
-            <div class="stage-slot"></div>
-            <div class="stage-slot"></div>
-            <div class="stage-slot"></div>
-            <div class="stage-slot"></div>
-            <div class="stage-slot"></div>
-            <div class="stage-slot"></div>
-            
-            <!-- Interpret A - 15:00-16:00 -->
-            <div class="event rock" data-artist="interpret-a" data-genre="rock" style="top: 120px; height: 60px;">
-                <div class="event-title">INTERPRET A</div>
-                <div class="event-time">15:00 - 16:00</div>
-                <div class="event-genre">Rock/Alternative</div>
+
+        <div class="legend">
+            <h3>Legenda</h3>
+            <div class="legend-items">
+                <div class="legend-item">
+                    <div class="legend-color headliner"></div>
+                    <span>Hvězdička - Přidat do mého programu</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color sold-out"></div>
+                    <span>Sold out - Sold out vystoupení na sociální síti</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color info"></div>
+                    <span>Info - Detailní informace o interpretovi</span>
+                </div>
             </div>
-            
-            <!-- Interpret B - 17:00-18:00 -->
-            <div class="event pop" data-artist="interpret-b" data-genre="pop" style="top: 240px; height: 120px;">
-                <div class="event-title">INTERPRET B</div>
-                <div class="event-time">17:00 - 19:00</div>
-                <div class="event-genre">Pop</div>
-            </div>
-            
-            <!-- Headliner - 20:00-23:00 -->
-            <div class="event rock" data-artist="headliner" data-genre="rock" style="top: 420px; height: 180px;">
-                <div class="event-title">HEADLINER</div>
-                <div class="event-time">20:00 - 23:00</div>
-                <div class="event-genre">Rock</div>
-            </div>
+            <p style="margin-top: 20px; font-size: 14px; color: #999;">
+                Legenda u vypracování leáků a funkcí v programu.
+            </p>
         </div>
-        
-        <div class="stage-column" data-stage="stage2">
-            <div class="column-header">STAGE 2</div>
-            <div class="stage-slot"></div>
-            <div class="stage-slot"></div>
-            <div class="stage-slot"></div>
-            <div class="stage-slot"></div>
-            <div class="stage-slot"></div>
-            <div class="stage-slot"></div>
-            <div class="stage-slot"></div>
-            <div class="stage-slot"></div>
-            <div class="stage-slot"></div>
-            <div class="stage-slot"></div>
-            <div class="stage-slot"></div>
-            <div class="stage-slot"></div>
-            <div class="stage-slot"></div>
-            
-            <!-- Interpret C - 14:00-15:00 -->
-            <div class="event folk" data-artist="interpret-c" data-genre="folk" style="top: 60px; height: 60px;">
-                <div class="event-title">INTERPRET C</div>
-                <div class="event-time">14:00 - 15:00</div>
-                <div class="event-genre">Folk</div>
-            </div>
-            
-            <!-- Interpret D - 16:00-17:00 -->
-            <div class="event indie" data-artist="interpret-d" data-genre="indie" style="top: 180px; height: 60px;">
-                <div class="event-title">INTERPRET D</div>
-                <div class="event-time">16:00 - 17:00</div>
-                <div class="event-genre">Indie</div>
-            </div>
-            
-            <!-- Interpret E - 19:00-20:00 -->
-            <div class="event electronic" data-artist="interpret-e" data-genre="electronic" style="top: 360px; height: 60px;">
-                <div class="event-title">INTERPRET E</div>
-                <div class="event-time">19:00 - 20:00</div>
-                <div class="event-genre">Electronic</div>
-            </div>
-            
-            <!-- Interpret G - 23:00-0:00 -->
-            <div class="event pop" data-artist="interpret-g" data-genre="pop" style="top: 600px; height: 60px;">
-                <div class="event-title">INTERPRET G</div>
-                <div class="event-time">23:00 - 0:00</div>
-                <div class="event-genre">Pop</div>
-            </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-text">
+            © 2025 Hudební festival | Kontakt | Podmínky použití | O nás | Pro média<br>
+            Platforma a copyright informačních a odkazy
         </div>
-        
-        <div class="stage-column" data-stage="stage3">
-            <div class="column-header">STAGE 3</div>
-            <div class="stage-slot"></div>
-            <div class="stage-slot"></div>
-            <div class="stage-slot"></div>
-            <div class="stage-slot"></div>
-            <div class="stage-slot"></div>
-            <div class="stage-slot"></div>
-            <div class="stage-slot"></div>
-            <div class="stage-slot"></div>
-            <div class="stage-slot"></div>
-            <div class="stage-slot"></div>
-            <div class="stage-slot"></div>
-            <div class="stage-slot"></div>
-            <div class="stage-slot"></div>
-            
-            <!-- Interpret E - 15:00-16:00 -->
-            <div class="event hiphop" data-artist="interpret-f" data-genre="hiphop" style="top: 120px; height: 60px;">
-                <div class="event-title">INTERPRET F</div>
-                <div class="event-time">15:00 - 16:00</div>
-                <div class="event-genre">Hip Hop</div>
-            </div>
-            
-            <!-- Interpret F - 18:00-19:00 -->
-            <div class="event rap" data-artist="interpret-f" data-genre="rap" style="top: 300px; height: 60px;">
-                <div class="event-title">INTERPRET F</div>
-                <div class="event-time">18:00 - 19:00</div>
-                <div class="event-genre">Rap</div>
-            </div>
-            
-            <!-- Interpret G - 19:00-20:00 -->
-            <div class="event jazz" data-artist="interpret-g" data-genre="jazz" style="top: 360px; height: 60px;">
-                <div class="event-title">INTERPRET G</div>
-                <div class="event-time">19:00 - 20:00</div>
-                <div class="event-genre">Jazz</div>
-            </div>
-            
-            <!-- Interpret H - 22:00-23:00 -->
-            <div class="event dance" data-artist="interpret-h" data-genre="dance" style="top: 540px; height: 60px;">
-                <div class="event-title">INTERPRET H</div>
-                <div class="event-time">22:00 - 23:00</div>
-                <div class="event-genre">Dance</div>
-            </div>
-            
-            <!-- Interpret H - 0:00-2:00 -->
-            <div class="event rap" data-artist="interpret-h" data-genre="rap" style="top: 660px; height: 120px;">
-                <div class="event-title">INTERPRET H</div>
-                <div class="event-time">0:00 - 2:00</div>
-                <div class="event-genre">Rap</div>
-            </div>
-        </div>
-    </div>
+    </footer>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const genreFilter = document.getElementById('genreFilter');
-            const stageFilter = document.getElementById('stageFilter');
-            const searchBox = document.getElementById('searchBox');
-            const events = document.querySelectorAll('.event');
-            
-            // Filter function
-            function filterEvents() {
-                const genreValue = genreFilter.value.toLowerCase();
-                const stageValue = stageFilter.value.toLowerCase();
-                const searchValue = searchBox.value.toLowerCase();
-                
-                events.forEach(event => {
-                    const genre = event.getAttribute('data-genre').toLowerCase();
-                    const artist = event.getAttribute('data-artist').toLowerCase();
-                    const stage = event.closest('.stage-column').getAttribute('data-stage').toLowerCase();
-                    
-                    // Check if event matches all filter criteria
-                    const matchesGenre = genreValue === '' || genre === genreValue;
-                    const matchesStage = stageValue === '' || stage === stageValue;
-                    const matchesSearch = searchValue === '' || 
-                                         artist.includes(searchValue) || 
-                                         event.textContent.toLowerCase().includes(searchValue);
-                    
-                    // Show or hide based on filter match
-                    if (matchesGenre && matchesStage && matchesSearch) {
-                        event.style.display = 'flex';
-                    } else {
-                        event.style.display = 'none';
-                    }
-                });
-            }
-            
-            // Add event listeners to filters
-            genreFilter.addEventListener('change', filterEvents);
-            stageFilter.addEventListener('change', filterEvents);
-            searchBox.addEventListener('input', filterEvents);
-            
-            // Initial filter application
-            filterEvents();
+        // Tab switching functionality
+        document.querySelectorAll('.date-tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                document.querySelectorAll('.date-tab').forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        // Performance card hover effects
+        document.querySelectorAll('.performance-card').forEach(card => {
+            card.addEventListener('click', function() {
+                console.log('Performance clicked:', this.querySelector('.performance-name').textContent);
+            });
+        });
+
+        // Filter functionality
+        document.querySelectorAll('.filter-select, .search-box').forEach(filter => {
+            filter.addEventListener('change', function() {
+                console.log('Filter changed:', this.value);
+            });
+        });
+
+        // Search functionality
+        document.querySelector('.search-box').addEventListener('input', function() {
+            console.log('Search term:', this.value);
         });
     </script>
 </body>
