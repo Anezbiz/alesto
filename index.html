@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Program - Festival Alesto</title>
+    <title>Vstupenky - Festival Alesto</title>
     <link href="https://fonts.googleapis.com/css2?family=Archivo+Narrow:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * {
@@ -16,11 +16,8 @@
             font-family: 'Archivo Narrow', sans-serif;
             background: linear-gradient(135deg, #001d3d 0%, #003566 50%, #000814 100%);
             color: white;
-            width: 1425px;
-            height: 2609px;
-            margin: 0 auto;
+            min-height: 100vh;
             background-attachment: fixed;
-            overflow-x: hidden;
         }
 
         /* Header - stejný jako na domovské stránce */
@@ -35,8 +32,7 @@
         }
 
         .nav-container {
-            max-width: 1425px;
-            width: 100%;
+            max-width: 1400px;
             margin: 0 auto;
             display: flex;
             justify-content: space-between;
@@ -102,10 +98,9 @@
 
         /* Main Content */
         .main-container {
-            max-width: 1425px;
-            width: 100%;
+            max-width: 1400px;
             margin: 0 auto;
-            padding: 30px 20px;
+            padding: 50px 20px;
         }
 
         .breadcrumb {
@@ -138,292 +133,306 @@
             background-clip: text;
         }
 
-        /* Date Tabs - stylované jako na domovské stránce */
-        .date-tabs {
-            display: flex;
-            background: rgba(0, 0, 0, 0.6);
+        /* Ticket Alert */
+        .ticket-alert {
+            background: linear-gradient(45deg, rgba(220, 53, 69, 0.8), rgba(200, 35, 51, 0.6));
+            border: 2px solid #dc3545;
             border-radius: 15px;
-            margin-bottom: 30px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            border: 1px solid rgba(255, 214, 10, 0.3);
+            padding: 25px;
+            margin-bottom: 40px;
+            text-align: center;
+            backdrop-filter: blur(10px);
         }
 
-        .date-tab {
-            flex: 1;
-            padding: 20px;
-            text-align: center;
-            background: transparent;
-            border: none;
-            color: white;
-            font-family: 'Archivo Narrow', sans-serif;
-            font-weight: 600;
+        .alert-title {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .alert-text {
             font-size: 18px;
+            font-weight: 600;
+        }
+
+        /* Ticket Types */
+        .ticket-types {
+            margin-bottom: 60px;
+        }
+
+        .section-title {
+            font-size: 32px;
+            font-weight: 700;
+            color: #ffd60a;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .tickets-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .ticket-card {
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.8), rgba(0, 29, 61, 0.6));
+            border: 2px solid rgba(255, 214, 10, 0.3);
+            border-radius: 15px;
+            padding: 30px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ticket-card:hover {
+            border-color: #ffd60a;
+            background: linear-gradient(135deg, rgba(255, 214, 10, 0.2), rgba(255, 214, 10, 0.1));
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(255, 214, 10, 0.3);
+        }
+
+        .ticket-card.popular {
+            border-color: #ffd60a;
+            border-width: 3px;
+            background: linear-gradient(135deg, rgba(255, 214, 10, 0.3), rgba(255, 183, 0, 0.2));
+        }
+
+        .ticket-card.popular::before {
+            content: 'NEJOBLÍBENĚJŠÍ';
+            position: absolute;
+            top: 15px;
+            right: -35px;
+            background: linear-gradient(45deg, #ffd60a, #ffb700);
+            color: #001d3d;
+            padding: 8px 40px;
+            font-size: 12px;
+            font-weight: 700;
+            transform: rotate(45deg);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .ticket-card.sold-out {
+            opacity: 0.6;
+            border-color: #dc3545;
+            background: linear-gradient(135deg, rgba(220, 53, 69, 0.2), rgba(200, 35, 51, 0.1));
+        }
+
+        .ticket-type {
+            font-size: 28px;
+            font-weight: 700;
+            color: #ffd60a;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .ticket-price {
+            font-size: 36px;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 20px;
+        }
+
+        .ticket-price .currency {
+            font-size: 24px;
+            color: #ccc;
+        }
+
+        .ticket-features {
+            list-style: none;
+            margin-bottom: 25px;
+        }
+
+        .ticket-features li {
+            font-size: 16px;
+            margin-bottom: 10px;
+            padding-left: 25px;
+            position: relative;
+            color: #ccc;
+        }
+
+        .ticket-features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #ffd60a;
+            font-weight: 700;
+            font-size: 18px;
+        }
+
+        .ticket-btn {
+            width: 100%;
+            background: linear-gradient(45deg, #ffd60a, #ffb700);
+            color: #001d3d;
+            border: none;
+            padding: 15px 25px;
+            border-radius: 8px;
+            font-family: 'Archivo Narrow', sans-serif;
+            font-size: 18px;
+            font-weight: 700;
             cursor: pointer;
             transition: all 0.3s ease;
             text-transform: uppercase;
             letter-spacing: 1px;
         }
 
-        .date-tab.active {
-            background: linear-gradient(45deg, #ffd60a, #ffb700);
-            color: #001d3d;
-            font-weight: 700;
-            text-shadow: none;
-        }
-
-        .date-tab:hover:not(.active) {
-            background: rgba(255, 214, 10, 0.2);
+        .ticket-btn:hover {
             transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(255, 214, 10, 0.5);
         }
 
-        .tab-subtitle {
-            font-size: 14px;
-            opacity: 0.8;
-            margin-top: 8px;
-            font-weight: 400;
+        .ticket-btn:disabled {
+            background: #6c757d;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
         }
 
-        /* Filters - stylované jako na domovské stránce */
-        .filters {
-            display: flex;
-            gap: 25px;
-            margin-bottom: 40px;
-            align-items: flex-end;
-            background: rgba(0, 0, 0, 0.4);
-            padding: 25px;
-            border-radius: 15px;
-            border: 1px solid rgba(255, 214, 10, 0.2);
+        /* Payment Methods */
+        .payment-section {
+            margin-bottom: 60px;
         }
 
-        .filter-group {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-
-        .filter-label {
-            font-size: 14px;
-            color: #ffd60a;
-            text-transform: uppercase;
-            font-weight: 600;
-            letter-spacing: 1px;
-        }
-
-        .filter-select {
-            background: rgba(0, 0, 0, 0.6);
-            border: 2px solid rgba(255, 214, 10, 0.3);
-            color: white;
-            padding: 12px 15px;
-            border-radius: 8px;
-            font-family: 'Archivo Narrow', sans-serif;
-            font-size: 16px;
-            min-width: 180px;
-            transition: all 0.3s ease;
-        }
-
-        .filter-select:focus {
-            border-color: #ffd60a;
-            outline: none;
-            box-shadow: 0 0 10px rgba(255, 214, 10, 0.3);
-        }
-
-        .search-box {
-            background: rgba(0, 0, 0, 0.6);
-            border: 2px solid rgba(255, 214, 10, 0.3);
-            color: white;
-            padding: 12px 15px;
-            border-radius: 8px;
-            font-family: 'Archivo Narrow', sans-serif;
-            font-size: 16px;
-            min-width: 250px;
-            transition: all 0.3s ease;
-        }
-
-        .search-box::placeholder {
-            color: #999;
-        }
-
-        .search-box:focus {
-            border-color: #ffd60a;
-            outline: none;
-            box-shadow: 0 0 10px rgba(255, 214, 10, 0.3);
-        }
-
-        /* Program Schedule - přesné pozicování podle wireframu */
-        .program-schedule {
+        .payment-methods {
             display: grid;
-            grid-template-columns: 100px 1fr 1fr 1fr;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 20px;
             background: rgba(0, 0, 0, 0.4);
             padding: 30px;
             border-radius: 15px;
             border: 1px solid rgba(255, 214, 10, 0.2);
-            margin-bottom: 40px;
         }
 
-        .time-header {
-            font-weight: 700;
-            font-size: 18px;
-            color: #ffd60a;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            text-align: center;
-            padding: 15px 0;
-            border-bottom: 2px solid rgba(255, 214, 10, 0.3);
-        }
-
-        .stage-header {
-            background: linear-gradient(45deg, rgba(255, 214, 10, 0.3), rgba(255, 214, 10, 0.1));
-            padding: 15px;
-            text-align: center;
-            font-weight: 700;
-            font-size: 18px;
-            text-transform: uppercase;
-            border-radius: 10px;
-            border: 2px solid rgba(255, 214, 10, 0.4);
-            letter-spacing: 1px;
-        }
-
-        .time-slot {
-            height: 100px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 600;
-            font-size: 16px;
-            color: #ffd60a;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            background: rgba(0, 0, 0, 0.2);
-            border-radius: 8px;
-            margin-bottom: 5px;
-        }
-
-        .performance-slot {
-            height: 100px;
-            margin-bottom: 5px;
-            display: flex;
-            align-items: center;
-        }
-
-        .performance-card {
-            background: linear-gradient(135deg, rgba(0, 0, 0, 0.8), rgba(0, 29, 61, 0.6));
+        .payment-method {
+            background: rgba(255, 255, 255, 0.95);
             border: 2px solid rgba(255, 214, 10, 0.3);
-            border-radius: 12px;
+            border-radius: 10px;
             padding: 20px;
+            text-align: center;
             transition: all 0.3s ease;
-            cursor: pointer;
-            width: 100%;
-            height: 100%;
+            min-height: 80px;
             display: flex;
-            flex-direction: column;
+            align-items: center;
             justify-content: center;
-            backdrop-filter: blur(5px);
         }
 
-        .performance-card:hover {
+        .payment-method:hover {
             border-color: #ffd60a;
-            background: linear-gradient(135deg, rgba(255, 214, 10, 0.2), rgba(255, 214, 10, 0.1));
             transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(255, 214, 10, 0.3);
+            box-shadow: 0 8px 20px rgba(255, 214, 10, 0.3);
         }
 
-        .performance-card.headliner {
-            background: linear-gradient(135deg, rgba(255, 214, 10, 0.4), rgba(255, 183, 0, 0.2));
-            border-color: #ffd60a;
-            border-width: 3px;
-            height: 200px;
-        }
-
-        .performance-card.headliner:hover {
-            box-shadow: 0 15px 35px rgba(255, 214, 10, 0.5);
-            transform: translateY(-5px);
-        }
-
-        .performance-card.double-slot {
-            height: 200px;
-        }
-
-        .performance-name {
-            font-weight: 700;
+        .payment-method-name {
             font-size: 18px;
-            margin-bottom: 8px;
+            font-weight: 700;
+            color: #001d3d;
             text-transform: uppercase;
             letter-spacing: 1px;
         }
 
-        .performance-time {
-            font-size: 14px;
-            color: #ffd60a;
-            margin-bottom: 5px;
-            font-weight: 600;
-        }
-
-        .performance-genre {
-            font-size: 13px;
-            color: #ccc;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .empty-slot {
-            height: 100px;
-            margin-bottom: 5px;
-        }
-
-        /* Legend - stylované jako na domovské stránce */
-        .legend {
-            margin-top: 50px;
-            padding: 30px;
-            background: linear-gradient(135deg, rgba(0, 0, 0, 0.6), rgba(0, 29, 61, 0.4));
+        /* Terms & Conditions */
+        .terms-section {
+            background: rgba(0, 0, 0, 0.4);
+            padding: 40px;
             border-radius: 15px;
-            border: 1px solid rgba(255, 214, 10, 0.3);
+            border: 1px solid rgba(255, 214, 10, 0.2);
+            margin-bottom: 60px;
+        }
+
+        .terms-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: #ffd60a;
+            margin-bottom: 25px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .terms-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .terms-column h4 {
+            font-size: 18px;
+            font-weight: 700;
+            color: #ffd60a;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .terms-column ul {
+            list-style: none;
+        }
+
+        .terms-column li {
+            font-size: 16px;
+            color: #ccc;
+            margin-bottom: 8px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .terms-column li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: #ffd60a;
+            font-weight: 700;
+        }
+
+        /* Important Info */
+        .important-info {
+            background: linear-gradient(45deg, rgba(255, 193, 7, 0.8), rgba(255, 158, 0, 0.6));
+            border: 2px solid #ffc107;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 40px;
             backdrop-filter: blur(10px);
         }
 
-        .legend h3 {
-            margin-bottom: 20px;
+        .important-title {
             font-size: 24px;
-            color: #ffd60a;
-            text-transform: uppercase;
-            letter-spacing: 2px;
             font-weight: 700;
+            color: #001d3d;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
-        .legend-items {
-            display: flex;
-            gap: 40px;
-            flex-wrap: wrap;
+        .important-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
         }
 
-        .legend-item {
+        .important-item {
             display: flex;
-            align-items: center;
+            align-items: flex-start;
             gap: 15px;
+        }
+
+        .important-icon {
+            font-size: 24px;
+            margin-top: 5px;
+        }
+
+        .important-text {
             font-size: 16px;
-            font-weight: 500;
+            font-weight: 600;
+            color: #001d3d;
+            line-height: 1.5;
         }
 
-        .legend-color {
-            width: 25px;
-            height: 25px;
-            border-radius: 6px;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-        }
-
-        .legend-color.headliner {
-            background: linear-gradient(45deg, #ffd60a, #ffb700);
-        }
-
-        .legend-color.sold-out {
-            background: linear-gradient(45deg, #dc3545, #c82333);
-        }
-
-        .legend-color.info {
-            background: linear-gradient(45deg, #17a2b8, #138496);
-        }
-
-        /* Footer - stejný jako na domovské stránce */
+        /* Footer */
         .footer {
             background: linear-gradient(135deg, rgba(0, 0, 0, 0.8), rgba(0, 29, 61, 0.6));
             padding: 40px 20px;
@@ -450,32 +459,20 @@
                 font-size: 16px;
             }
 
-            .date-tabs {
-                flex-direction: column;
+            .tickets-grid {
+                grid-template-columns: 1fr;
             }
 
-            .filters {
-                flex-direction: column;
-                align-items: stretch;
+            .payment-methods {
+                grid-template-columns: repeat(2, 1fr);
             }
 
-            .program-schedule {
-                grid-template-columns: 80px 1fr;
-                gap: 10px;
+            .terms-content {
+                grid-template-columns: 1fr;
             }
 
-            .stage-header:nth-child(3),
-            .stage-header:nth-child(4) {
-                display: none;
-            }
-
-            .performance-slot:nth-child(4n+3),
-            .performance-slot:nth-child(4n+4) {
-                display: none;
-            }
-
-            .legend-items {
-                gap: 20px;
+            .important-grid {
+                grid-template-columns: 1fr;
             }
 
             .page-title {
@@ -489,8 +486,8 @@
         <nav class="nav-container">
             <div class="logo">ALESTO</div>
             <ul class="nav-menu">
-                <li><a href="#" class="active">PROGRAM</a></li>
-                <li><a href="#">VSTUPENKY</a></li>
+                <li><a href="#">PROGRAM</a></li>
+                <li><a href="#" class="active">VSTUPENKY</a></li>
                 <li><a href="#">INTERPRETI</a></li>
                 <li><a href="#">INFO</a></li>
                 <li><a href="#">KONTAKT</a></li>
@@ -500,263 +497,314 @@
 
     <main class="main-container">
         <div class="breadcrumb">
-            <a href="#">Domů</a> > Program festivalu<br>
-            Podrobná navigace pro přehled o pozici na webu
+            <a href="#">Domů</a> > Vstupenky<br>
+            Drobečková navigace pro přehled o pozici na webu
         </div>
 
-        <h1 class="page-title">Program Festivalu</h1>
+        <h1 class="page-title">Vstupenky</h1>
 
-        <div class="date-tabs">
-            <button class="date-tab active">
-                <div>PÁTEK 15.7.</div>
-                <div class="tab-subtitle">První den programu / mezní jezdecký den festivalu</div>
-            </button>
-            <button class="date-tab">
-                <div>SOBOTA 16.7.</div>
-                <div class="tab-subtitle"></div>
-            </button>
-            <button class="date-tab">
-                <div>NEDĚLE 17.7.</div>
-                <div class="tab-subtitle"></div>
-            </button>
+        <!-- Ticket Alert -->
+        <div class="ticket-alert">
+            <div class="alert-title">⚠️ Omezená dostupnost</div>
+            <div class="alert-text">Některé typy vstupenek jsou vyprodané. Doporučujeme rychlé rozhodnutí!</div>
         </div>
 
-        <div class="filters">
-            <div class="filter-group">
-                <label class="filter-label">Filtr podle pódia</label>
-                <select class="filter-select">
-                    <option>Všechna pódia</option>
-                    <option>Hlavní pódium</option>
-                    <option>Stage 2</option>
-                    <option>Stage 3</option>
-                </select>
-            </div>
-            <div class="filter-group">
-                <label class="filter-label">Filtr podle žánru</label>
-                <select class="filter-select">
-                    <option>Všechny žánry</option>
-                    <option>Rock</option>
-                    <option>Pop</option>
-                    <option>Electronic</option>
-                    <option>Folk</option>
-                    <option>Jazz</option>
-                    <option>Dance</option>
-                </select>
-            </div>
-            <div class="filter-group">
-                <label class="filter-label">Hledat interpreta</label>
-                <input type="text" class="search-box" placeholder="Název interpreta...">
+        <!-- Important Info -->
+        <div class="important-info">
+            <h2 class="important-title">Důležité informace</h2>
+            <div class="important-grid">
+                <div class="important-item">
+                    <div class="important-icon">📅</div>
+                    <div class="important-text">
+                        <strong>Termín:</strong> 15. - 17. července 2025<br>
+                        Festival Park, Hradec Králové
+                    </div>
+                </div>
+                <div class="important-item">
+                    <div class="important-icon">🎫</div>
+                    <div class="important-text">
+                        <strong>Kapacita:</strong> 20 000 návštěvníků<br>
+                        Omezený počet vstupenek
+                    </div>
+                </div>
+                <div class="important-item">
+                    <div class="important-icon">🔞</div>
+                    <div class="important-text">
+                        <strong>Věkové omezení:</strong> 15+ let<br>
+                        Mladší s doprovodem dospělé osoby
+                    </div>
+                </div>
+                <div class="important-item">
+                    <div class="important-icon">🎵</div>
+                    <div class="important-text">
+                        <strong>Program:</strong> 3 pódia, 60+ interpretů<br>
+                        Hudba od 14:00 do 02:00
+                    </div>
+                </div>
             </div>
         </div>
 
-        <div class="program-schedule">
-            <!-- Headers -->
-            <div class="time-header">ČAS</div>
-            <div class="stage-header">HLAVNÍ PÓDIUM</div>
-            <div class="stage-header">STAGE 2</div>
-            <div class="stage-header">STAGE 3</div>
+        <!-- Ticket Types -->
+        <section class="ticket-types">
+            <h2 class="section-title">Typy vstupenek</h2>
+            <div class="tickets-grid">
+                <!-- VIP Ticket -->
+                <div class="ticket-card popular">
+                    <h3 class="ticket-type">VIP Permanentka</h3>
+                    <div class="ticket-price">4 990 <span class="currency">Kč</span></div>
+                    <ul class="ticket-features">
+                        <li>Přístup na všechny 3 dny festivalu</li>
+                        <li>VIP zóna s lepším výhledem</li>
+                        <li>Soukromé toalety a bar</li>
+                        <li>Expresní vstup bez čekání</li>
+                        <li>Welcome drink zdarma</li>
+                        <li>Oficiální festivalové tričko</li>
+                        <li>Možnost Meet & Greet s vybranými interprety</li>
+                    </ul>
+                    <button class="ticket-btn" onclick="selectTicket('VIP')">Koupit VIP vstupenku</button>
+                </div>
 
-            <!-- 14:00 -->
-            <div class="time-slot">14:00</div>
-            <div class="empty-slot"></div>
-            <div class="performance-slot">
-                <div class="performance-card">
-                    <div class="performance-name">INTERPRET C</div>
-                    <div class="performance-time">14:00 - 15:00</div>
-                    <div class="performance-genre">Folk</div>
+                <!-- 3-Day Pass -->
+                <div class="ticket-card">
+                    <h3 class="ticket-type">3denní permanentka</h3>
+                    <div class="ticket-price">2 990 <span class="currency">Kč</span></div>
+                    <ul class="ticket-features">
+                        <li>Přístup na všechny 3 dny festivalu</li>
+                        <li>Všechna pódia a interpreti</li>
+                        <li>Úspora 600 Kč oproti jednodenním</li>
+                        <li>Možnost opustit a vrátit se na areál</li>
+                        <li>Festivalová mapa a program</li>
+                    </ul>
+                    <button class="ticket-btn" onclick="selectTicket('3DAY')">Koupit 3denní vstupenku</button>
+                </div>
+
+                <!-- Friday -->
+                <div class="ticket-card">
+                    <h3 class="ticket-type">Pátek 15.7.</h3>
+                    <div class="ticket-price">1 290 <span class="currency">Kč</span></div>
+                    <ul class="ticket-features">
+                        <li>Vstup pouze v pátek 15.7.2025</li>
+                        <li>Všechna pódia včetně headlinera</li>
+                        <li>Program od 14:00 do 02:00</li>
+                        <li>Možnost opustit a vrátit se</li>
+                    </ul>
+                    <button class="ticket-btn" onclick="selectTicket('FRIDAY')">Koupit páteční vstupenku</button>
+                </div>
+
+                <!-- Saturday -->
+                <div class="ticket-card sold-out">
+                    <h3 class="ticket-type">Sobota 16.7.</h3>
+                    <div class="ticket-price">1 390 <span class="currency">Kč</span></div>
+                    <ul class="ticket-features">
+                        <li>Vstup pouze v sobotu 16.7.2025</li>
+                        <li>Všechna pódia včetně headlinera</li>
+                        <li>Program od 14:00 do 02:00</li>
+                        <li>Nejsilnější program festivalu</li>
+                    </ul>
+                    <button class="ticket-btn" disabled>VYPRODÁNO</button>
+                </div>
+
+                <!-- Sunday -->
+                <div class="ticket-card">
+                    <h3 class="ticket-type">Neděle 17.7.</h3>
+                    <div class="ticket-price">1 190 <span class="currency">Kč</span></div>
+                    <ul class="ticket-features">
+                        <li>Vstup pouze v neděli 17.7.2025</li>
+                        <li>Všechna pódia a závěrečné koncerty</li>
+                        <li>Program od 14:00 do 22:00</li>
+                        <li>Nejlevnější jednodenní vstupenka</li>
+                    </ul>
+                    <button class="ticket-btn" onclick="selectTicket('SUNDAY')">Koupit nedělní vstupenku</button>
+                </div>
+
+                <!-- Student Discount -->
+                <div class="ticket-card">
+                    <h3 class="ticket-type">Studentská sleva</h3>
+                    <div class="ticket-price">2 390 <span class="currency">Kč</span></div>
+                    <ul class="ticket-features">
+                        <li>3denní permanentka se slevou 20%</li>
+                        <li>Nutné předložit ISIC při vstupu</li>
+                        <li>Všechna pódia a interpreti</li>
+                        <li>Stejné výhody jako běžná permanentka</li>
+                    </ul>
+                    <button class="ticket-btn" onclick="selectTicket('STUDENT')">Koupit studentskou vstupenku</button>
                 </div>
             </div>
-            <div class="empty-slot"></div>
-
-            <!-- 15:00 -->
-            <div class="time-slot">15:00</div>
-            <div class="empty-slot"></div>
-            <div class="empty-slot"></div>
-            <div class="performance-slot">
-                <div class="performance-card">
-                    <div class="performance-name">INTERPRET F</div>
-                    <div class="performance-time">15:00 - 16:00</div>
-                    <div class="performance-genre">Hip Hop</div>
-                </div>
-            </div>
-
-            <!-- 16:00 -->
-            <div class="time-slot">16:00</div>
-            <div class="performance-slot">
-                <div class="performance-card">
-                    <div class="performance-name">INTERPRET A</div>
-                    <div class="performance-time">16:00 - 16:00</div>
-                    <div class="performance-genre">Rock/Alternative</div>
-                </div>
-            </div>
-            <div class="performance-slot">
-                <div class="performance-card">
-                    <div class="performance-name">INTERPRET D</div>
-                    <div class="performance-time">16:00 - 17:00</div>
-                    <div class="performance-genre">Indie</div>
-                </div>
-            </div>
-            <div class="empty-slot"></div>
-
-            <!-- 17:00 -->
-            <div class="time-slot">17:00</div>
-            <div class="performance-slot">
-                <div class="performance-card">
-                    <div class="performance-name">INTERPRET B</div>
-                    <div class="performance-time">17:00 - 18:00</div>
-                    <div class="performance-genre">Pop</div>
-                </div>
-            </div>
-            <div class="empty-slot"></div>
-            <div class="empty-slot"></div>
-
-            <!-- 18:00 -->
-            <div class="time-slot">18:00</div>
-            <div class="empty-slot"></div>
-            <div class="empty-slot"></div>
-            <div class="performance-slot">
-                <div class="performance-card">
-                    <div class="performance-name">INTERPRET G</div>
-                    <div class="performance-time">18:00 - 19:00</div>
-                    <div class="performance-genre">Jazz</div>
-                </div>
-            </div>
-
-            <!-- 19:00 -->
-            <div class="time-slot">19:00</div>
-            <div class="empty-slot"></div>
-            <div class="performance-slot">
-                <div class="performance-card">
-                    <div class="performance-name">INTERPRET E</div>
-                    <div class="performance-time">19:00 - 20:00</div>
-                    <div class="performance-genre">Electronic</div>
-                </div>
-            </div>
-            <div class="empty-slot"></div>
-
-            <!-- 20:00 -->
-            <div class="time-slot">20:00</div>
-            <div class="empty-slot"></div>
-            <div class="empty-slot"></div>
-            <div class="empty-slot"></div>
-
-            <!-- 21:00 -->
-            <div class="time-slot">21:00</div>
-            <div class="performance-slot">
-                <div class="performance-card headliner">
-                    <div class="performance-name">HEADLINER</div>
-                    <div class="performance-time">21:00 - 23:00</div>
-                    <div class="performance-genre">Rock</div>
-                </div>
-            </div>
-            <div class="empty-slot"></div>
-            <div class="empty-slot"></div>
-
-            <!-- 22:00 -->
-            <div class="time-slot">22:00</div>
-            <div class="empty-slot"></div>
-            <div class="empty-slot"></div>
-            <div class="performance-slot">
-                <div class="performance-card">
-                    <div class="performance-name">INTERPRET H</div>
-                    <div class="performance-time">22:00 - 23:00</div>
-                    <div class="performance-genre">Dance</div>
-                </div>
-            </div>
-
-            <!-- 23:00 -->
-            <div class="time-slot">23:00</div>
-            <div class="empty-slot"></div>
-            <div class="performance-slot">
-                <div class="performance-card double-slot">
-                    <div class="performance-name">INTERPRET CH</div>
-                    <div class="performance-time">23:00 - 01:00</div>
-                    <div class="performance-genre">Dance</div>
-                </div>
-            </div>
-            <div class="empty-slot"></div>
-
-            <!-- 00:00 -->
-            <div class="time-slot">00:00</div>
-            <div class="empty-slot"></div>
-            <div class="empty-slot"></div>
-            <div class="empty-slot"></div>
-
-            <!-- 01:00 -->
-            <div class="time-slot">01:00</div>
-            <div class="performance-slot">
-                <div class="performance-card">
-                    <div class="performance-name">INTERPRET I</div>
-                    <div class="performance-time">01:00 - 02:00</div>
-                    <div class="performance-genre">Electronic</div>
-                </div>
-            </div>
-            <div class="empty-slot"></div>
-            <div class="empty-slot"></div>
-
-            <!-- 02:00 -->
-            <div class="time-slot">02:00</div>
-            <div class="empty-slot"></div>
-            <div class="empty-slot"></div>
-            <div class="empty-slot"></div>
-        </div>
-
-        <div class="legend">
-            <h3>Legenda</h3>
-            <div class="legend-items">
-                <div class="legend-item">
-                    <div class="legend-color headliner"></div>
-                    <span>Hvězdička - Přidat do mého programu</span>
-                </div>
-                <div class="legend-item">
-                    <div class="legend-color sold-out"></div>
-                    <span>Sold out - Sold out vystoupení na sociální síti</span>
-                </div>
-                <div class="legend-item">
-                    <div class="legend-color info"></div>
-                    <span>Info - Detailní informace o interpretovi</span>
-                </div>
-            </div>
-            <p style="margin-top: 20px; font-size: 14px; color: #999;">
-                Legenda u vypracování leáků a funkcí v programu.
+            <p style="font-size: 14px; color: #ccc;">
+                * Ceny včetně všech poplatků. VIP vstupenky v omezeném množství. Studentská sleva pouze s platným ISIC.
             </p>
-        </div>
+        </section>
+
+        <!-- Payment Methods -->
+        <section class="payment-section">
+            <h2 class="section-title">Způsoby platby</h2>
+            <div class="payment-methods">
+                <div class="payment-method">
+                    <div class="payment-method-name">💳 Platební karta</div>
+                </div>
+                <div class="payment-method">
+                    <div class="payment-method-name">🏦 Bankovní převod</div>
+                </div>
+                <div class="payment-method">
+                    <div class="payment-method-name">📱 Apple Pay</div>
+                </div>
+                <div class="payment-method">
+                    <div class="payment-method-name">🅿️ PayPal</div>
+                </div>
+                <div class="payment-method">
+                    <div class="payment-method-name">💰 Hotovost na místě</div>
+                </div>
+                <div class="payment-method">
+                    <div class="payment-method-name">📲 Google Pay</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Terms & Conditions -->
+        <section class="terms-section">
+            <h2 class="terms-title">Podmínky prodeje a návštěvy</h2>
+            <div class="terms-content">
+                <div class="terms-column">
+                    <h4>Obecné podmínky</h4>
+                    <ul>
+                        <li>Vstupenka je platná pouze na uvedený den/dny</li>
+                        <li>Nutné předložit platný doklad totožnosti</li>
+                        <li>Zákaz vnášení alkoholu a drog</li>
+                        <li>Zákaz profesionální foto/video techniky</li>
+                        <li>Organizátor si vyhrazuje právo na kontrolu</li>
+                    </ul>
+                </div>
+                <div class="terms-column">
+                    <h4>Storno podmínky</h4>
+                    <ul>
+                        <li>Do 30 dní před akcí: plná refundace</li>
+                        <li>Do 14 dní před akcí: 50% refundace</li>
+                        <li>Méně než 14 dní: bez refundace</li>
+                        <li>Zrušení z důvodu vyšší moci: plná refundace</li>
+                        <li>Přeprodej vstupenek pouze přes oficiální kanály</li>
+                    </ul>
+                </div>
+                <div class="terms-column">
+                    <h4>Bezpečnost a zdraví</h4>
+                    <ul>
+                        <li>Povinná vakcinace nebo negativní test</li>
+                        <li>Dodržování hygienických opatření</li>
+                        <li>Zdravotnická služba na místě 24/7</li>
+                        <li>Bezpečnostní personál po celém areálu</li>
+                        <li>Kamerový systém pro vaši bezpečnost</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
     </main>
 
     <footer class="footer">
         <div class="footer-text">
             © 2025 Hudební festival | Kontakt | Podmínky použití | O nás | Pro média<br>
-            Platforma a copyright informačních a odkazy
+            Bezpečný nákup vstupenek • SSL šifrování • Zákaznická podpora 24/7
         </div>
     </footer>
 
     <script>
-        // Tab switching functionality
-        document.querySelectorAll('.date-tab').forEach(tab => {
-            tab.addEventListener('click', function() {
-                document.querySelectorAll('.date-tab').forEach(t => t.classList.remove('active'));
-                this.classList.add('active');
+        // Ticket selection functionality
+        function selectTicket(ticketType) {
+            console.log('Selected ticket:', ticketType);
+            
+            // Simulate loading state
+            const button = event.target;
+            const originalText = button.textContent;
+            button.textContent = 'Načítání...';
+            button.disabled = true;
+            
+            // Simulate redirect to payment
+            setTimeout(() => {
+                alert(`Přesměrování na platbu pro ${getTicketName(ticketType)}`);
+                button.textContent = originalText;
+                button.disabled = false;
+            }, 1500);
+        }
+
+        function getTicketName(type) {
+            const names = {
+                'VIP': 'VIP Permanentku',
+                '3DAY': '3denní permanentku',
+                'FRIDAY': 'Páteční vstupenku',
+                'SUNDAY': 'Nedělní vstupenku',
+                'STUDENT': 'Studentskou vstupenku'
+            };
+            return names[type] || 'vstupenku';
+        }
+
+        // Ticket card hover effects
+        document.querySelectorAll('.ticket-card:not(.sold-out)').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-8px) scale(1.02)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(-5px) scale(1)';
             });
         });
 
-        // Performance card hover effects
-        document.querySelectorAll('.performance-card').forEach(card => {
+        // Payment method interactions
+        document.querySelectorAll('.payment-method').forEach(method => {
+            method.addEventListener('click', function() {
+                const methodName = this.querySelector('.payment-method-name').textContent;
+                console.log('Selected payment method:', methodName);
+                
+                // Visual feedback
+                this.style.background = 'rgba(255, 214, 10, 0.3)';
+                setTimeout(() => {
+                    this.style.background = 'rgba(255, 255, 255, 0.95)';
+                }, 300);
+            });
+        });
+
+        // Sold out notification
+        document.querySelectorAll('.ticket-card.sold-out').forEach(card => {
             card.addEventListener('click', function() {
-                console.log('Performance clicked:', this.querySelector('.performance-name').textContent);
+                alert('Tato vstupenka je bohužel vyprodaná. Zkuste jiný typ vstupenky nebo se zaregistrujte do čekací listiny.');
             });
         });
 
-        // Filter functionality
-        document.querySelectorAll('.filter-select, .search-box').forEach(filter => {
-            filter.addEventListener('change', function() {
-                console.log('Filter changed:', this.value);
-            });
-        });
+        // Price calculator
+        function calculateTotalPrice(ticketType, quantity = 1) {
+            const prices = {
+                'VIP': 4990,
+                '3DAY': 2990,
+                'FRIDAY': 1290,
+                'SATURDAY': 1390,
+                'SUNDAY': 1190,
+                'STUDENT': 2390
+            };
+            
+            return prices[ticketType] * quantity;
+        }
 
-        // Search functionality
-        document.querySelector('.search-box').addEventListener('input', function() {
-            console.log('Search term:', this.value);
-        });
-    </script>
-</body>
-</html>
+        // Form validation for future checkout
+        function validateCheckoutForm(formData) {
+            const required = ['name', 'email', 'phone', 'ticketType'];
+            const missing = required.filter(field => !formData[field]);
+            
+            if (missing.length > 0) {
+                alert(`Vyplňte prosím: ${missing.join(', ')}`);
+                return false;
+            }
+            
+            return true;
+        }
+
+        // Countdown timer for limited offers
+        function startCountdown() {
+            const countdownElement = document.createElement('div');
+            countdownElement.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: rgba(220, 53, 69, 0.9);
+                color: white;
+                padding: 15px;
+                border-radius: 10px;
+                font-weight: 700;
+                z-index: 1000;
+                backdrop-filter: blur
