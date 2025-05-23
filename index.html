@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vstupenky - Festival Alesto</title>
+    <title>Kontakt - Festival Alesto</title>
     <link href="https://fonts.googleapis.com/css2?family=Archivo+Narrow:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * {
@@ -133,33 +133,21 @@
             background-clip: text;
         }
 
-        /* Ticket Alert */
-        .ticket-alert {
-            background: linear-gradient(45deg, rgba(220, 53, 69, 0.8), rgba(200, 35, 51, 0.6));
-            border: 2px solid #dc3545;
-            border-radius: 15px;
-            padding: 25px;
-            margin-bottom: 40px;
-            text-align: center;
-            backdrop-filter: blur(10px);
-        }
-
-        .alert-title {
-            font-size: 24px;
-            font-weight: 700;
-            margin-bottom: 10px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .alert-text {
-            font-size: 18px;
-            font-weight: 600;
-        }
-
-        /* Ticket Types */
-        .ticket-types {
+        /* Contact Grid */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
             margin-bottom: 60px;
+        }
+
+        .contact-form-section,
+        .contact-info-section {
+            background: rgba(0, 0, 0, 0.4);
+            padding: 40px;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 214, 10, 0.2);
+            backdrop-filter: blur(5px);
         }
 
         .section-title {
@@ -171,107 +159,75 @@
             letter-spacing: 2px;
         }
 
-        .tickets-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 30px;
-            margin-bottom: 30px;
+        /* Contact Form */
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
         }
 
-        .ticket-card {
-            background: linear-gradient(135deg, rgba(0, 0, 0, 0.8), rgba(0, 29, 61, 0.6));
-            border: 2px solid rgba(255, 214, 10, 0.3);
-            border-radius: 15px;
-            padding: 30px;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(5px);
-            position: relative;
-            overflow: hidden;
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
         }
 
-        .ticket-card:hover {
-            border-color: #ffd60a;
-            background: linear-gradient(135deg, rgba(255, 214, 10, 0.2), rgba(255, 214, 10, 0.1));
-            transform: translateY(-5px);
-            box-shadow: 0 15px 35px rgba(255, 214, 10, 0.3);
+        .form-group.half {
+            flex-direction: row;
+            gap: 20px;
         }
 
-        .ticket-card.popular {
-            border-color: #ffd60a;
-            border-width: 3px;
-            background: linear-gradient(135deg, rgba(255, 214, 10, 0.3), rgba(255, 183, 0, 0.2));
+        .form-group.half > div {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
         }
 
-        .ticket-card.popular::before {
-            content: 'NEJOBLÍBENĚJŠÍ';
-            position: absolute;
-            top: 15px;
-            right: -35px;
-            background: linear-gradient(45deg, #ffd60a, #ffb700);
-            color: #001d3d;
-            padding: 8px 40px;
-            font-size: 12px;
-            font-weight: 700;
-            transform: rotate(45deg);
+        .form-label {
+            font-size: 16px;
+            font-weight: 600;
+            color: #ffd60a;
             text-transform: uppercase;
             letter-spacing: 1px;
         }
 
-        .ticket-card.sold-out {
-            opacity: 0.6;
-            border-color: #dc3545;
-            background: linear-gradient(135deg, rgba(220, 53, 69, 0.2), rgba(200, 35, 51, 0.1));
-        }
-
-        .ticket-type {
-            font-size: 28px;
-            font-weight: 700;
-            color: #ffd60a;
-            margin-bottom: 15px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
-        .ticket-price {
-            font-size: 36px;
-            font-weight: 700;
+        .form-input,
+        .form-select,
+        .form-textarea {
+            background: rgba(0, 0, 0, 0.6);
+            border: 2px solid rgba(255, 214, 10, 0.3);
             color: white;
-            margin-bottom: 20px;
-        }
-
-        .ticket-price .currency {
-            font-size: 24px;
-            color: #ccc;
-        }
-
-        .ticket-features {
-            list-style: none;
-            margin-bottom: 25px;
-        }
-
-        .ticket-features li {
+            padding: 15px;
+            border-radius: 8px;
+            font-family: 'Archivo Narrow', sans-serif;
             font-size: 16px;
-            margin-bottom: 10px;
-            padding-left: 25px;
-            position: relative;
-            color: #ccc;
+            transition: all 0.3s ease;
         }
 
-        .ticket-features li::before {
-            content: '✓';
-            position: absolute;
-            left: 0;
-            color: #ffd60a;
-            font-weight: 700;
-            font-size: 18px;
+        .form-input:focus,
+        .form-select:focus,
+        .form-textarea:focus {
+            border-color: #ffd60a;
+            outline: none;
+            box-shadow: 0 0 10px rgba(255, 214, 10, 0.3);
         }
 
-        .ticket-btn {
-            width: 100%;
+        .form-input::placeholder,
+        .form-textarea::placeholder {
+            color: #999;
+        }
+
+        .form-textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .form-submit {
             background: linear-gradient(45deg, #ffd60a, #ffb700);
             color: #001d3d;
             border: none;
-            padding: 15px 25px;
+            padding: 18px 30px;
             border-radius: 8px;
             font-family: 'Archivo Narrow', sans-serif;
             font-size: 18px;
@@ -280,156 +236,264 @@
             transition: all 0.3s ease;
             text-transform: uppercase;
             letter-spacing: 1px;
+            margin-top: 10px;
         }
 
-        .ticket-btn:hover {
+        .form-submit:hover {
             transform: translateY(-2px);
             box-shadow: 0 10px 25px rgba(255, 214, 10, 0.5);
         }
 
-        .ticket-btn:disabled {
-            background: #6c757d;
-            cursor: not-allowed;
-            transform: none;
-            box-shadow: none;
-        }
-
-        /* Payment Methods */
-        .payment-section {
-            margin-bottom: 60px;
-        }
-
-        .payment-methods {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            background: rgba(0, 0, 0, 0.4);
-            padding: 30px;
-            border-radius: 15px;
-            border: 1px solid rgba(255, 214, 10, 0.2);
-        }
-
-        .payment-method {
-            background: rgba(255, 255, 255, 0.95);
-            border: 2px solid rgba(255, 214, 10, 0.3);
-            border-radius: 10px;
-            padding: 20px;
-            text-align: center;
-            transition: all 0.3s ease;
-            min-height: 80px;
+        /* Contact Information */
+        .contact-info {
             display: flex;
-            align-items: center;
-            justify-content: center;
+            flex-direction: column;
+            gap: 30px;
         }
 
-        .payment-method:hover {
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+            padding: 20px;
+            background: rgba(255, 214, 10, 0.1);
+            border-radius: 12px;
+            border: 2px solid rgba(255, 214, 10, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .contact-item:hover {
             border-color: #ffd60a;
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(255, 214, 10, 0.3);
+            background: rgba(255, 214, 10, 0.2);
+            transform: translateY(-2px);
         }
 
-        .payment-method-name {
-            font-size: 18px;
+        .contact-icon {
+            font-size: 32px;
+            color: #ffd60a;
+            margin-top: 5px;
+        }
+
+        .contact-details h3 {
+            font-size: 20px;
             font-weight: 700;
-            color: #001d3d;
+            color: #ffd60a;
+            margin-bottom: 8px;
             text-transform: uppercase;
             letter-spacing: 1px;
         }
 
-        /* Terms & Conditions */
-        .terms-section {
+        .contact-details p {
+            font-size: 16px;
+            color: white;
+            line-height: 1.6;
+            margin-bottom: 5px;
+        }
+
+        .contact-details a {
+            color: #ffd60a;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .contact-details a:hover {
+            color: white;
+        }
+
+        /* Social Media */
+        .social-section {
+            margin-bottom: 60px;
+        }
+
+        .social-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 25px;
             background: rgba(0, 0, 0, 0.4);
             padding: 40px;
             border-radius: 15px;
             border: 1px solid rgba(255, 214, 10, 0.2);
-            margin-bottom: 60px;
         }
 
-        .terms-title {
-            font-size: 24px;
-            font-weight: 700;
-            color: #ffd60a;
-            margin-bottom: 25px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+        .social-item {
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.8), rgba(0, 29, 61, 0.6));
+            border: 2px solid rgba(255, 214, 10, 0.3);
+            border-radius: 12px;
+            padding: 25px;
+            text-align: center;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+            cursor: pointer;
         }
 
-        .terms-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
+        .social-item:hover {
+            border-color: #ffd60a;
+            background: linear-gradient(135deg, rgba(255, 214, 10, 0.2), rgba(255, 214, 10, 0.1));
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(255, 214, 10, 0.3);
         }
 
-        .terms-column h4 {
+        .social-icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .social-name {
             font-size: 18px;
             font-weight: 700;
             color: #ffd60a;
-            margin-bottom: 15px;
+            margin-bottom: 8px;
             text-transform: uppercase;
             letter-spacing: 1px;
         }
 
-        .terms-column ul {
-            list-style: none;
-        }
-
-        .terms-column li {
+        .social-handle {
             font-size: 16px;
             color: #ccc;
-            margin-bottom: 8px;
-            padding-left: 20px;
-            position: relative;
+            font-weight: 500;
         }
 
-        .terms-column li::before {
-            content: '•';
-            position: absolute;
-            left: 0;
-            color: #ffd60a;
-            font-weight: 700;
+        /* FAQ Section */
+        .faq-section {
+            margin-bottom: 60px;
         }
 
-        /* Important Info */
-        .important-info {
-            background: linear-gradient(45deg, rgba(255, 193, 7, 0.8), rgba(255, 158, 0, 0.6));
-            border: 2px solid #ffc107;
+        .faq-container {
+            background: rgba(0, 0, 0, 0.4);
+            padding: 40px;
             border-radius: 15px;
-            padding: 30px;
-            margin-bottom: 40px;
-            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 214, 10, 0.2);
         }
 
-        .important-title {
-            font-size: 24px;
-            font-weight: 700;
-            color: #001d3d;
+        .faq-item {
+            border-bottom: 1px solid rgba(255, 214, 10, 0.2);
             margin-bottom: 20px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            padding-bottom: 20px;
         }
 
-        .important-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 25px;
+        .faq-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
         }
 
-        .important-item {
+        .faq-question {
+            font-size: 20px;
+            font-weight: 700;
+            color: #ffd60a;
+            margin-bottom: 12px;
+            cursor: pointer;
+            transition: color 0.3s ease;
             display: flex;
-            align-items: flex-start;
+            align-items: center;
             gap: 15px;
         }
 
-        .important-icon {
-            font-size: 24px;
-            margin-top: 5px;
+        .faq-question:hover {
+            color: white;
         }
 
-        .important-text {
+        .faq-question::before {
+            content: '+';
+            font-size: 24px;
+            font-weight: 700;
+            transition: transform 0.3s ease;
+        }
+
+        .faq-question.active::before {
+            transform: rotate(45deg);
+        }
+
+        .faq-answer {
             font-size: 16px;
-            font-weight: 600;
+            color: #ccc;
+            line-height: 1.7;
+            display: none;
+            padding-left: 39px;
+        }
+
+        .faq-answer.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Team Section */
+        .team-section {
+            margin-bottom: 60px;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .team-member {
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.8), rgba(0, 29, 61, 0.6));
+            border: 2px solid rgba(255, 214, 10, 0.3);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+
+        .team-member:hover {
+            border-color: #ffd60a;
+            background: linear-gradient(135deg, rgba(255, 214, 10, 0.2), rgba(255, 214, 10, 0.1));
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(255, 214, 10, 0.3);
+        }
+
+        .team-photo {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #ffd60a, #ffb700);
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 36px;
             color: #001d3d;
-            line-height: 1.5;
+            font-weight: 700;
+        }
+
+        .team-name {
+            font-size: 22px;
+            font-weight: 700;
+            color: #ffd60a;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .team-position {
+            font-size: 16px;
+            color: #ccc;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .team-contact {
+            font-size: 14px;
+            color: #999;
+        }
+
+        .team-contact a {
+            color: #ffd60a;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .team-contact a:hover {
+            color: white;
         }
 
         /* Footer */
@@ -459,19 +523,21 @@
                 font-size: 16px;
             }
 
-            .tickets-grid {
+            .contact-grid {
                 grid-template-columns: 1fr;
+                gap: 40px;
             }
 
-            .payment-methods {
+            .form-group.half {
+                flex-direction: column;
+                gap: 25px;
+            }
+
+            .social-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
 
-            .terms-content {
-                grid-template-columns: 1fr;
-            }
-
-            .important-grid {
+            .team-grid {
                 grid-template-columns: 1fr;
             }
 
@@ -487,212 +553,235 @@
             <div class="logo">ALESTO</div>
             <ul class="nav-menu">
                 <li><a href="#">PROGRAM</a></li>
-                <li><a href="#" class="active">VSTUPENKY</a></li>
+                <li><a href="#">VSTUPENKY</a></li>
                 <li><a href="#">INTERPRETI</a></li>
                 <li><a href="#">INFO</a></li>
-                <li><a href="#">KONTAKT</a></li>
+                <li><a href="#" class="active">KONTAKT</a></li>
             </ul>
         </nav>
     </header>
 
     <main class="main-container">
         <div class="breadcrumb">
-            <a href="#">Domů</a> > Vstupenky<br>
+            <a href="#">Domů</a> > Kontakt<br>
             Drobečková navigace pro přehled o pozici na webu
         </div>
 
-        <h1 class="page-title">Vstupenky</h1>
+        <h1 class="page-title">Kontakt</h1>
 
-        <!-- Ticket Alert -->
-        <div class="ticket-alert">
-            <div class="alert-title">⚠️ Omezená dostupnost</div>
-            <div class="alert-text">Některé typy vstupenek jsou vyprodané. Doporučujeme rychlé rozhodnutí!</div>
+        <!-- Contact Grid -->
+        <div class="contact-grid">
+            <!-- Contact Form -->
+            <section class="contact-form-section">
+                <h2 class="section-title">Napište nám</h2>
+                <form class="contact-form" onsubmit="submitContactForm(event)">
+                    <div class="form-group half">
+                        <div>
+                            <label class="form-label">Jméno *</label>
+                            <input type="text" class="form-input" placeholder="Vaše jméno" required>
+                        </div>
+                        <div>
+                            <label class="form-label">Příjmení *</label>
+                            <input type="text" class="form-input" placeholder="Vaše příjmení" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">E-mail *</label>
+                        <input type="email" class="form-input" placeholder="vas@email.cz" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Telefon</label>
+                        <input type="tel" class="form-input" placeholder="+420 123 456 789">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Předmět dotazu *</label>
+                        <select class="form-select" required>
+                            <option value="">Vyberte předmět dotazu</option>
+                            <option value="tickets">Vstupenky a platby</option>
+                            <option value="program">Program a interpreti</option>
+                            <option value="accommodation">Ubytování a doprava</option>
+                            <option value="partnership">Partnerství a sponzoring</option>
+                            <option value="media">Média a akreditace</option>
+                            <option value="general">Obecný dotaz</option>
+                            <option value="complaint">Stížnost</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Zpráva *</label>
+                        <textarea class="form-textarea" placeholder="Napište nám svůj dotaz, připomínku nebo návrh..." required></textarea>
+                    </div>
+                    
+                    <button type="submit" class="form-submit">Odeslat zprávu</button>
+                </form>
+            </section>
+
+            <!-- Contact Information -->
+            <section class="contact-info-section">
+                <h2 class="section-title">Kontaktní informace</h2>
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <div class="contact-icon">📧</div>
+                        <div class="contact-details">
+                            <h3>E-mail</h3>
+                            <p><a href="mailto:info@festivalalesto.cz">info@festivalalesto.cz</a></p>
+                            <p><a href="mailto:vstupenky@festivalalesto.cz">vstupenky@festivalalesto.cz</a></p>
+                            <p><a href="mailto:media@festivalalesto.cz">media@festivalalesto.cz</a></p>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="contact-icon">📞</div>
+                        <div class="contact-details">
+                            <h3>Telefon</h3>
+                            <p><a href="tel:+420123456789">+420 123 456 789</a></p>
+                            <p>Po-Pá: 9:00 - 17:00</p>
+                            <p>So-Ne: 10:00 - 16:00</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="contact-icon">📍</div>
+                        <div class="contact-details">
+                            <h3>Adresa festivalu</h3>
+                            <p>Festival Park</p>
+                            <p>Hradec Králové</p>
+                            <p>15. - 17. července 2025</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="contact-icon">🏢</div>
+                        <div class="contact-details">
+                            <h3>Kancelář organizátora</h3>
+                            <p>Festival Alesto s.r.o.</p>
+                            <p>Hudební náměstí 123</p>
+                            <p>110 00 Praha 1</p>
+                            <p>IČ: 12345678</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
         </div>
 
-        <!-- Important Info -->
-        <div class="important-info">
-            <h2 class="important-title">Důležité informace</h2>
-            <div class="important-grid">
-                <div class="important-item">
-                    <div class="important-icon">📅</div>
-                    <div class="important-text">
-                        <strong>Termín:</strong> 15. - 17. července 2025<br>
-                        Festival Park, Hradec Králové
-                    </div>
+        <!-- Social Media -->
+        <section class="social-section">
+            <h2 class="section-title">Sledujte nás</h2>
+            <div class="social-grid">
+                <div class="social-item" onclick="openSocial('facebook')">
+                    <div class="social-icon">📘</div>
+                    <div class="social-name">Facebook</div>
+                    <div class="social-handle">@FestivalAlesto</div>
                 </div>
-                <div class="important-item">
-                    <div class="important-icon">🎫</div>
-                    <div class="important-text">
-                        <strong>Kapacita:</strong> 20 000 návštěvníků<br>
-                        Omezený počet vstupenek
-                    </div>
+                
+                <div class="social-item" onclick="openSocial('instagram')">
+                    <div class="social-icon">📷</div>
+                    <div class="social-name">Instagram</div>
+                    <div class="social-handle">@festivalalesto</div>
                 </div>
-                <div class="important-item">
-                    <div class="important-icon">🔞</div>
-                    <div class="important-text">
-                        <strong>Věkové omezení:</strong> 15+ let<br>
-                        Mladší s doprovodem dospělé osoby
-                    </div>
+                
+                <div class="social-item" onclick="openSocial('youtube')">
+                    <div class="social-icon">📺</div>
+                    <div class="social-name">YouTube</div>
+                    <div class="social-handle">Festival Alesto</div>
                 </div>
-                <div class="important-item">
-                    <div class="important-icon">🎵</div>
-                    <div class="important-text">
-                        <strong>Program:</strong> 3 pódia, 60+ interpretů<br>
-                        Hudba od 14:00 do 02:00
-                    </div>
+                
+                <div class="social-item" onclick="openSocial('twitter')">
+                    <div class="social-icon">🐦</div>
+                    <div class="social-name">Twitter/X</div>
+                    <div class="social-handle">@FestivalAlesto</div>
                 </div>
-            </div>
-        </div>
-
-        <!-- Ticket Types -->
-        <section class="ticket-types">
-            <h2 class="section-title">Typy vstupenek</h2>
-            <div class="tickets-grid">
-                <!-- VIP Ticket -->
-                <div class="ticket-card popular">
-                    <h3 class="ticket-type">VIP Permanentka</h3>
-                    <div class="ticket-price">4 990 <span class="currency">Kč</span></div>
-                    <ul class="ticket-features">
-                        <li>Přístup na všechny 3 dny festivalu</li>
-                        <li>VIP zóna s lepším výhledem</li>
-                        <li>Soukromé toalety a bar</li>
-                        <li>Expresní vstup bez čekání</li>
-                        <li>Welcome drink zdarma</li>
-                        <li>Oficiální festivalové tričko</li>
-                        <li>Možnost Meet & Greet s vybranými interprety</li>
-                    </ul>
-                    <button class="ticket-btn" onclick="selectTicket('VIP')">Koupit VIP vstupenku</button>
+                
+                <div class="social-item" onclick="openSocial('tiktok')">
+                    <div class="social-icon">🎵</div>
+                    <div class="social-name">TikTok</div>
+                    <div class="social-handle">@festivalalesto</div>
                 </div>
-
-                <!-- 3-Day Pass -->
-                <div class="ticket-card">
-                    <h3 class="ticket-type">3denní permanentka</h3>
-                    <div class="ticket-price">2 990 <span class="currency">Kč</span></div>
-                    <ul class="ticket-features">
-                        <li>Přístup na všechny 3 dny festivalu</li>
-                        <li>Všechna pódia a interpreti</li>
-                        <li>Úspora 600 Kč oproti jednodenním</li>
-                        <li>Možnost opustit a vrátit se na areál</li>
-                        <li>Festivalová mapa a program</li>
-                    </ul>
-                    <button class="ticket-btn" onclick="selectTicket('3DAY')">Koupit 3denní vstupenku</button>
-                </div>
-
-                <!-- Friday -->
-                <div class="ticket-card">
-                    <h3 class="ticket-type">Pátek 15.7.</h3>
-                    <div class="ticket-price">1 290 <span class="currency">Kč</span></div>
-                    <ul class="ticket-features">
-                        <li>Vstup pouze v pátek 15.7.2025</li>
-                        <li>Všechna pódia včetně headlinera</li>
-                        <li>Program od 14:00 do 02:00</li>
-                        <li>Možnost opustit a vrátit se</li>
-                    </ul>
-                    <button class="ticket-btn" onclick="selectTicket('FRIDAY')">Koupit páteční vstupenku</button>
-                </div>
-
-                <!-- Saturday -->
-                <div class="ticket-card sold-out">
-                    <h3 class="ticket-type">Sobota 16.7.</h3>
-                    <div class="ticket-price">1 390 <span class="currency">Kč</span></div>
-                    <ul class="ticket-features">
-                        <li>Vstup pouze v sobotu 16.7.2025</li>
-                        <li>Všechna pódia včetně headlinera</li>
-                        <li>Program od 14:00 do 02:00</li>
-                        <li>Nejsilnější program festivalu</li>
-                    </ul>
-                    <button class="ticket-btn" disabled>VYPRODÁNO</button>
-                </div>
-
-                <!-- Sunday -->
-                <div class="ticket-card">
-                    <h3 class="ticket-type">Neděle 17.7.</h3>
-                    <div class="ticket-price">1 190 <span class="currency">Kč</span></div>
-                    <ul class="ticket-features">
-                        <li>Vstup pouze v neděli 17.7.2025</li>
-                        <li>Všechna pódia a závěrečné koncerty</li>
-                        <li>Program od 14:00 do 22:00</li>
-                        <li>Nejlevnější jednodenní vstupenka</li>
-                    </ul>
-                    <button class="ticket-btn" onclick="selectTicket('SUNDAY')">Koupit nedělní vstupenku</button>
-                </div>
-
-                <!-- Student Discount -->
-                <div class="ticket-card">
-                    <h3 class="ticket-type">Studentská sleva</h3>
-                    <div class="ticket-price">2 390 <span class="currency">Kč</span></div>
-                    <ul class="ticket-features">
-                        <li>3denní permanentka se slevou 20%</li>
-                        <li>Nutné předložit ISIC při vstupu</li>
-                        <li>Všechna pódia a interpreti</li>
-                        <li>Stejné výhody jako běžná permanentka</li>
-                    </ul>
-                    <button class="ticket-btn" onclick="selectTicket('STUDENT')">Koupit studentskou vstupenku</button>
-                </div>
-            </div>
-            <p style="font-size: 14px; color: #ccc;">
-                * Ceny včetně všech poplatků. VIP vstupenky v omezeném množství. Studentská sleva pouze s platným ISIC.
-            </p>
-        </section>
-
-        <!-- Payment Methods -->
-        <section class="payment-section">
-            <h2 class="section-title">Způsoby platby</h2>
-            <div class="payment-methods">
-                <div class="payment-method">
-                    <div class="payment-method-name">💳 Platební karta</div>
-                </div>
-                <div class="payment-method">
-                    <div class="payment-method-name">🏦 Bankovní převod</div>
-                </div>
-                <div class="payment-method">
-                    <div class="payment-method-name">📱 Apple Pay</div>
-                </div>
-                <div class="payment-method">
-                    <div class="payment-method-name">🅿️ PayPal</div>
-                </div>
-                <div class="payment-method">
-                    <div class="payment-method-name">💰 Hotovost na místě</div>
-                </div>
-                <div class="payment-method">
-                    <div class="payment-method-name">📲 Google Pay</div>
+                
+                <div class="social-item" onclick="openSocial('spotify')">
+                    <div class="social-icon">🎧</div>
+                    <div class="social-name">Spotify</div>
+                    <div class="social-handle">Festival Alesto Playlist</div>
                 </div>
             </div>
         </section>
 
-        <!-- Terms & Conditions -->
-        <section class="terms-section">
-            <h2 class="terms-title">Podmínky prodeje a návštěvy</h2>
-            <div class="terms-content">
-                <div class="terms-column">
-                    <h4>Obecné podmínky</h4>
-                    <ul>
-                        <li>Vstupenka je platná pouze na uvedený den/dny</li>
-                        <li>Nutné předložit platný doklad totožnosti</li>
-                        <li>Zákaz vnášení alkoholu a drog</li>
-                        <li>Zákaz profesionální foto/video techniky</li>
-                        <li>Organizátor si vyhrazuje právo na kontrolu</li>
-                    </ul>
+        <!-- Team Section -->
+        <section class="team-section">
+            <h2 class="section-title">Náš tým</h2>
+            <div class="team-grid">
+                <div class="team-member">
+                    <div class="team-photo">MH</div>
+                    <div class="team-name">Martin Hudební</div>
+                    <div class="team-position">Ředitel festivalu</div>
+                    <div class="team-contact">
+                        <a href="mailto:martin@festivalalesto.cz">martin@festivalalesto.cz</a><br>
+                        <a href="tel:+420123456701">+420 123 456 701</a>
+                    </div>
                 </div>
-                <div class="terms-column">
-                    <h4>Storno podmínky</h4>
-                    <ul>
-                        <li>Do 30 dní před akcí: plná refundace</li>
-                        <li>Do 14 dní před akcí: 50% refundace</li>
-                        <li>Méně než 14 dní: bez refundace</li>
-                        <li>Zrušení z důvodu vyšší moci: plná refundace</li>
-                        <li>Přeprodej vstupenek pouze přes oficiální kanály</li>
-                    </ul>
+                
+                <div class="team-member">
+                    <div class="team-photo">AK</div>
+                    <div class="team-name">Anna Kulturní</div>
+                    <div class="team-position">Programová ředitelka</div>
+                    <div class="team-contact">
+                        <a href="mailto:anna@festivalalesto.cz">anna@festivalalesto.cz</a><br>
+                        <a href="tel:+420123456702">+420 123 456 702</a>
+                    </div>
                 </div>
-                <div class="terms-column">
-                    <h4>Bezpečnost a zdraví</h4>
-                    <ul>
-                        <li>Povinná vakcinace nebo negativní test</li>
-                        <li>Dodržování hygienických opatření</li>
-                        <li>Zdravotnická služba na místě 24/7</li>
-                        <li>Bezpečnostní personál po celém areálu</li>
-                        <li>Kamerový systém pro vaši bezpečnost</li>
-                    </ul>
+                
+                <div class="team-member">
+                    <div class="team-photo">PV</div>
+                    <div class="team-name">Petr Vstupenkový</div>
+                    <div class="team-position">Manažer prodeje</div>
+                    <div class="team-contact">
+                        <a href="mailto:petr@festivalalesto.cz">petr@festivalalesto.cz</a><br>
+                        <a href="tel:+420123456703">+420 123 456 703</a>
+                    </div>
+                </div>
+                
+                <div class="team-member">
+                    <div class="team-photo">JS</div>
+                    <div class="team-name">Jana Sociální</div>
+                    <div class="team-position">PR a Marketing</div>
+                    <div class="team-contact">
+                        <a href="mailto:jana@festivalalesto.cz">jana@festivalalesto.cz</a><br>
+                        <a href="tel:+420123456704">+420 123 456 704</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="faq-section">
+            <h2 class="section-title">Často kladené otázky</h2>
+            <div class="faq-container">
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">Jak rychle odpovídáte na dotazy?</div>
+                    <div class="faq-answer">Snažíme se odpovědět na všechny dotazy do 24 hodin v pracovní dny. V období těsně před festivalem může odpověď trvat až 48 hodin kvůli zvýšenému počtu dotazů.</div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">Mohu změnit nebo zrušit objednávku vstupenek?</div>
+                    <div class="faq-answer">Ano, změny a zrušení objednávek jsou možné podle našich storno podmínek. Kontaktujte nás co nejdříve na vstupenky@festivalalesto.cz s číslem vaší objednávky.</div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">Jak se mohu stát partnerem festivalu?</div>
+                    <div class="faq-answer">Rádi se seznámíme s novými partnery! Napište nám na info@festivalalesto.cz s označením "Partnerství" a popište, jakým způsobem byste chtěli festival podpořit.</div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">Poskytujete akreditace pro média?</div>
+                    <div class="faq-answer">Ano, poskytujeme mediální akreditace pro ověřené zástupce médií. Žádosti zasílejte na media@festivalalesto.cz nejméně 30 dní před festivalem.</div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">Můžu se přihlásit jako dobrovolník?</div>
+                    <div class="faq-answer">Určitě! Dobrovolníci jsou srdcem našeho festivalu. Informace o dobrovolnických pozicích zveřejňujeme na našich sociálních sítích a webu obvykle 3 měsíce před festivalem.</div>
                 </div>
             </div>
         </section>
@@ -701,110 +790,205 @@
     <footer class="footer">
         <div class="footer-text">
             © 2025 Hudební festival | Kontakt | Podmínky použití | O nás | Pro média<br>
-            Bezpečný nákup vstupenek • SSL šifrování • Zákaznická podpora 24/7
+            Odpovídáme na všechny dotazy • Zákaznická podpora 24/7 • Bezpečná komunikace
         </div>
     </footer>
 
     <script>
-        // Ticket selection functionality
-        function selectTicket(ticketType) {
-            console.log('Selected ticket:', ticketType);
+        // Contact form submission
+        function submitContactForm(event) {
+            event.preventDefault();
             
-            // Simulate loading state
-            const button = event.target;
-            const originalText = button.textContent;
-            button.textContent = 'Načítání...';
-            button.disabled = true;
+            const submitBtn = event.target.querySelector('.form-submit');
+            const originalText = submitBtn.textContent;
             
-            // Simulate redirect to payment
+            submitBtn.textContent = 'Odesílání...';
+            submitBtn.disabled = true;
+            
+            // Simulate form submission
             setTimeout(() => {
-                alert(`Přesměrování na platbu pro ${getTicketName(ticketType)}`);
-                button.textContent = originalText;
-                button.disabled = false;
-            }, 1500);
+                alert('Děkujeme za vaši zprávu! Odpovíme vám do 24 hodin na uvedený e-mail.');
+                event.target.reset();
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+            }, 2000);
         }
 
-        function getTicketName(type) {
-            const names = {
-                'VIP': 'VIP Permanentku',
-                '3DAY': '3denní permanentku',
-                'FRIDAY': 'Páteční vstupenku',
-                'SUNDAY': 'Nedělní vstupenku',
-                'STUDENT': 'Studentskou vstupenku'
+        // Social media links
+        function openSocial(platform) {
+            const urls = {
+                'facebook': 'https://facebook.com/FestivalAlesto',
+                'instagram': 'https://instagram.com/festivalalesto',
+                'youtube': 'https://youtube.com/@FestivalAlesto',
+                'twitter': 'https://twitter.com/FestivalAlesto',
+                'tiktok': 'https://tiktok.com/@festivalalesto',
+                'spotify': 'https://open.spotify.com/user/festivalalesto'
             };
-            return names[type] || 'vstupenku';
+            
+            console.log('Opening social platform:', platform);
+            // In real implementation: window.open(urls[platform], '_blank');
+            
+            // Visual feedback
+            event.target.style.transform = 'translateY(-8px) scale(1.05)';
+            setTimeout(() => {
+                event.target.style.transform = 'translateY(-5px) scale(1)';
+            }, 200);
         }
 
-        // Ticket card hover effects
-        document.querySelectorAll('.ticket-card:not(.sold-out)').forEach(card => {
-            card.addEventListener('mouseenter', function() {
-                this.style.transform = 'translateY(-8px) scale(1.02)';
+        // FAQ toggle functionality
+        function toggleFaq(element) {
+            const answer = element.nextElementSibling;
+            const isActive = answer.classList.contains('active');
+            
+            // Close all other FAQs
+            document.querySelectorAll('.faq-answer.active').forEach(item => {
+                item.classList.remove('active');
+            });
+            document.querySelectorAll('.faq-question.active').forEach(item => {
+                item.classList.remove('active');
             });
             
-            card.addEventListener('mouseleave', function() {
-                this.style.transform = 'translateY(-5px) scale(1)';
-            });
-        });
+            // Toggle current FAQ
+            if (!isActive) {
+                answer.classList.add('active');
+                element.classList.add('active');
+            }
+        }
 
-        // Payment method interactions
-        document.querySelectorAll('.payment-method').forEach(method => {
-            method.addEventListener('click', function() {
-                const methodName = this.querySelector('.payment-method-name').textContent;
-                console.log('Selected payment method:', methodName);
+        // Team member interactions
+        document.querySelectorAll('.team-member').forEach(member => {
+            member.addEventListener('click', function() {
+                const name = this.querySelector('.team-name').textContent;
+                const email = this.querySelector('a[href^="mailto:"]').textContent;
+                console.log('Team member clicked:', name, email);
                 
                 // Visual feedback
-                this.style.background = 'rgba(255, 214, 10, 0.3)';
+                this.style.transform = 'translateY(-8px) scale(1.02)';
                 setTimeout(() => {
-                    this.style.background = 'rgba(255, 255, 255, 0.95)';
+                    this.style.transform = 'translateY(-5px) scale(1)';
                 }, 300);
             });
         });
 
-        // Sold out notification
-        document.querySelectorAll('.ticket-card.sold-out').forEach(card => {
-            card.addEventListener('click', function() {
-                alert('Tato vstupenka je bohužel vyprodaná. Zkuste jiný typ vstupenky nebo se zaregistrujte do čekací listiny.');
+        // Contact item interactions
+        document.querySelectorAll('.contact-item').forEach(item => {
+            item.addEventListener('click', function() {
+                const links = this.querySelectorAll('a');
+                if (links.length === 1) {
+                    // If there's only one link, click it
+                    links[0].click();
+                }
             });
         });
 
-        // Price calculator
-        function calculateTotalPrice(ticketType, quantity = 1) {
-            const prices = {
-                'VIP': 4990,
-                '3DAY': 2990,
-                'FRIDAY': 1290,
-                'SATURDAY': 1390,
-                'SUNDAY': 1190,
-                'STUDENT': 2390
-            };
+        // Form validation enhancement
+        document.querySelectorAll('.form-input, .form-select, .form-textarea').forEach(input => {
+            input.addEventListener('blur', function() {
+                if (this.hasAttribute('required') && !this.value) {
+                    this.style.borderColor = '#dc3545';
+                } else {
+                    this.style.borderColor = '';
+                }
+            });
             
-            return prices[ticketType] * quantity;
-        }
+            input.addEventListener('focus', function() {
+                this.style.borderColor = '#ffd60a';
+            });
+        });
 
-        // Form validation for future checkout
-        function validateCheckoutForm(formData) {
-            const required = ['name', 'email', 'phone', 'ticketType'];
-            const missing = required.filter(field => !formData[field]);
-            
-            if (missing.length > 0) {
-                alert(`Vyplňte prosím: ${missing.join(', ')}`);
-                return false;
-            }
-            
-            return true;
-        }
+        // Auto-resize textarea
+        document.querySelector('.form-textarea').addEventListener('input', function() {
+            this.style.height = 'auto';
+            this.style.height = Math.max(120, this.scrollHeight) + 'px';
+        });
 
-        // Countdown timer for limited offers
-        function startCountdown() {
-            const countdownElement = document.createElement('div');
-            countdownElement.style.cssText = `
+        // Copy email to clipboard functionality
+        document.querySelectorAll('a[href^="mailto:"]').forEach(emailLink => {
+            emailLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                const email = this.textContent;
+                
+                if (navigator.clipboard) {
+                    navigator.clipboard.writeText(email).then(() => {
+                        showNotification('E-mail zkopírován do schránky: ' + email);
+                    });
+                } else {
+                    // Fallback for older browsers
+                    showNotification('E-mail: ' + email);
+                }
+            });
+        });
+
+        // Show notification function
+        function showNotification(message) {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
                 position: fixed;
                 top: 20px;
                 right: 20px;
-                background: rgba(220, 53, 69, 0.9);
-                color: white;
-                padding: 15px;
+                background: linear-gradient(45deg, #ffd60a, #ffb700);
+                color: #001d3d;
+                padding: 15px 25px;
                 border-radius: 10px;
                 font-weight: 700;
                 z-index: 1000;
-                backdrop-filter: blur
+                box-shadow: 0 10px 25px rgba(255, 214, 10, 0.5);
+                animation: slideIn 0.3s ease;
+            `;
+            notification.textContent = message;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.animation = 'slideOut 0.3s ease';
+                setTimeout(() => {
+                    notification.remove();
+                }, 300);
+            }, 3000);
+        }
+
+        // Add CSS for notification animations
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideIn {
+                from { transform: translateX(100%); opacity: 0; }
+                to { transform: translateX(0); opacity: 1; }
+            }
+            @keyframes slideOut {
+                from { transform: translateX(0); opacity: 1; }
+                to { transform: translateX(100%); opacity: 0; }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Form field auto-completion suggestions
+        const commonDomains = ['gmail.com', 'seznam.cz', 'email.cz', 'centrum.cz', 'volny.cz'];
+        const emailInput = document.querySelector('input[type="email"]');
+        
+        emailInput.addEventListener('input', function() {
+            const value = this.value;
+            if (value.includes('@') && !value.includes('.')) {
+                const [localPart] = value.split('@');
+                if (localPart.length > 0) {
+                    // Could suggest domains here
+                    console.log('Email suggestion for:', value);
+                }
+            }
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
