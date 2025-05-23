@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interpreti - Festival Alesto</title>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Narrow:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Archivo Narrow', sans-serif;
+            background: linear-gradient(135deg, #001d3d 0%, #003566 50%, #000814 100%);
+            color: white;
+            min-height: 100vh;
+            background-attachment: fixed;
+        }
+
+        /* Header - stejný jako na domovské stránce */
+        .header {
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 15px 0;
+            border-bottom: 2px solid #ffd60a;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-weight: 700;
+            font-size: 28px;
+            color: #ffd60a;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .logo::before {
+            content: "♪";
+            margin-right: 12px;
+            font-size: 32px;
+            color: #ffd60a;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 40px;
+        }
+
+        .nav-menu a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 18px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-menu a:hover,
+        .nav-menu a.active {
+            color: #ffd60a;
+            text-shadow: 0 0 10px rgba(255, 214, 10, 0.5);
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #ffd60a;
+            transition: width 0.3s ease;
+        }
+
+        .nav-menu a:hover::after,
+        .nav-menu a.active::after {
+            width: 100%;
+        }
+
+        /* Main Content */
+        .main-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 50px 20px;
+        }
+
+        .breadcrumb {
+            color: #ccc;
+            margin-bottom: 30px;
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        .breadcrumb a {
+            color: #ffd60a;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .breadcrumb a:hover {
+            color: white;
+        }
+
+        .page-title {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 40px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            text-align: center;
+            background: linear-gradient(45deg, #ffd60a, #ffb700);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Filters */
+        .filters-section {
+            background: rgba(0, 0, 0, 0.4);
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 214, 10, 0.2);
+            margin-bottom: 40px;
+        }
+
+        .filter-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #ffd60a;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .genre-filters {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
+
+        .genre-btn {
+            background: rgba(0, 0, 0, 0.6);
+            border: 2px solid rgba(255, 214, 10, 0.3);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-family: 'Archivo Narrow', sans-serif;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .genre-btn.active,
+        .genre-btn:hover {
+            background: linear-gradient(45deg, #ffd60a, #ffb700);
+            color: #001d3d;
+            border-color: #ffd60a;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 214, 10, 0.3);
+        }
+
+        .search-container {
+            position: relative;
+            max-width: 400px;
+        }
+
+        .search-box {
+            background: rgba(0, 0, 0, 0.6);
+            border: 2px solid rgba(255, 214, 10, 0.3);
+            color: white;
+            padding: 12px 50px 12px 15px;
+            border-radius: 8px;
+            font-family: 'Archivo Narrow', sans-serif;
+            font-size: 16px;
+            width: 100%;
+            transition: all 0.3s ease;
+        }
+
+        .search-box::placeholder {
+            color: #999;
+        }
+
+        .search-box:focus {
+            border-color: #ffd60a;
+            outline: none;
+            box-shadow: 0 0 10px rgba(255, 214, 10, 0.3);
+        }
+
+        .search-icon {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #ffd60a;
+            font-size: 18px;
+        }
+
+        /* Alphabet Navigation */
+        .alphabet-nav {
+            display: flex;
+            gap: 8px;
+            background: rgba(0, 0, 0, 0.4);
+            padding: 20px;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 214, 10, 0.2);
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .alphabet-btn {
+            width: 45px;
+            height: 45px;
+            background: rgba(0, 0, 0, 0.6);
+            border: 2px solid rgba(255, 214, 10, 0.3);
+            color: white;
+            border-radius: 8px;
+            font-family: 'Archivo Narrow', sans-serif;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .alphabet-btn:hover,
+        .alphabet-btn.active {
+            background: linear-gradient(45deg, #ffd60a, #ffb700);
+            color: #001d3d;
+            border-color: #ffd60a;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 214, 10, 0.3);
+        }
+
+        /* Headliners Section */
+        .headliners-section {
+            margin-bottom: 50px;
+        }
+
+        .section-title {
+            font-size: 32px;
+            font-weight: 700;
+            color: #ffd60a;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .headliners-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .headliner-card {
+            background: linear-gradient(135deg, rgba(255, 214, 10, 0.4), rgba(255, 183, 0, 0.2));
+            border: 3px solid #ffd60a;
+            border-radius: 15px;
+            padding: 30px;
+            display: flex;
+            gap: 30px;
+            align-items: center;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .headliner-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(255, 214, 10, 0.5);
+        }
+
+        .artist-photo-container {
+            flex-shrink: 0;
+        }
+
+        .artist-photo {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .artist-info {
+            flex: 1;
+        }
+
+        .artist-name {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: white;
+        }
+
+        .artist-details {
+            margin-bottom: 20px;
+        }
+
+        .artist-time,
+        .artist-stage,
+        .artist-genre {
+            font-size: 16px;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+
+        .artist-time {
+            color: #001d3d;
+        }
+
+        .artist-stage,
+        .artist-genre {
+            color: #003566;
+        }
+
+        .artist-actions {
+            display: flex;
+            gap: 15px;
+        }
+
+        .action-btn {
+            background: rgba(0, 0, 0, 0.6);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-family: 'Archivo Narrow', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .action-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Other Artists Section */
+        .other-artists-section {
+            margin-bottom: 50px;
+        }
+
+        .artists-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 25px;
+        }
+
+        .artist-card {
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.8), rgba(0, 29, 61, 0.6));
+            border: 2px solid rgba(255, 214, 10, 0.3);
+            border-radius: 12px;
+            padding: 25px;
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+
+        .artist-card:hover {
+            border-color: #ffd60a;
+            background: linear-gradient(135deg, rgba(255, 214, 10, 0.2), rgba(255, 214, 10, 0.1));
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(255, 214, 10, 0.3);
+        }
+
+        .artist-card .artist-photo {
+            width: 80px;
+            height: 80px;
+        }
+
+        .artist-card .artist-name {
+            font-size: 20px;
+            margin-bottom: 8px;
+        }
+
+        .artist-card .artist-time,
+        .artist-card .artist-stage,
+        .artist-card .artist-genre {
+            font-size: 14px;
+            color: #ccc;
+        }
+
+        /* Pagination */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            margin: 50px 0;
+            padding: 30px;
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 15px;
+            border: 1px solid rgba(255, 214, 10, 0.2);
+        }
+
+        .pagination-label {
+            font-size: 18px;
+            font-weight: 600;
+            color: #ffd60a;
+            margin-right: 10px;
+        }
+
+        .page-btn {
+            width: 45px;
+            height: 45px;
+            background: rgba(0, 0, 0, 0.6);
+            border: 2px solid rgba(255, 214, 10, 0.3);
+            color: white;
+            border-radius: 8px;
+            font-family: 'Archivo Narrow', sans-serif;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .page-btn.active,
+        .page-btn:hover {
+            background: linear-gradient(45deg, #ffd60a, #ffb700);
+            color: #001d3d;
+            border-color: #ffd60a;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 214, 10, 0.3);
+        }
+
+        .page-btn.more {
+            background: transparent;
+            border: none;
+            cursor: default;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .page-btn.more:hover {
+            background: transparent;
+            transform: none;
+            box-shadow: none;
+        }
+
+        /* Artist Detail Modal */
+        .artist-detail {
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.9), rgba(0, 29, 61, 0.8));
+            border: 2px solid #ffd60a;
+            border-radius: 15px;
+            padding: 40px;
+            margin-top: 50px;
+            backdrop-filter: blur(15px);
+        }
+
+        .detail-header {
+            font-size: 28px;
+            font-weight: 700;
+            color: #ffd60a;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .detail-content {
+            display: flex;
+            gap: 40px;
+            align-items: flex-start;
+        }
+
+        .detail-photo {
+            width: 200px;
+            height: 200px;
+            border-radius: 10px;
+            object-fit: cover;
+            border: 3px solid rgba(255, 214, 10, 0.3);
+        }
+
+        .detail-info {
+            flex: 1;
+        }
+
+        .detail-section {
+            margin-bottom: 25px;
+        }
+
+        .detail-label {
+            font-size: 18px;
+            font-weight: 700;
+            color: #ffd60a;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .detail-value {
+            font-size: 16px;
+            color: white;
+            line-height: 1.6;
+        }
+
+        .bio-text {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #ccc;
+            margin-bottom: 30px;
+        }
+
+        .add-to-program-btn {
+            background: linear-gradient(45deg, #ffd60a, #ffb700);
+            color: #001d3d;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 8px;
+            font-family: 'Archivo Narrow', sans-serif;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .add-to-program-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(255, 214, 10, 0.5);
+        }
+
+        /* Footer */
+        .footer {
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.8), rgba(0, 29, 61, 0.6));
+            padding: 40px 20px;
+            text-align: center;
+            margin-top: 80px;
+            border-top: 2px solid rgba(255, 214, 10, 0.3);
+            backdrop-filter: blur(15px);
+        }
+
+        .footer-text {
+            font-size: 14px;
+            color: #999;
+            font-weight: 500;
+            letter-spacing: 1px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-menu {
+                gap: 20px;
+            }
+
+            .nav-menu a {
+                font-size: 16px;
+            }
+
+            .genre-filters {
+                justify-content: center;
+            }
+
+            .alphabet-nav {
+                gap: 5px;
+            }
+
+            .alphabet-btn {
+                width: 35px;
+                height: 35px;
+                font-size: 14px;
+            }
+
+            .headliners-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .headliner-card {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .artists-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .detail-content {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+
+            .page-title {
+                font-size: 36px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav-container">
+            <div class="logo">ALESTO</div>
+            <ul class="nav-menu">
+                <li><a href="#">PROGRAM</a></li>
+                <li><a href="#">VSTUPENKY</a></li>
+                <li><a href="#" class="active">INTERPRETI</a></li>
+                <li><a href="#">KONTAKT</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="main-container">
+        <div class="breadcrumb">
+            <a href="#">Domů</a> > Interpreti<br>
+            Drobečková navigace pro přehled o pozici na webu
+        </div>
+
+        <h1 class="page-title">Interpreti Festivalu</h1>
+
+        <!-- Filters Section -->
+        <div class="filters-section">
+            <div class="filter-title">Filtrovat podle:</div>
+            <div class="genre-filters">
+                <button class="genre-btn active">Všechny</button>
+                <button class="genre-btn">Rock</button>
+                <button class="genre-btn">Pop</button>
+                <button class="genre-btn">Electronic</button>
+                <button class="genre-btn">Folk</button>
+                <button class="genre-btn">Jazz</button>
+                <button class="genre-btn">Hip Hop</button>
+            </div>
+            <div class="search-container">
+                <input type="text" class="search-box" placeholder="Hledat interpreta...">
+                <div class="search-icon">🔍</div>
+            </div>
+        </div>
+
+        <!-- Alphabet Navigation -->
+        <div class="alphabet-nav">
+            <button class="alphabet-btn active">A</button>
+            <button class="alphabet-btn">B</button>
+            <button class="alphabet-btn">C</button>
+            <button class="alphabet-btn">D</button>
+            <button class="alphabet-btn">E</button>
+            <button class="alphabet-btn">F</button>
+            <button class="alphabet-btn">G</button>
+            <button class="alphabet-btn">H</button>
+            <button class="alphabet-btn">I</button>
+            <button class="alphabet-btn">J</button>
+            <button class="alphabet-btn">K</button>
+            <button class="alphabet-btn">L</button>
+            <button class="alphabet-btn">M</button>
+            <button class="alphabet-btn">N</button>
+            <button class="alphabet-btn">O</button>
+            <button class="alphabet-btn">P</button>
+            <button class="alphabet-btn">R</button>
+            <button class="alphabet-btn">S</button>
+            <button class="alphabet-btn">T</button>
+            <button class="alphabet-btn">V</button>
+            <button class="alphabet-btn">Z</button>
+        </div>
+
+        <!-- Headliners Section -->
+        <section class="headliners-section">
+            <h2 class="section-title">Headlineři</h2>
+            <div class="headliners-grid">
+                <div class="headliner-card">
+                    <div class="artist-photo-container">
+                        <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIwIiBoZWlnaHQ9IjEyMCIgdmlld0JveD0iMCAwIDEyMCAxMjAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxMjAiIGhlaWdodD0iMTIwIiByeD0iNjAiIGZpbGw9InVybCgjZ3JhZGllbnQwKSIvPgo8Y2lyY2xlIGN4PSI2MCIgY3k9IjQ1IiByPSIyMCIgZmlsbD0iIzMzMzMzMyIvPgo8ZWxsaXBzZSBjeD0iNjAiIGN5PSI5NSIgcng9IjM1IiByeT0iMjAiIGZpbGw9IiMzMzMzMzMiLz4KPHN0eWxlPgoudGV4dCB7IGZvbnQtZmFtaWx5OiBBcmlhbCwgc2Fucy1zZXJpZjsgZm9udC1zaXplOiAxMnB4OyBmaWxsOiAjZmZmZmZmOyB9Cjwvc3R5bGU+Cjx0ZXh0IHg9IjYwIiB5PSI1MCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgY2xhc3M9InRleHQiPkZPVE88L3RleHQ+CjxkZWZzPgo8bGluZWFyR3JhZGllbnQgaWQ9ImdyYWRpZW50MCIgeDE9IjAiIHkxPSIwIiB4Mj0iMSIgeTI9IjEiPgo8c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjZmZkNjBhIi8+CjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iI2ZmYjcwMCIvPgo8L2xpbmVhckdyYWRpZW50Pgo8L2RlZnM+Cjwvc3ZnPgo=" alt="INTERPRET A" class="artist-photo">
+                    </div>
+                    <div class="artist-info">
+                        <div class="artist-name">INTERPRET A</div>
+                        <div class="artist-details">
+                            <div class="artist-time">Pátek 21:00 - Hlavní pódium</div>
+                            <div class="artist-genre">Žánr: Rock</div>
+                        </div>
+                        <div class="artist-actions">
+                            <button class="action-btn">DO PROGRAMU</button>
+                            <button class="action-btn">VÍCE</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="headliner-card">
+                    <div class="artist-photo-container">
+                        <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIwIiBoZWlnaHQ9IjEyMCIgdmlld0JveD0iMCAwIDEyMCAxMjAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxMjAiIGhlaWdodD0iMTIwIiByeD0iNjAiIGZpbGw9InVybCgjZ3JhZGllbnQwKSIvPgo8Y2lyY2xlIGN4PSI2MCIgY3k9IjQ1IiByPSIyMCIgZmlsbD0iIzMzMzMzMyIvPgo8ZWxsaXBzZSBjeD0iNjAiIGN5PSI5NSIgcng9IjM1IiByeT0iMjAiIGZpbGw9IiMzMzMzMzMiLz4KPHN0eWxlPgoudGV4dCB7IGZvbnQtZmFtaWx5OiBBcmlhbCwgc2Fucy1zZXJpZjsgZm9udC1zaXplOiAxMnB4OyBmaWxsOiAjZmZmZmZmOyB9Cjwvc3R5bGU+Cjx0ZXh0IHg9IjYwIiB5PSI1MCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgY2xhc3M9InRleHQiPkZPVE88L3RleHQ+CjxkZWZzPgo8bGluZWFyR3JhZGllbnQgaWQ9ImdyYWRpZW50MCIgeDE9IjAiIHkxPSIwIiB4Mj0iMSIgeTI9IjEiPgo8c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjZmZkNjBhIi8+CjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iI2ZmYjcwMCIvPgo8L2xpbmVhckdyYWRpZW50Pgo8L2RlZnM+Cjwvc3ZnPgo=" alt="INTERPRET B" class="artist-photo">
+                    </div>
+                    <div class="artist-info">
+                        <div class="artist-name">INTERPRET B</div>
+                        <div class="artist-details">
+                            <div class="artist-time">Sobota 22:00 - Hlavní pódium</div>
+                            <div class="artist-genre">Žánr: Pop/Electronic</div>
+                        </div>
+                        <div class="artist-actions">
+                            <button class="action-btn">DO PROGRAMU</button>
+                            <button class="action-btn">VÍCE</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <p style="font-size: 14px; color: #ccc; margin-top: 20px;">
+                Detailní karty hlavních interpretů (headlinerů) s fotografiemi a informacemi
+            </p>
+        </section>
+
+        <!-- Other Artists Section -->
+        <section class="other-artists-section">
+            <h2 class="section-title">Další interpreti - R</h2>
+            <div class="artists-grid">
+                <div class="artist-card">
+                    <div class="artist-photo-container">
+                        <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODAiIGhlaWdodD0iODAiIHZpZXdCb3g9IjAgMCA4MCA4MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjgwIiBoZWlnaHQ9IjgwIiByeD0iNDAiIGZpbGw9InVybCgjZ3JhZGllbnQwKSIvPgo8Y2lyY2xlIGN4PSI0MCIgY3k9IjMwIiByPSIxMiIgZmlsbD0iIzMzMzMzMyIvPgo8ZWxsaXBzZSBjeD0iNDAiIGN5PSI2NSIgcng9IjIwIiByeT0iMTIiIGZpbGw9IiMzMzMzMzMiLz4KPHN0eWxlPgoudGV4dCB7IGZvbnQtZmFtaWx5OiBBcmlhbCwgc2Fucy1zZXJpZjsgZm9udC1zaXplOiA4cHg7IGZpbGw6ICNmZmZmZmY7IH0KPC9zdHlsZT4KPHRleHQgeD0iNDAiIHk9IjM1IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBjbGFzcz0idGV4dCI+Rk9UTzwvdGV4dD4KPGRlZnM+CjxsaW5lYXJHcmFkaWVudCBpZD0iZ3JhZGllbnQwIiB4MT0iMCIgeTE9IjAiIHgyPSIxIiB5Mj0iMSI+CjxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiNmZmQ2MGEiLz4KPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjZmZiNzAwIi8+CjwvbGluZWFyR3JhZGllbnQ+CjwvZGVmcz4KPC9zdmc+Cg==" alt="INTERPRET R1" class="artist-photo">
+                    </div>
+                    <div class="artist-info">
+                        <div class="artist-name">INTERPRET R1</div>
+                        <div class="artist-details">
+                            <div class="artist-time">Pátek 18:30 - Stage 2</div>
+                            <div class="artist-genre">Žánr: Rock/Alternative</div>
+                        </div>
+                        <div class="artist-actions">
+                            <button class="action-btn">DO PROGRAMU</button>
+                            <button class="action-btn">VÍCE</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="artist-card">
+                    <div class="artist-photo-container">
+                        <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODAiIGhlaWdodD0iODAiIHZpZXdCb3g9IjAgMCA4MCA4MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjgwIiBoZWlnaHQ9IjgwIiByeD0iNDAiIGZpbGw9InVybCgjZ3JhZGllbnQwKSIvPgo8Y2lyY2xlIGN4PSI0MCIgY3k9IjMwIiByPSIxMiIgZmlsbD0iIzMzMzMzMyIvPgo8ZWxsaXBzZSBjeD0iNDAiIGN5PSI2NSIgcng9IjIwIiByeT0iMTIiIGZpbGw9IiMzMzMzMzMiLz4KPHN0eWxlPgoudGV4dCB7IGZvbnQtZmFtaWx5OiBBcmlhbCwgc2Fucy1zZXJpZjsgZm9udC1zaXplOiA4cHg7IGZpbGw6ICNmZmZmZmY7IH0KPC9zdHlsZT4KPHRleHQgeD0iNDAiIHk9IjM1IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBjbGFzcz0idGV4dCI+Rk9UTzwvdGV4dD4KPGRlZnM+CjxsaW5lYXJHcmFkaWVudCBpZD0iZ3JhZGllbnQwIiB4MT0iMCIgeTE9IjAiIHgyPSIxIiB5Mj0iMSI+CjxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiNmZmQ2MGEiLz4KPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjZmZiNzAwIi8+CjwvbGluZWFyR3JhZGllbnQ+CjwvZGVmcz4KPC9zdmc+Cg==" alt="INTERPRET R2" class="artist-photo">
+                    </div>
+                    <div class="artist-info">
+                        <div class="artist-name">INTERPRET R2</div>
+                        <div class="artist-details">
+                            <div class="artist-time">Sobota 16:00 - Stage 3</div>
+                            <div class="artist-genre">Žánr: Reggae</div>
+                        </div>
+                        <div class="artist-actions">
+                            <button class="action-btn">DO PROGRAMU</button>
+                            <button class="action-btn">VÍCE</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="artist-card">
+                    <div class="artist-photo-container">
+                        <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODAiIGhlaWdodD0iODAiIHZpZXdCb3g9IjAgMCA4MCA4MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjgwIiBoZWlnaHQ9IjgwIiByeD0iNDAiIGZpbGw9InVybCgjZ3JhZGllbnQwKSIvPgo8Y2lyY2xlIGN4PSI0MCIgY3k9IjMwIiByPSIxMiIgZmlsbD0iIzMzMzMzMyIvPgo8ZWxsaXBzZSBjeD0iNDAiIGN5PSI2NSIgcng9IjIwIiByeT0iMTIiIGZpbGw9IiMzMzMzMzMiLz4KPHN0eWxlPgoudGV4dCB7IGZvbnQtZmFtaWx5OiBBcmlhbCwgc2Fucy1zZXJpZjsgZm9udC1zaXplOiA4cHg7IGZpbGw6ICNmZmZmZmY7IH0KPC9zdHlsZT4KPHRleHQgeD0iNDAiIHk9IjM1IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBjbGFzcz0idGV4dCI+Rk9UTzwvdGV4dD4KPGRlZnM+CjxsaW5lYXJHcmFkaWVudCBpZD0iZ3JhZGllbnQwIiB4MT0iMCIgeTE9IjAiIHgyPSIxIiB5Mj0iMSI+CjxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiNmZmQ2MGEiLz4KPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjZmZiNzAwIi8+CjwvbGluZWFyR3JhZGllbnQ+CjwvZGVmcz4KPC9zdmc+Cg==" alt="INTERPRET R3" class="artist-photo">
+                    </div>
+                    <div class="artist-info">
+                        <div class="artist-name">INTERPRET R3</div>
+                        <div class="artist-details">
+                            <div class="artist-time">Neděle 14:30 - Hlavní pódium</div>
+                            <div class="artist-genre">Žánr: Rock/Indie</div>
+                        </div>
+                        <div class="artist-actions">
+                            <button class="action-btn">DO PROGRAMU</button>
+                            <button class="action-btn">VÍCE</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <p style="font-size: 14px; color: #ccc; margin-top: 20px;">
+                Seznam interpretů seřazený podle abecedy, kompaktní zobrazení s tlačítky pro akci
+            </p>
+        </section>
+
+        <!-- Pagination -->
+        <div class="pagination">
+            <span class="pagination-label">Strana:</span>
+            <button class="page-btn active">1</button>
+            <button class="page-btn">2</button>
+            <button class="page-btn">3</button>
+            <button class="page-btn">4</button>
+            <button class="page-btn more">Další →</button>
+        </div>
+        <p style="font-size: 14px; color: #ccc; text-align: center; margin-top: 10px;">
+            Stránkování pro procházení větším počtem interpretů
+        </p>
+
+        <!-- Artist Detail Section -->
+        <section class="artist-detail">
+            <h3 class="detail-header">Detail interpreta - INTERPRET R2</h3>
+            <div class="detail-content">
+                <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgdmlld0JveD0iMCAwIDIwMCAyMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIyMDAiIGhlaWdodD0iMjAwIiByeD0iMTAiIGZpbGw9InVybCgjZ3JhZGllbnQwKSIvPgo8Y2lyY2xlIGN4PSIxMDAiIGN5PSI3NSIgcj0iMzAiIGZpbGw9IiMzMzMzMzMiLz4KPGVsbGlwc2UgY3g9IjEwMCIgY3k9IjE1NSIgcng9IjUwIiByeT0iMzAiIGZpbGw9IiMzMzMzMzMiLz4KPHN0eWxlPgoudGV4dCB7IGZvbnQtZmFtaWx5OiBBcmlhbCwgc2Fucy1zZXJpZjsgZm9udC1zaXplOiAxNnB4OyBmaWxsOiAjZmZmZmZmOyB9Cjwvc3R5bGU+Cjx0ZXh0IHg9IjEwMCIgeT0iODUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGNsYXNzPSJ0ZXh0Ij5GT1RPR1JBRklFPC90ZXh0Pgo8ZGVmcz4KPGxpbmVhckdyYWRpZW50IGlkPSJncmFkaWVudDAiIHgxPSIwIiB5MT0iMCIgeDI9IjEiIHkyPSIxIj4KPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2ZmZDYwYSIvPgo8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNmZmI3MDAiLz4KPC9saW5lYXJHcmFkaWVudD4KPC9kZWZzPgo8L3N2Zz4K" alt="INTERPRET R2" class="detail-photo">
+                <div class="detail-info">
+                    <div class="detail-section">
+                        <div class="detail-label">Čas a místo vystoupení:</div>
+                        <div class="detail-value">
+                            Sobota 16:00 - 17:00<br>
+                            Stage 3
+                        </div>
+                    </div>
+                    
+                    <div class="detail-section">
+                        <div class="detail-label">Žánr:</div>
+                        <div class="detail-value">Reggae</div>
+                    </div>
+                    
+                    <div class="detail-section">
+                        <div class="detail-label">Původ:</div>
+                        <div class="detail-value">Česká republika</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="detail-section">
+                <div class="detail-label">Bio:</div>
+                <p class="bio-text">
+                    Kapela vznikla v roce 2015. Od té doby se proslavili svým energickým vystoupením na mnoha festivalech. 
+                    Jejich hudba kombinuje prvky reggae s moderními elektronickými beaty. 
+                    Na festivalu představí svou novou desku "Reggae Sunrise".
+                </p>
+            </div>
+            
+            <button class="add-to-program-btn">PŘIDAT DO PROGRAMU</button>
+            
+            <p style="font-size: 14px; color: #ccc; margin-top: 30px;">
+                Detail vybraného interpreta s rozšířenými informacemi a biografií
+            </p>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-text">
+            © 2025 Hudební festival | Kontakt | Podmínky použití | O nás | Pro média<br>
+            Platforma a copyright informačních a odkazy
+        </div>
+    </footer>
+
+    <script>
+        // Genre filter functionality
+        document.querySelectorAll('.genre-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.genre-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                console.log('Genre filter:', this.textContent);
+            });
+        });
+
+        // Alphabet navigation functionality
+        document.querySelectorAll('.alphabet-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.alphabet-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                console.log('Alphabet filter:', this.textContent);
+            });
+        });
+
+        // Search functionality
+        document.querySelector('.search-box').addEventListener('input', function() {
+            console.log('Search term:', this.value);
+        });
+
+        // Action buttons functionality
+        document.querySelectorAll('.action-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const action = this.textContent;
+                const artistCard = this.closest('.headliner-card, .artist-card');
+                const artistName = artistCard.querySelector('.artist-name').textContent;
+                
+                if (action === 'DO PROGRAMU') {
+                    console.log('Adding to program:', artistName);
+                    this.textContent = 'PŘIDÁNO ✓';
+                    this.style.background = 'linear-gradient(45deg, #28a745, #20c997)';
+                    setTimeout(() => {
+                        this.textContent = 'DO PROGRAMU';
+                        this.style.background = '';
+                    }, 2000);
+                } else if (action === 'VÍCE') {
+                    console.log('Show details for:', artistName);
+                    // Scroll to detail section
+                    document.querySelector('.artist-detail').scrollIntoView({ 
+                        behavior: 'smooth' 
+                    });
+                }
+            });
+        });
+
+        // Pagination functionality
+        document.querySelectorAll('.page-btn:not(.more)').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.page-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                console.log('Page:', this.textContent);
+            });
+        });
+
+        // Add to program button in detail
+        document.querySelector('.add-to-program-btn').addEventListener('click', function() {
+            console.log('Adding detailed artist to program');
+            this.textContent = 'PŘIDÁNO DO PROGRAMU ✓';
+            this.style.background = 'linear-gradient(45deg, #28a745, #20c997)';
+            setTimeout(() => {
+                this.textContent = 'PŘIDAT DO PROGRAMU';
+                this.style.background = '';
+            }, 3000);
+        });
+    </script>
+</body>
+</html>
