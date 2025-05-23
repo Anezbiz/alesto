@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Interpreti - Festival Alesto</title>
+    <title>Info - Festival Alesto</title>
     <link href="https://fonts.googleapis.com/css2?family=Archivo+Narrow:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * {
@@ -133,132 +133,126 @@
             background-clip: text;
         }
 
-        /* Filters */
-        .filters-section {
-            background: rgba(0, 0, 0, 0.4);
-            padding: 30px;
-            border-radius: 15px;
-            border: 1px solid rgba(255, 214, 10, 0.2);
-            margin-bottom: 40px;
-        }
-
-        .filter-title {
-            font-size: 18px;
-            font-weight: 600;
-            color: #ffd60a;
-            margin-bottom: 20px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .genre-filters {
+        /* Secondary Navigation */
+        .secondary-nav {
             display: flex;
-            gap: 15px;
-            margin-bottom: 25px;
-            flex-wrap: wrap;
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 15px;
+            margin-bottom: 40px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 214, 10, 0.3);
         }
 
-        .genre-btn {
-            background: rgba(0, 0, 0, 0.6);
-            border: 2px solid rgba(255, 214, 10, 0.3);
+        .secondary-nav-btn {
+            flex: 1;
+            padding: 20px;
+            text-align: center;
+            background: transparent;
+            border: none;
             color: white;
-            padding: 12px 25px;
-            border-radius: 25px;
             font-family: 'Archivo Narrow', sans-serif;
-            font-size: 16px;
             font-weight: 600;
+            font-size: 16px;
             cursor: pointer;
             transition: all 0.3s ease;
             text-transform: uppercase;
             letter-spacing: 1px;
         }
 
-        .genre-btn.active,
-        .genre-btn:hover {
+        .secondary-nav-btn.active {
             background: linear-gradient(45deg, #ffd60a, #ffb700);
             color: #001d3d;
-            border-color: #ffd60a;
+            font-weight: 700;
+        }
+
+        .secondary-nav-btn:hover:not(.active) {
+            background: rgba(255, 214, 10, 0.2);
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(255, 214, 10, 0.3);
         }
 
-        .search-container {
-            position: relative;
-            max-width: 400px;
-        }
-
-        .search-box {
-            background: rgba(0, 0, 0, 0.6);
-            border: 2px solid rgba(255, 214, 10, 0.3);
-            color: white;
-            padding: 12px 50px 12px 15px;
-            border-radius: 8px;
-            font-family: 'Archivo Narrow', sans-serif;
-            font-size: 16px;
-            width: 100%;
-            transition: all 0.3s ease;
-        }
-
-        .search-box::placeholder {
-            color: #999;
-        }
-
-        .search-box:focus {
-            border-color: #ffd60a;
-            outline: none;
-            box-shadow: 0 0 10px rgba(255, 214, 10, 0.3);
-        }
-
-        .search-icon {
-            position: absolute;
-            right: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #ffd60a;
-            font-size: 18px;
-        }
-
-        /* Alphabet Navigation */
-        .alphabet-nav {
-            display: flex;
-            gap: 8px;
+        /* Festival Info Section */
+        .festival-info {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 40px;
             background: rgba(0, 0, 0, 0.4);
-            padding: 20px;
+            padding: 40px;
             border-radius: 15px;
             border: 1px solid rgba(255, 214, 10, 0.2);
-            margin-bottom: 40px;
-            flex-wrap: wrap;
-            justify-content: center;
+            margin-bottom: 50px;
         }
 
-        .alphabet-btn {
-            width: 45px;
-            height: 45px;
-            background: rgba(0, 0, 0, 0.6);
+        .festival-photo {
+            background: rgba(255, 214, 10, 0.1);
             border: 2px solid rgba(255, 214, 10, 0.3);
-            color: white;
-            border-radius: 8px;
-            font-family: 'Archivo Narrow', sans-serif;
-            font-size: 18px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.3s ease;
+            border-radius: 15px;
             display: flex;
             align-items: center;
             justify-content: center;
+            min-height: 300px;
+            font-size: 18px;
+            font-weight: 600;
+            color: #ffd60a;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            background-image: url('https://images.unsplash.com/photo-1459749411175-04bf5292ceea?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');
+            background-size: cover;
+            background-position: center;
+            position: relative;
         }
 
-        .alphabet-btn:hover,
-        .alphabet-btn.active {
-            background: linear-gradient(45deg, #ffd60a, #ffb700);
-            color: #001d3d;
-            border-color: #ffd60a;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(255, 214, 10, 0.3);
+        .festival-photo::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 13px;
         }
 
-        /* Headliners Section */
-        .headliners-section {
+        .festival-details {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .festival-title {
+            font-size: 36px;
+            font-weight: 700;
+            color: #ffd60a;
+            margin-bottom: 25px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .festival-description {
+            font-size: 18px;
+            line-height: 1.8;
+            color: #ccc;
+            margin-bottom: 30px;
+        }
+
+        .festival-details-list {
+            list-style: none;
+        }
+
+        .festival-details-list li {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: white;
+        }
+
+        .festival-details-list li strong {
+            color: #ffd60a;
+            margin-right: 10px;
+        }
+
+        /* Map Section */
+        .map-section {
             margin-bottom: 50px;
         }
 
@@ -271,178 +265,83 @@
             letter-spacing: 2px;
         }
 
-        .headliners-grid {
+        .map-container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            grid-template-columns: 300px 1fr;
             gap: 30px;
-            margin-bottom: 30px;
-        }
-
-        .headliner-card {
-            background: linear-gradient(135deg, rgba(255, 214, 10, 0.4), rgba(255, 183, 0, 0.2));
-            border: 3px solid #ffd60a;
-            border-radius: 15px;
-            padding: 30px;
-            display: flex;
-            gap: 30px;
-            align-items: center;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
-        }
-
-        .headliner-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 35px rgba(255, 214, 10, 0.5);
-        }
-
-        .artist-photo-container {
-            flex-shrink: 0;
-        }
-
-        .artist-photo {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 3px solid rgba(255, 255, 255, 0.3);
-        }
-
-        .artist-info {
-            flex: 1;
-        }
-
-        .artist-name {
-            font-size: 28px;
-            font-weight: 700;
-            margin-bottom: 10px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            color: white;
-        }
-
-        .artist-details {
-            margin-bottom: 20px;
-        }
-
-        .artist-time,
-        .artist-stage,
-        .artist-genre {
-            font-size: 16px;
-            margin-bottom: 5px;
-            font-weight: 600;
-        }
-
-        .artist-time {
-            color: #001d3d;
-        }
-
-        .artist-stage,
-        .artist-genre {
-            color: #003566;
-        }
-
-        .artist-actions {
-            display: flex;
-            gap: 15px;
-        }
-
-        .action-btn {
-            background: rgba(0, 0, 0, 0.6);
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            color: white;
-            padding: 10px 20px;
-            border-radius: 8px;
-            font-family: 'Archivo Narrow', sans-serif;
-            font-size: 14px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .action-btn:hover {
-            background: rgba(255, 255, 255, 0.2);
-            border-color: white;
-            transform: translateY(-2px);
-        }
-
-        /* Other Artists Section */
-        .other-artists-section {
-            margin-bottom: 50px;
-        }
-
-        .artists-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 25px;
-        }
-
-        .artist-card {
-            background: linear-gradient(135deg, rgba(0, 0, 0, 0.8), rgba(0, 29, 61, 0.6));
-            border: 2px solid rgba(255, 214, 10, 0.3);
-            border-radius: 12px;
-            padding: 25px;
-            display: flex;
-            gap: 20px;
-            align-items: center;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(5px);
-        }
-
-        .artist-card:hover {
-            border-color: #ffd60a;
-            background: linear-gradient(135deg, rgba(255, 214, 10, 0.2), rgba(255, 214, 10, 0.1));
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(255, 214, 10, 0.3);
-        }
-
-        .artist-card .artist-photo {
-            width: 80px;
-            height: 80px;
-        }
-
-        .artist-card .artist-name {
-            font-size: 20px;
-            margin-bottom: 8px;
-        }
-
-        .artist-card .artist-time,
-        .artist-card .artist-stage,
-        .artist-card .artist-genre {
-            font-size: 14px;
-            color: #ccc;
-        }
-
-        /* Pagination */
-        .pagination {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 15px;
-            margin: 50px 0;
-            padding: 30px;
             background: rgba(0, 0, 0, 0.4);
+            padding: 30px;
             border-radius: 15px;
             border: 1px solid rgba(255, 214, 10, 0.2);
         }
 
-        .pagination-label {
-            font-size: 18px;
-            font-weight: 600;
-            color: #ffd60a;
-            margin-right: 10px;
+        .map-legend {
+            background: rgba(0, 0, 0, 0.6);
+            padding: 25px;
+            border-radius: 12px;
+            border: 2px solid rgba(255, 214, 10, 0.3);
         }
 
-        .page-btn {
-            width: 45px;
-            height: 45px;
-            background: rgba(0, 0, 0, 0.6);
-            border: 2px solid rgba(255, 214, 10, 0.3);
-            color: white;
-            border-radius: 8px;
-            font-family: 'Archivo Narrow', sans-serif;
+        .legend-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #ffd60a;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
             font-size: 16px;
+            font-weight: 600;
+        }
+
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            border-radius: 4px;
+            margin-right: 12px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .legend-color.main-stage { background: #dc3545; }
+        .legend-color.stage2 { background: #28a745; }
+        .legend-color.stage3 { background: #007bff; }
+        .legend-color.food { background: #fd7e14; }
+        .legend-color.toilets { background: #6c757d; }
+
+        .map-area {
+            position: relative;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            min-height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid rgba(255, 214, 10, 0.3);
+            overflow: hidden;
+        }
+
+        .map-controls {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .map-control-btn {
+            width: 40px;
+            height: 40px;
+            background: rgba(0, 0, 0, 0.8);
+            border: 2px solid #ffd60a;
+            color: #ffd60a;
+            border-radius: 8px;
+            font-size: 20px;
             font-weight: 700;
             cursor: pointer;
             transition: all 0.3s ease;
@@ -451,110 +350,127 @@
             justify-content: center;
         }
 
-        .page-btn.active,
-        .page-btn:hover {
-            background: linear-gradient(45deg, #ffd60a, #ffb700);
+        .map-control-btn:hover {
+            background: #ffd60a;
             color: #001d3d;
-            border-color: #ffd60a;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(255, 214, 10, 0.3);
+            transform: scale(1.1);
         }
 
-        .page-btn.more {
-            background: transparent;
-            border: none;
-            cursor: default;
-            transform: none;
-            box-shadow: none;
-        }
-
-        .page-btn.more:hover {
-            background: transparent;
-            transform: none;
-            box-shadow: none;
-        }
-
-        /* Artist Detail Modal */
-        .artist-detail {
-            background: linear-gradient(135deg, rgba(0, 0, 0, 0.9), rgba(0, 29, 61, 0.8));
-            border: 2px solid #ffd60a;
-            border-radius: 15px;
-            padding: 40px;
-            margin-top: 50px;
-            backdrop-filter: blur(15px);
-        }
-
-        .detail-header {
-            font-size: 28px;
+        .interactive-map {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(255, 214, 10, 0.1), rgba(255, 183, 0, 0.05));
+            position: relative;
+            font-size: 24px;
             font-weight: 700;
             color: #ffd60a;
-            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             text-transform: uppercase;
             letter-spacing: 2px;
         }
 
-        .detail-content {
+        /* Basic Info Cards */
+        .basic-info {
+            margin-bottom: 50px;
+        }
+
+        .info-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .info-card {
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.8), rgba(0, 29, 61, 0.6));
+            border: 2px solid rgba(255, 214, 10, 0.3);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+
+        .info-card:hover {
+            border-color: #ffd60a;
+            background: linear-gradient(135deg, rgba(255, 214, 10, 0.2), rgba(255, 214, 10, 0.1));
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(255, 214, 10, 0.3);
+        }
+
+        .info-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(45deg, #ffd60a, #ffb700);
+            border-radius: 50%;
             display: flex;
-            gap: 40px;
-            align-items: flex-start;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 36px;
+            color: #001d3d;
         }
 
-        .detail-photo {
-            width: 200px;
-            height: 200px;
-            border-radius: 10px;
-            object-fit: cover;
-            border: 3px solid rgba(255, 214, 10, 0.3);
-        }
-
-        .detail-info {
-            flex: 1;
-        }
-
-        .detail-section {
-            margin-bottom: 25px;
-        }
-
-        .detail-label {
-            font-size: 18px;
+        .info-card-title {
+            font-size: 24px;
             font-weight: 700;
             color: #ffd60a;
-            margin-bottom: 8px;
+            margin-bottom: 15px;
             text-transform: uppercase;
             letter-spacing: 1px;
         }
 
-        .detail-value {
-            font-size: 16px;
+        .info-card-value {
+            font-size: 20px;
+            font-weight: 600;
             color: white;
-            line-height: 1.6;
         }
 
-        .bio-text {
-            font-size: 16px;
-            line-height: 1.8;
-            color: #ccc;
-            margin-bottom: 30px;
+        /* Partners Section */
+        .partners-section {
+            margin-bottom: 50px;
         }
 
-        .add-to-program-btn {
-            background: linear-gradient(45deg, #ffd60a, #ffb700);
-            color: #001d3d;
-            border: none;
-            padding: 15px 30px;
-            border-radius: 8px;
-            font-family: 'Archivo Narrow', sans-serif;
-            font-size: 18px;
-            font-weight: 700;
-            cursor: pointer;
+        .partners-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 25px;
+        }
+
+        .partner-card {
+            background: rgba(255, 255, 255, 0.95);
+            border: 2px solid rgba(255, 214, 10, 0.3);
+            border-radius: 12px;
+            padding: 30px;
+            text-align: center;
             transition: all 0.3s ease;
+            min-height: 150px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .partner-card:hover {
+            border-color: #ffd60a;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(255, 214, 10, 0.3);
+        }
+
+        .partner-logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: #001d3d;
+            margin-bottom: 10px;
             text-transform: uppercase;
             letter-spacing: 1px;
         }
 
-        .add-to-program-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(255, 214, 10, 0.5);
+        .partner-name {
+            font-size: 14px;
+            color: #666;
+            font-weight: 600;
         }
 
         /* Footer */
@@ -565,6 +481,26 @@
             margin-top: 80px;
             border-top: 2px solid rgba(255, 214, 10, 0.3);
             backdrop-filter: blur(15px);
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .footer-link {
+            color: #ffd60a;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            transition: color 0.3s ease;
+        }
+
+        .footer-link:hover {
+            color: white;
         }
 
         .footer-text {
@@ -584,37 +520,31 @@
                 font-size: 16px;
             }
 
-            .genre-filters {
-                justify-content: center;
-            }
-
-            .alphabet-nav {
-                gap: 5px;
-            }
-
-            .alphabet-btn {
-                width: 35px;
-                height: 35px;
-                font-size: 14px;
-            }
-
-            .headliners-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .headliner-card {
+            .secondary-nav {
                 flex-direction: column;
-                text-align: center;
             }
 
-            .artists-grid {
+            .festival-info {
                 grid-template-columns: 1fr;
+                gap: 30px;
             }
 
-            .detail-content {
+            .map-container {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .map-legend {
+                order: 2;
+            }
+
+            .partners-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .footer-links {
                 flex-direction: column;
-                align-items: center;
-                text-align: center;
+                gap: 15px;
             }
 
             .page-title {
@@ -630,7 +560,8 @@
             <ul class="nav-menu">
                 <li><a href="#">PROGRAM</a></li>
                 <li><a href="#">VSTUPENKY</a></li>
-                <li><a href="#" class="active">INTERPRETI</a></li>
+                <li><a href="#">INTERPRETI</a></li>
+                <li><a href="#" class="active">INFO</a></li>
                 <li><a href="#">KONTAKT</a></li>
             </ul>
         </nav>
@@ -638,288 +569,236 @@
 
     <main class="main-container">
         <div class="breadcrumb">
-            <a href="#">Domů</a> > Interpreti<br>
+            <a href="#">Domů</a> > Informace o festivalu<br>
             Drobečková navigace pro přehled o pozici na webu
         </div>
 
-        <h1 class="page-title">Interpreti Festivalu</h1>
+        <h1 class="page-title">Informace o festivalu</h1>
 
-        <!-- Filters Section -->
-        <div class="filters-section">
-            <div class="filter-title">Filtrovat podle:</div>
-            <div class="genre-filters">
-                <button class="genre-btn active">Všechny</button>
-                <button class="genre-btn">Rock</button>
-                <button class="genre-btn">Pop</button>
-                <button class="genre-btn">Electronic</button>
-                <button class="genre-btn">Folk</button>
-                <button class="genre-btn">Jazz</button>
-                <button class="genre-btn">Hip Hop</button>
-            </div>
-            <div class="search-container">
-                <input type="text" class="search-box" placeholder="Hledat interpreta...">
-                <div class="search-icon">🔍</div>
-            </div>
+        <!-- Secondary Navigation -->
+        <div class="secondary-nav">
+            <button class="secondary-nav-btn active">O FESTIVALU</button>
+            <button class="secondary-nav-btn">DOPRAVA</button>
+            <button class="secondary-nav-btn">UBYTOVÁNÍ</button>
+            <button class="secondary-nav-btn">OBČERSTVENÍ</button>
+            <button class="secondary-nav-btn">PRAVIDLA</button>
+            <button class="secondary-nav-btn">FAQ</button>
         </div>
-
-        <!-- Alphabet Navigation -->
-        <div class="alphabet-nav">
-            <button class="alphabet-btn active">A</button>
-            <button class="alphabet-btn">B</button>
-            <button class="alphabet-btn">C</button>
-            <button class="alphabet-btn">D</button>
-            <button class="alphabet-btn">E</button>
-            <button class="alphabet-btn">F</button>
-            <button class="alphabet-btn">G</button>
-            <button class="alphabet-btn">H</button>
-            <button class="alphabet-btn">I</button>
-            <button class="alphabet-btn">J</button>
-            <button class="alphabet-btn">K</button>
-            <button class="alphabet-btn">L</button>
-            <button class="alphabet-btn">M</button>
-            <button class="alphabet-btn">N</button>
-            <button class="alphabet-btn">O</button>
-            <button class="alphabet-btn">P</button>
-            <button class="alphabet-btn">R</button>
-            <button class="alphabet-btn">S</button>
-            <button class="alphabet-btn">T</button>
-            <button class="alphabet-btn">V</button>
-            <button class="alphabet-btn">Z</button>
-        </div>
-
-        <!-- Headliners Section -->
-        <section class="headliners-section">
-            <h2 class="section-title">Headlineři</h2>
-            <div class="headliners-grid">
-                <div class="headliner-card">
-                    <div class="artist-photo-container">
-                        <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIwIiBoZWlnaHQ9IjEyMCIgdmlld0JveD0iMCAwIDEyMCAxMjAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxMjAiIGhlaWdodD0iMTIwIiByeD0iNjAiIGZpbGw9InVybCgjZ3JhZGllbnQwKSIvPgo8Y2lyY2xlIGN4PSI2MCIgY3k9IjQ1IiByPSIyMCIgZmlsbD0iIzMzMzMzMyIvPgo8ZWxsaXBzZSBjeD0iNjAiIGN5PSI5NSIgcng9IjM1IiByeT0iMjAiIGZpbGw9IiMzMzMzMzMiLz4KPHN0eWxlPgoudGV4dCB7IGZvbnQtZmFtaWx5OiBBcmlhbCwgc2Fucy1zZXJpZjsgZm9udC1zaXplOiAxMnB4OyBmaWxsOiAjZmZmZmZmOyB9Cjwvc3R5bGU+Cjx0ZXh0IHg9IjYwIiB5PSI1MCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgY2xhc3M9InRleHQiPkZPVE88L3RleHQ+CjxkZWZzPgo8bGluZWFyR3JhZGllbnQgaWQ9ImdyYWRpZW50MCIgeDE9IjAiIHkxPSIwIiB4Mj0iMSIgeTI9IjEiPgo8c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjZmZkNjBhIi8+CjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iI2ZmYjcwMCIvPgo8L2xpbmVhckdyYWRpZW50Pgo8L2RlZnM+Cjwvc3ZnPgo=" alt="INTERPRET A" class="artist-photo">
-                    </div>
-                    <div class="artist-info">
-                        <div class="artist-name">INTERPRET A</div>
-                        <div class="artist-details">
-                            <div class="artist-time">Pátek 21:00 - Hlavní pódium</div>
-                            <div class="artist-genre">Žánr: Rock</div>
-                        </div>
-                        <div class="artist-actions">
-                            <button class="action-btn">DO PROGRAMU</button>
-                            <button class="action-btn">VÍCE</button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="headliner-card">
-                    <div class="artist-photo-container">
-                        <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIwIiBoZWlnaHQ9IjEyMCIgdmlld0JveD0iMCAwIDEyMCAxMjAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxMjAiIGhlaWdodD0iMTIwIiByeD0iNjAiIGZpbGw9InVybCgjZ3JhZGllbnQwKSIvPgo8Y2lyY2xlIGN4PSI2MCIgY3k9IjQ1IiByPSIyMCIgZmlsbD0iIzMzMzMzMyIvPgo8ZWxsaXBzZSBjeD0iNjAiIGN5PSI5NSIgcng9IjM1IiByeT0iMjAiIGZpbGw9IiMzMzMzMzMiLz4KPHN0eWxlPgoudGV4dCB7IGZvbnQtZmFtaWx5OiBBcmlhbCwgc2Fucy1zZXJpZjsgZm9udC1zaXplOiAxMnB4OyBmaWxsOiAjZmZmZmZmOyB9Cjwvc3R5bGU+Cjx0ZXh0IHg9IjYwIiB5PSI1MCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgY2xhc3M9InRleHQiPkZPVE88L3RleHQ+CjxkZWZzPgo8bGluZWFyR3JhZGllbnQgaWQ9ImdyYWRpZW50MCIgeDE9IjAiIHkxPSIwIiB4Mj0iMSIgeTI9IjEiPgo8c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjZmZkNjBhIi8+CjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iI2ZmYjcwMCIvPgo8L2xpbmVhckdyYWRpZW50Pgo8L2RlZnM+Cjwvc3ZnPgo=" alt="INTERPRET B" class="artist-photo">
-                    </div>
-                    <div class="artist-info">
-                        <div class="artist-name">INTERPRET B</div>
-                        <div class="artist-details">
-                            <div class="artist-time">Sobota 22:00 - Hlavní pódium</div>
-                            <div class="artist-genre">Žánr: Pop/Electronic</div>
-                        </div>
-                        <div class="artist-actions">
-                            <button class="action-btn">DO PROGRAMU</button>
-                            <button class="action-btn">VÍCE</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <p style="font-size: 14px; color: #ccc; margin-top: 20px;">
-                Detailní karty hlavních interpretů (headlinerů) s fotografiemi a informacemi
-            </p>
-        </section>
-
-        <!-- Other Artists Section -->
-        <section class="other-artists-section">
-            <h2 class="section-title">Další interpreti - R</h2>
-            <div class="artists-grid">
-                <div class="artist-card">
-                    <div class="artist-photo-container">
-                        <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODAiIGhlaWdodD0iODAiIHZpZXdCb3g9IjAgMCA4MCA4MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjgwIiBoZWlnaHQ9IjgwIiByeD0iNDAiIGZpbGw9InVybCgjZ3JhZGllbnQwKSIvPgo8Y2lyY2xlIGN4PSI0MCIgY3k9IjMwIiByPSIxMiIgZmlsbD0iIzMzMzMzMyIvPgo8ZWxsaXBzZSBjeD0iNDAiIGN5PSI2NSIgcng9IjIwIiByeT0iMTIiIGZpbGw9IiMzMzMzMzMiLz4KPHN0eWxlPgoudGV4dCB7IGZvbnQtZmFtaWx5OiBBcmlhbCwgc2Fucy1zZXJpZjsgZm9udC1zaXplOiA4cHg7IGZpbGw6ICNmZmZmZmY7IH0KPC9zdHlsZT4KPHRleHQgeD0iNDAiIHk9IjM1IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBjbGFzcz0idGV4dCI+Rk9UTzwvdGV4dD4KPGRlZnM+CjxsaW5lYXJHcmFkaWVudCBpZD0iZ3JhZGllbnQwIiB4MT0iMCIgeTE9IjAiIHgyPSIxIiB5Mj0iMSI+CjxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiNmZmQ2MGEiLz4KPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjZmZiNzAwIi8+CjwvbGluZWFyR3JhZGllbnQ+CjwvZGVmcz4KPC9zdmc+Cg==" alt="INTERPRET R1" class="artist-photo">
-                    </div>
-                    <div class="artist-info">
-                        <div class="artist-name">INTERPRET R1</div>
-                        <div class="artist-details">
-                            <div class="artist-time">Pátek 18:30 - Stage 2</div>
-                            <div class="artist-genre">Žánr: Rock/Alternative</div>
-                        </div>
-                        <div class="artist-actions">
-                            <button class="action-btn">DO PROGRAMU</button>
-                            <button class="action-btn">VÍCE</button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="artist-card">
-                    <div class="artist-photo-container">
-                        <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODAiIGhlaWdodD0iODAiIHZpZXdCb3g9IjAgMCA4MCA4MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjgwIiBoZWlnaHQ9IjgwIiByeD0iNDAiIGZpbGw9InVybCgjZ3JhZGllbnQwKSIvPgo8Y2lyY2xlIGN4PSI0MCIgY3k9IjMwIiByPSIxMiIgZmlsbD0iIzMzMzMzMyIvPgo8ZWxsaXBzZSBjeD0iNDAiIGN5PSI2NSIgcng9IjIwIiByeT0iMTIiIGZpbGw9IiMzMzMzMzMiLz4KPHN0eWxlPgoudGV4dCB7IGZvbnQtZmFtaWx5OiBBcmlhbCwgc2Fucy1zZXJpZjsgZm9udC1zaXplOiA4cHg7IGZpbGw6ICNmZmZmZmY7IH0KPC9zdHlsZT4KPHRleHQgeD0iNDAiIHk9IjM1IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBjbGFzcz0idGV4dCI+Rk9UTzwvdGV4dD4KPGRlZnM+CjxsaW5lYXJHcmFkaWVudCBpZD0iZ3JhZGllbnQwIiB4MT0iMCIgeTE9IjAiIHgyPSIxIiB5Mj0iMSI+CjxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiNmZmQ2MGEiLz4KPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjZmZiNzAwIi8+CjwvbGluZWFyR3JhZGllbnQ+CjwvZGVmcz4KPC9zdmc+Cg==" alt="INTERPRET R2" class="artist-photo">
-                    </div>
-                    <div class="artist-info">
-                        <div class="artist-name">INTERPRET R2</div>
-                        <div class="artist-details">
-                            <div class="artist-time">Sobota 16:00 - Stage 3</div>
-                            <div class="artist-genre">Žánr: Reggae</div>
-                        </div>
-                        <div class="artist-actions">
-                            <button class="action-btn">DO PROGRAMU</button>
-                            <button class="action-btn">VÍCE</button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="artist-card">
-                    <div class="artist-photo-container">
-                        <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODAiIGhlaWdodD0iODAiIHZpZXdCb3g9IjAgMCA4MCA4MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjgwIiBoZWlnaHQ9IjgwIiByeD0iNDAiIGZpbGw9InVybCgjZ3JhZGllbnQwKSIvPgo8Y2lyY2xlIGN4PSI0MCIgY3k9IjMwIiByPSIxMiIgZmlsbD0iIzMzMzMzMyIvPgo8ZWxsaXBzZSBjeD0iNDAiIGN5PSI2NSIgcng9IjIwIiByeT0iMTIiIGZpbGw9IiMzMzMzMzMiLz4KPHN0eWxlPgoudGV4dCB7IGZvbnQtZmFtaWx5OiBBcmlhbCwgc2Fucy1zZXJpZjsgZm9udC1zaXplOiA4cHg7IGZpbGw6ICNmZmZmZmY7IH0KPC9zdHlsZT4KPHRleHQgeD0iNDAiIHk9IjM1IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBjbGFzcz0idGV4dCI+Rk9UTzwvdGV4dD4KPGRlZnM+CjxsaW5lYXJHcmFkaWVudCBpZD0iZ3JhZGllbnQwIiB4MT0iMCIgeTE9IjAiIHgyPSIxIiB5Mj0iMSI+CjxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiNmZmQ2MGEiLz4KPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjZmZiNzAwIi8+CjwvbGluZWFyR3JhZGllbnQ+CjwvZGVmcz4KPC9zdmc+Cg==" alt="INTERPRET R3" class="artist-photo">
-                    </div>
-                    <div class="artist-info">
-                        <div class="artist-name">INTERPRET R3</div>
-                        <div class="artist-details">
-                            <div class="artist-time">Neděle 14:30 - Hlavní pódium</div>
-                            <div class="artist-genre">Žánr: Rock/Indie</div>
-                        </div>
-                        <div class="artist-actions">
-                            <button class="action-btn">DO PROGRAMU</button>
-                            <button class="action-btn">VÍCE</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <p style="font-size: 14px; color: #ccc; margin-top: 20px;">
-                Seznam interpretů seřazený podle abecedy, kompaktní zobrazení s tlačítky pro akci
-            </p>
-        </section>
-
-        <!-- Pagination -->
-        <div class="pagination">
-            <span class="pagination-label">Strana:</span>
-            <button class="page-btn active">1</button>
-            <button class="page-btn">2</button>
-            <button class="page-btn">3</button>
-            <button class="page-btn">4</button>
-            <button class="page-btn more">Další →</button>
-        </div>
-        <p style="font-size: 14px; color: #ccc; text-align: center; margin-top: 10px;">
-            Stránkování pro procházení větším počtem interpretů
+        <p style="font-size: 14px; color: #ccc; margin-bottom: 40px;">
+            Sekundární panelová navigace pro přepínání mezi informačními sekcemi
         </p>
 
-        <!-- Artist Detail Section -->
-        <section class="artist-detail">
-            <h3 class="detail-header">Detail interpreta - INTERPRET R2</h3>
-            <div class="detail-content">
-                <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgdmlld0JveD0iMCAwIDIwMCAyMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIyMDAiIGhlaWdodD0iMjAwIiByeD0iMTAiIGZpbGw9InVybCgjZ3JhZGllbnQwKSIvPgo8Y2lyY2xlIGN4PSIxMDAiIGN5PSI3NSIgcj0iMzAiIGZpbGw9IiMzMzMzMzMiLz4KPGVsbGlwc2UgY3g9IjEwMCIgY3k9IjE1NSIgcng9IjUwIiByeT0iMzAiIGZpbGw9IiMzMzMzMzMiLz4KPHN0eWxlPgoudGV4dCB7IGZvbnQtZmFtaWx5OiBBcmlhbCwgc2Fucy1zZXJpZjsgZm9udC1zaXplOiAxNnB4OyBmaWxsOiAjZmZmZmZmOyB9Cjwvc3R5bGU+Cjx0ZXh0IHg9IjEwMCIgeT0iODUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGNsYXNzPSJ0ZXh0Ij5GT1RPR1JBRklFPC90ZXh0Pgo8ZGVmcz4KPGxpbmVhckdyYWRpZW50IGlkPSJncmFkaWVudDAiIHgxPSIwIiB5MT0iMCIgeDI9IjEiIHkyPSIxIj4KPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2ZmZDYwYSIvPgo8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNmZmI3MDAiLz4KPC9saW5lYXJHcmFkaWVudD4KPC9kZWZzPgo8L3N2Zz4K" alt="INTERPRET R2" class="detail-photo">
-                <div class="detail-info">
-                    <div class="detail-section">
-                        <div class="detail-label">Čas a místo vystoupení:</div>
-                        <div class="detail-value">
-                            Sobota 16:00 - 17:00<br>
-                            Stage 3
-                        </div>
+        <!-- Festival Info Section -->
+        <section class="festival-info">
+            <div class="festival-photo">
+                <!-- Background image set in CSS -->
+            </div>
+            <div class="festival-details">
+                <h2 class="festival-title">Hudební festival 2025</h2>
+                <p class="festival-description">
+                    Hudební festival v pořadí již 10. ročník patří mezi nejoblíbenější letní akce v ČR. 
+                    Každý rok přináší to nejlepší ze světové i domácí hudební scény, skvělou atmosféru 
+                    a nezapomenutelné zážitky.
+                </p>
+                <ul class="festival-details-list">
+                    <li><strong>Datum:</strong> 15. - 17. července 2025</li>
+                    <li><strong>Místo:</strong> Festival Park, Hradec Králové</li>
+                </ul>
+            </div>
+        </section>
+        <p style="font-size: 14px; color: #ccc; margin-bottom: 50px;">
+            Základní informace o festivalu s fotografií a popisem
+        </p>
+
+        <!-- Map Section -->
+        <section class="map-section">
+            <h2 class="section-title">Mapa festivalového areálu</h2>
+            <div class="map-container">
+                <div class="map-legend">
+                    <h3 class="legend-title">Legenda</h3>
+                    <div class="legend-item">
+                        <div class="legend-color main-stage"></div>
+                        <span>Hlavní pódium</span>
                     </div>
-                    
-                    <div class="detail-section">
-                        <div class="detail-label">Žánr:</div>
-                        <div class="detail-value">Reggae</div>
+                    <div class="legend-item">
+                        <div class="legend-color stage2"></div>
+                        <span>Stage 2</span>
                     </div>
-                    
-                    <div class="detail-section">
-                        <div class="detail-label">Původ:</div>
-                        <div class="detail-value">Česká republika</div>
+                    <div class="legend-item">
+                        <div class="legend-color stage3"></div>
+                        <span>Stage 3</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color food"></div>
+                        <span>Občerstvení</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color toilets"></div>
+                        <span>Toalety</span>
+                    </div>
+                </div>
+                <div class="map-area">
+                    <div class="map-controls">
+                        <button class="map-control-btn" onclick="zoomIn()">+</button>
+                        <button class="map-control-btn" onclick="zoomOut()">−</button>
+                    </div>
+                    <div class="interactive-map" id="festivalMap">
+                        Interaktivní mapa areálu
                     </div>
                 </div>
             </div>
-            
-            <div class="detail-section">
-                <div class="detail-label">Bio:</div>
-                <p class="bio-text">
-                    Kapela vznikla v roce 2015. Od té doby se proslavili svým energickým vystoupením na mnoha festivalech. 
-                    Jejich hudba kombinuje prvky reggae s moderními elektronickými beaty. 
-                    Na festivalu představí svou novou desku "Reggae Sunrise".
-                </p>
+            <p style="font-size: 14px; color: #ccc; margin-top: 20px;">
+                Interaktivní mapa festivalového areálu s legendou a ovládacími prvky
+            </p>
+        </section>
+
+        <!-- Basic Info Cards -->
+        <section class="basic-info">
+            <h2 class="section-title">Základní informace</h2>
+            <div class="info-cards">
+                <div class="info-card">
+                    <div class="info-icon">👥</div>
+                    <h3 class="info-card-title">Kapacita</h3>
+                    <p class="info-card-value">20 000 návštěvníků</p>
+                </div>
+                <div class="info-card">
+                    <div class="info-icon">⚠️</div>
+                    <h3 class="info-card-title">Věkové omezení</h3>
+                    <p class="info-card-value">15+ (s doprovodem)</p>
+                </div>
+                <div class="info-card">
+                    <div class="info-icon">🎵</div>
+                    <h3 class="info-card-title">Pódia</h3>
+                    <p class="info-card-value">3 pódia, 60+ interpretů</p>
+                </div>
             </div>
-            
-            <button class="add-to-program-btn">PŘIDAT DO PROGRAMU</button>
-            
             <p style="font-size: 14px; color: #ccc; margin-top: 30px;">
-                Detail vybraného interpreta s rozšířenými informacemi a biografií
+                Ikonické zobrazení základních informací pro rychlou orientaci
+            </p>
+        </section>
+
+        <!-- Partners Section -->
+        <section class="partners-section">
+            <h2 class="section-title">Partneři festivalu</h2>
+            <div class="partners-grid">
+                <div class="partner-card">
+                    <div class="partner-logo">LOGO</div>
+                    <div class="partner-name">Partner 1</div>
+                </div>
+                <div class="partner-card">
+                    <div class="partner-logo">LOGO</div>
+                    <div class="partner-name">Partner 2</div>
+                </div>
+                <div class="partner-card">
+                    <div class="partner-logo">LOGO</div>
+                    <div class="partner-name">Partner 3</div>
+                </div>
+                <div class="partner-card">
+                    <div class="partner-logo">LOGO</div>
+                    <div class="partner-name">Partner 4</div>
+                </div>
+            </div>
+            <p style="font-size: 14px; color: #ccc; margin-top: 30px;">
+                Loga partnerů a sponzorů festivalu
             </p>
         </section>
     </main>
 
     <footer class="footer">
+        <div class="footer-links">
+            <a href="#" class="footer-link">Kontakt</a>
+            <a href="#" class="footer-link">Podmínky použití</a>
+            <a href="#" class="footer-link">O nás</a>
+            <a href="#" class="footer-link">Pro média</a>
+        </div>
         <div class="footer-text">
             © 2025 Hudební festival | Kontakt | Podmínky použití | O nás | Pro média<br>
-            Platforma a copyright informačních a odkazy
+            Patička s copyright informacemi a odkazy
         </div>
     </footer>
 
     <script>
-        // Genre filter functionality
-        document.querySelectorAll('.genre-btn').forEach(btn => {
+        // Secondary navigation functionality
+        document.querySelectorAll('.secondary-nav-btn').forEach(btn => {
             btn.addEventListener('click', function() {
-                document.querySelectorAll('.genre-btn').forEach(b => b.classList.remove('active'));
+                document.querySelectorAll('.secondary-nav-btn').forEach(b => b.classList.remove('active'));
                 this.classList.add('active');
-                console.log('Genre filter:', this.textContent);
+                console.log('Section changed to:', this.textContent);
             });
         });
 
-        // Alphabet navigation functionality
-        document.querySelectorAll('.alphabet-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                document.querySelectorAll('.alphabet-btn').forEach(b => b.classList.remove('active'));
-                this.classList.add('active');
-                console.log('Alphabet filter:', this.textContent);
+        // Map control functions
+        let mapZoom = 1;
+
+        function zoomIn() {
+            mapZoom = Math.min(mapZoom + 0.2, 3);
+            updateMapZoom();
+            console.log('Zoom in:', mapZoom);
+        }
+
+        function zoomOut() {
+            mapZoom = Math.max(mapZoom - 0.2, 0.5);
+            updateMapZoom();
+            console.log('Zoom out:', mapZoom);
+        }
+
+        function updateMapZoom() {
+            const mapElement = document.getElementById('festivalMap');
+            mapElement.style.transform = `scale(${mapZoom})`;
+            mapElement.style.fontSize = `${24 / mapZoom}px`;
+        }
+
+        // Map interaction
+        document.getElementById('festivalMap').addEventListener('click', function(e) {
+            const rect = this.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            console.log('Map clicked at:', x, y);
+            
+            // Simulate showing location info
+            this.style.background = 'linear-gradient(45deg, rgba(255, 214, 10, 0.3), rgba(255, 183, 0, 0.1))';
+            setTimeout(() => {
+                this.style.background = 'linear-gradient(45deg, rgba(255, 214, 10, 0.1), rgba(255, 183, 0, 0.05))';
+            }, 500);
+        });
+
+        // Info cards hover effects
+        document.querySelectorAll('.info-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-8px) scale(1.02)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(-5px) scale(1)';
             });
         });
 
-        // Search functionality
-        document.querySelector('.search-box').addEventListener('input', function() {
-            console.log('Search term:', this.value);
-        });
-
-        // Action buttons functionality
-        document.querySelectorAll('.action-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                const action = this.textContent;
-                const artistCard = this.closest('.headliner-card, .artist-card');
-                const artistName = artistCard.querySelector('.artist-name').textContent;
+        // Partner cards interaction
+        document.querySelectorAll('.partner-card').forEach(card => {
+            card.addEventListener('click', function() {
+                const partnerName = this.querySelector('.partner-name').textContent;
+                console.log('Partner clicked:', partnerName);
                 
-                if (action === 'DO PROGRAMU') {
-                    console.log('Adding to program:', artistName);
-                    this.textContent = 'PŘIDÁNO ✓';
-                    this.style.background = 'linear-gradient(45deg, #28a745, #20c997)';
-                    setTimeout(() => {
-                        this.textContent = 'DO PROGRAMU';
-                        this.style.background = '';
-                    }, 2000);
-                } else if (action === 'VÍCE') {
-                    console.log('Show details for:', artistName);
-                    // Scroll to detail section
-                    document.querySelector('.artist-detail').scrollIntoView({ 
-                        behavior: 'smooth' 
+                // Simulate partner info popup
+                this.style.background = 'rgba(255, 214, 10, 0.2)';
+                setTimeout(() => {
+                    this.style.background = 'rgba(255, 255, 255, 0.95)';
+                }, 300);
+            });
+        });
+
+        // Smooth scroll for internal links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
                     });
                 }
             });
-        });
-
-        // Pagination functionality
-        document.querySelectorAll('.page-btn:not(.more)').forEach(btn => {
-            btn.addEventListener('click', function() {
-                document.querySelectorAll('.page-btn').forEach(b => b.classList.remove('active'));
-                this.classList.add('active');
-                console.log('Page:', this.textContent);
-            });
-        });
-
-        // Add to program button in detail
-        document.querySelector('.add-to-program-btn').addEventListener('click', function() {
-            console.log('Adding detailed artist to program');
-            this.textContent = 'PŘIDÁNO DO PROGRAMU ✓';
-            this.style.background = 'linear-gradient(45deg, #28a745, #20c997)';
-            setTimeout(() => {
-                this.textContent = 'PŘIDAT DO PROGRAMU';
-                this.style.background = '';
-            }, 3000);
         });
     </script>
 </body>
