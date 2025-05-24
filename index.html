@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Festival Alesto - Hudební festival 2025</title>
+    <title>Festival Alesto - Domů</title>
     <link href="https://fonts.googleapis.com/css2?family=Archivo+Narrow:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * {
@@ -14,855 +14,666 @@
 
         body {
             font-family: 'Archivo Narrow', sans-serif;
-            background: linear-gradient(135deg, #001d3d 0%, #003566 50%, #000814 100%);
+            background: linear-gradient(135deg, #003566 0%, #001d3d 50%, #000814 100%);
             color: white;
+            width: 100%;
+            max-width: 375px;
+            margin: 0 auto;
             min-height: 100vh;
             background-attachment: fixed;
+            overflow-x: hidden;
         }
 
-        /* Mobile Header */
+        /* Header */
         .mobile-header {
-            background: rgba(0, 0, 0, 0.9);
+            background: rgba(0, 29, 61, 0.9);
             backdrop-filter: blur(10px);
             padding: 15px 20px;
-            border-bottom: 2px solid #ffd60a;
-            position: sticky;
-            top: 0;
-            z-index: 100;
+            border-bottom: 2px solid #ffb700;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            border: 2px solid rgba(255, 183, 0, 0.3);
+            border-bottom: 2px solid #ffb700;
+            margin: 0;
         }
 
-        .logo {
+        .logo-box {
+            background: rgba(255, 183, 0, 0.15);
+            border: 2px solid rgba(255, 183, 0, 0.4);
+            border-radius: 8px;
+            padding: 10px 20px;
             font-weight: 700;
-            font-size: 24px;
-            color: #ffd60a;
+            font-size: 16px;
+            color: #ffb700;
             text-transform: uppercase;
-            letter-spacing: 2px;
+            letter-spacing: 1px;
         }
 
-        .menu-toggle {
-            background: none;
-            border: 2px solid #ffd60a;
-            color: #ffd60a;
-            width: 40px;
-            height: 40px;
-            border-radius: 5px;
+        .hamburger-menu {
+            background: rgba(255, 183, 0, 0.15);
+            border: 2px solid rgba(255, 183, 0, 0.4);
+            border-radius: 8px;
+            padding: 10px;
             cursor: pointer;
             display: flex;
             flex-direction: column;
-            justify-content: center;
+            gap: 3px;
             align-items: center;
-            gap: 4px;
-            transition: all 0.3s ease;
+            justify-content: center;
         }
 
-        .menu-toggle:hover {
-            background: rgba(255, 214, 10, 0.1);
-        }
-
-        .menu-toggle span {
+        .hamburger-menu span {
             width: 20px;
             height: 2px;
-            background: #ffd60a;
+            background: #ffb700;
             display: block;
-            transition: all 0.3s ease;
         }
 
-        .nav-description {
-            font-size: 12px;
+        .header-note {
+            font-size: 11px;
             color: #999;
-            margin-top: 8px;
-            padding: 0 20px;
+            padding: 8px 20px;
+            text-align: left;
+            background: rgba(0, 29, 61, 0.3);
         }
 
-        /* Main Banner */
-        .main-banner {
+        /* Banner Section */
+        .banner-section {
             margin: 20px;
-            height: 200px;
-            background: linear-gradient(135deg, rgba(0, 0, 0, 0.8), rgba(0, 29, 61, 0.6));
-            border: 2px solid rgba(255, 214, 10, 0.3);
+            background: rgba(255, 183, 0, 0.1);
+            border: 2px solid rgba(255, 183, 0, 0.3);
             border-radius: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            padding: 80px 20px;
+            text-align: center;
             backdrop-filter: blur(5px);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .main-banner::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(45deg, transparent 30%, rgba(255, 214, 10, 0.1) 50%, transparent 70%);
-            animation: shimmer 3s infinite;
-        }
-
-        @keyframes shimmer {
-            0%, 100% { transform: translateX(-100%); }
-            50% { transform: translateX(100%); }
         }
 
         .banner-title {
-            font-size: 32px;
+            font-size: 24px;
             font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 3px;
-            text-align: center;
-            background: linear-gradient(45deg, #ffd60a, #ffb700);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            z-index: 1;
-            position: relative;
+            letter-spacing: 2px;
+            color: #ffb700;
         }
 
-        .banner-description {
-            font-size: 12px;
+        .banner-note {
+            font-size: 11px;
             color: #999;
-            margin: 8px 20px;
+            margin: 15px 20px;
+            text-align: left;
         }
 
-        /* Action Buttons */
+        /* Main Action Buttons */
         .action-buttons {
-            padding: 0 20px;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
+            margin: 0 20px;
         }
 
-        .action-btn {
-            background: linear-gradient(135deg, rgba(0, 0, 0, 0.8), rgba(0, 29, 61, 0.6));
-            border: 2px solid rgba(255, 214, 10, 0.3);
-            color: white;
-            padding: 18px 25px;
+        .action-button {
+            background: linear-gradient(135deg, #ffb700 0%, #ffc947 100%);
+            border: 2px solid rgba(255, 183, 0, 0.6);
             border-radius: 25px;
+            padding: 18px 20px;
+            margin-bottom: 12px;
+            text-align: center;
             font-family: 'Archivo Narrow', sans-serif;
             font-size: 16px;
             font-weight: 600;
+            color: #001d3d;
             text-transform: uppercase;
             letter-spacing: 1px;
             cursor: pointer;
             transition: all 0.3s ease;
-            backdrop-filter: blur(5px);
-            text-align: center;
+            display: block;
+            text-decoration: none;
+            box-shadow: 0 4px 15px rgba(255, 183, 0, 0.3);
         }
 
-        .action-btn:hover {
-            border-color: #ffd60a;
-            background: linear-gradient(135deg, rgba(255, 214, 10, 0.2), rgba(255, 214, 10, 0.1));
+        .action-button:hover {
+            background: linear-gradient(135deg, #ffc947 0%, #ffb700 100%);
+            border-color: #ffb700;
+            color: #001d3d;
             transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(255, 214, 10, 0.3);
+            box-shadow: 0 8px 25px rgba(255, 183, 0, 0.4);
         }
 
-        .buttons-description {
-            font-size: 12px;
+        .buttons-note {
+            font-size: 11px;
             color: #999;
-            margin: 8px 20px;
+            margin: 15px 20px;
+            text-align: left;
         }
 
-        /* Section Title */
-        .section-title {
-            font-size: 24px;
+        /* Section Headers */
+        .section-header {
+            font-size: 18px;
             font-weight: 700;
-            color: #ffd60a;
-            margin: 30px 20px 20px;
+            color: #ffb700;
             text-transform: uppercase;
-            letter-spacing: 2px;
+            letter-spacing: 1px;
+            margin: 30px 20px 15px 20px;
         }
 
-        /* Aktuality */
-        .aktuality-section {
-            padding: 0 20px;
-        }
-
-        .aktuality-item {
-            background: rgba(0, 0, 0, 0.4);
-            border: 1px solid rgba(255, 214, 10, 0.2);
+        /* News Cards */
+        .news-item {
+            background: rgba(0, 53, 102, 0.6);
+            border: 2px solid rgba(255, 183, 0, 0.2);
             border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 15px;
-            display: flex;
-            gap: 15px;
+            margin: 0 20px 12px 20px;
+            padding: 15px;
             backdrop-filter: blur(5px);
-            transition: all 0.3s ease;
         }
 
-        .aktuality-item:hover {
-            border-color: #ffd60a;
-            background: rgba(255, 214, 10, 0.1);
-            transform: translateY(-2px);
+        .news-content {
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
         }
 
-        .aktuality-photo {
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(45deg, #ffd60a, #ffb700);
-            border-radius: 8px;
+        .news-photo-placeholder {
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 183, 0, 0.3);
+            border: 1px solid rgba(255, 183, 0, 0.5);
+            border-radius: 6px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 14px;
+            font-size: 10px;
             color: #001d3d;
-            font-weight: 700;
+            font-weight: 600;
             flex-shrink: 0;
         }
 
-        .aktuality-content {
+        .news-details {
             flex: 1;
         }
 
-        .aktuality-title {
-            font-size: 16px;
-            font-weight: 700;
-            color: white;
-            margin-bottom: 8px;
-            text-transform: uppercase;
-        }
-
-        .aktuality-text {
+        .news-headline {
             font-size: 14px;
-            color: #ccc;
-            line-height: 1.4;
-            margin-bottom: 10px;
+            font-weight: 700;
+            margin-bottom: 6px;
+            color: white;
         }
 
-        .aktuality-more {
-            background: linear-gradient(45deg, #ffd60a, #ffb700);
-            color: #001d3d;
-            border: none;
-            padding: 8px 15px;
-            border-radius: 5px;
+        .news-summary {
             font-size: 12px;
+            color: #ccc;
+            line-height: 1.3;
+            margin-bottom: 8px;
+        }
+
+        .news-link {
+            background: linear-gradient(135deg, #ffb700 0%, #ffc947 100%);
+            border: 1px solid rgba(255, 183, 0, 0.5);
+            border-radius: 12px;
+            padding: 6px 12px;
+            font-size: 10px;
+            color: #001d3d;
             font-weight: 600;
+            text-transform: uppercase;
             cursor: pointer;
             transition: all 0.3s ease;
-            text-transform: uppercase;
+            font-family: 'Archivo Narrow', sans-serif;
+            display: inline-block;
         }
 
-        .aktuality-more:hover {
+        .news-link:hover {
+            background: linear-gradient(135deg, #ffc947 0%, #ffb700 100%);
+            border-color: #ffb700;
+            color: #001d3d;
             transform: translateY(-1px);
-            box-shadow: 0 5px 15px rgba(255, 214, 10, 0.4);
         }
 
-        .aktuality-description {
-            font-size: 12px;
+        .news-note {
+            font-size: 11px;
             color: #999;
             margin: 15px 20px;
+            text-align: left;
         }
 
-        /* Hlavní interpreti */
-        .interpreti-section {
-            padding: 0 20px;
-        }
-
-        .interpret-item {
-            background: linear-gradient(135deg, rgba(0, 0, 0, 0.8), rgba(0, 29, 61, 0.6));
-            border: 2px solid rgba(255, 214, 10, 0.3);
+        /* Artist Cards */
+        .artist-item {
+            background: rgba(0, 53, 102, 0.6);
+            border: 2px solid rgba(255, 183, 0, 0.2);
             border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 15px;
+            margin: 0 20px 12px 20px;
+            padding: 15px;
+            backdrop-filter: blur(5px);
             display: flex;
             align-items: center;
-            gap: 20px;
-            backdrop-filter: blur(5px);
-            transition: all 0.3s ease;
+            gap: 12px;
         }
 
-        .interpret-item:hover {
-            border-color: #ffd60a;
-            background: linear-gradient(135deg, rgba(255, 214, 10, 0.2), rgba(255, 214, 10, 0.1));
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(255, 214, 10, 0.3);
-        }
-
-        .interpret-photo {
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(45deg, #ffd60a, #ffb700);
+        .artist-photo-placeholder {
+            width: 45px;
+            height: 45px;
+            background: rgba(255, 183, 0, 0.3);
+            border: 1px solid rgba(255, 183, 0, 0.5);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 14px;
+            font-size: 10px;
             color: #001d3d;
-            font-weight: 700;
+            font-weight: 600;
             flex-shrink: 0;
         }
 
-        .interpret-info {
+        .artist-details {
             flex: 1;
         }
 
-        .interpret-name {
-            font-size: 18px;
+        .artist-name {
+            font-size: 14px;
             font-weight: 700;
-            color: #ffd60a;
-            margin-bottom: 5px;
+            margin-bottom: 4px;
+            color: white;
             text-transform: uppercase;
         }
 
-        .interpret-time {
-            font-size: 14px;
-            color: #ccc;
-            font-weight: 500;
+        .artist-schedule {
+            font-size: 12px;
+            color: #ffb700;
+            font-weight: 600;
         }
 
-        .interpret-actions {
+        .artist-controls {
             display: flex;
-            flex-direction: column;
             gap: 8px;
         }
 
-        .interpret-btn {
-            width: 30px;
-            height: 30px;
-            border: 2px solid rgba(255, 214, 10, 0.5);
-            background: rgba(0, 0, 0, 0.6);
-            color: #ffd60a;
+        .control-icon {
+            width: 28px;
+            height: 28px;
+            background: rgba(255, 183, 0, 0.3);
+            border: 1px solid rgba(255, 183, 0, 0.5);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
             transition: all 0.3s ease;
-            font-size: 16px;
+            font-size: 12px;
+            color: #001d3d;
+            font-weight: bold;
         }
 
-        .interpret-btn:hover {
-            border-color: #ffd60a;
-            background: rgba(255, 214, 10, 0.2);
+        .control-icon:hover {
+            background: linear-gradient(135deg, #ffb700 0%, #ffc947 100%);
+            border-color: #ffb700;
+            color: #001d3d;
             transform: scale(1.1);
         }
 
+        /* Show More Button */
         .show-more-btn {
-            background: linear-gradient(135deg, rgba(0, 0, 0, 0.8), rgba(0, 29, 61, 0.6));
-            border: 2px solid rgba(255, 214, 10, 0.3);
-            color: #ffd60a;
-            padding: 15px 25px;
-            border-radius: 25px;
-            font-family: 'Archivo Narrow', sans-serif;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(5px);
+            background: linear-gradient(135deg, #ffb700 0%, #ffc947 100%);
+            border: 2px solid rgba(255, 183, 0, 0.6);
+            border-radius: 20px;
+            padding: 15px 20px;
+            margin: 15px 20px;
             text-align: center;
-            margin: 20px;
+            font-family: 'Archivo Narrow', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            color: #001d3d;
             text-transform: uppercase;
             letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: block;
         }
 
         .show-more-btn:hover {
-            border-color: #ffd60a;
-            background: linear-gradient(135deg, rgba(255, 214, 10, 0.2), rgba(255, 214, 10, 0.1));
+            background: linear-gradient(135deg, #ffc947 0%, #ffb700 100%);
+            border-color: #ffb700;
+            color: #001d3d;
             transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 183, 0, 0.3);
         }
 
-        .interpreti-description {
-            font-size: 12px;
+        .artists-note {
+            font-size: 11px;
             color: #999;
-            margin: 15px 20px;
+            margin: 0 20px 20px 20px;
+            text-align: left;
         }
 
         /* Bottom Navigation */
-        .bottom-nav {
-            background: rgba(0, 0, 0, 0.9);
+        .bottom-navigation {
+            background: rgba(0, 29, 61, 0.9);
+            border: 2px solid rgba(255, 183, 0, 0.3);
+            border-radius: 0;
+            margin: 0;
+            padding: 12px 0;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
             backdrop-filter: blur(10px);
-            border-top: 2px solid rgba(255, 214, 10, 0.3);
-            padding: 15px 0;
-            margin-top: 30px;
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
         }
 
-        .nav-item {
+        .nav-button {
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 5px;
+            gap: 4px;
             cursor: pointer;
             transition: all 0.3s ease;
-            padding: 10px;
+            text-decoration: none;
+            color: white;
+            padding: 8px 12px;
         }
 
-        .nav-item:hover {
-            background: rgba(255, 214, 10, 0.1);
+        .nav-button.active {
+            color: #ffb700;
         }
 
-        .nav-item.active {
-            color: #ffd60a;
+        .nav-button:hover {
+            color: #ffb700;
+            transform: translateY(-2px);
         }
 
         .nav-icon {
-            width: 30px;
-            height: 30px;
-            border: 2px solid currentColor;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 16px;
+            font-size: 20px;
+            margin-bottom: 2px;
         }
 
-        .nav-label {
-            font-size: 12px;
+        .nav-button.active .nav-icon {
+            color: #ffb700;
+        }
+
+        .nav-text {
+            font-size: 10px;
             font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
         }
 
-        .nav-description {
-            font-size: 12px;
+        .nav-note {
+            font-size: 11px;
             color: #999;
             margin: 8px 20px;
+            text-align: left;
         }
 
-        /* Newsletter */
+        /* Newsletter Section */
         .newsletter-section {
-            margin: 30px 20px;
-            background: rgba(0, 0, 0, 0.4);
-            border: 1px solid rgba(255, 214, 10, 0.2);
-            border-radius: 15px;
-            padding: 25px;
+            background: rgba(0, 53, 102, 0.6);
+            border: 2px solid rgba(255, 183, 0, 0.3);
+            border-radius: 12px;
+            margin: 20px;
+            padding: 20px;
             backdrop-filter: blur(5px);
         }
 
         .newsletter-title {
-            font-size: 18px;
+            font-size: 14px;
             font-weight: 700;
-            color: #ffd60a;
-            margin-bottom: 15px;
+            color: #ffb700;
             text-transform: uppercase;
             letter-spacing: 1px;
-        }
-
-        .newsletter-form {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
+            margin-bottom: 12px;
         }
 
         .newsletter-input {
-            background: rgba(0, 0, 0, 0.6);
-            border: 2px solid rgba(255, 214, 10, 0.3);
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 183, 0, 0.3);
+            border-radius: 20px;
+            padding: 12px 16px;
+            width: 100%;
             color: white;
-            padding: 15px;
-            border-radius: 8px;
             font-family: 'Archivo Narrow', sans-serif;
-            font-size: 16px;
+            font-size: 14px;
+            margin-bottom: 12px;
             transition: all 0.3s ease;
-        }
-
-        .newsletter-input:focus {
-            border-color: #ffd60a;
-            outline: none;
-            box-shadow: 0 0 10px rgba(255, 214, 10, 0.3);
         }
 
         .newsletter-input::placeholder {
             color: #999;
         }
 
+        .newsletter-input:focus {
+            border-color: #ffb700;
+            outline: none;
+            box-shadow: 0 0 15px rgba(255, 183, 0, 0.4);
+        }
+
         .newsletter-submit {
-            background: linear-gradient(45deg, #ffd60a, #ffb700);
-            color: #001d3d;
-            border: none;
-            padding: 15px 25px;
-            border-radius: 8px;
+            background: linear-gradient(135deg, #ffb700 0%, #ffc947 100%);
+            border: 2px solid rgba(255, 183, 0, 0.6);
+            border-radius: 20px;
+            padding: 12px 16px;
+            width: 100%;
             font-family: 'Archivo Narrow', sans-serif;
-            font-size: 16px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.3s ease;
+            font-size: 14px;
+            font-weight: 600;
+            color: #001d3d;
             text-transform: uppercase;
             letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
         }
 
         .newsletter-submit:hover {
+            background: linear-gradient(135deg, #ffc947 0%, #ffb700 100%);
+            border-color: #ffb700;
+            color: #001d3d;
             transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(255, 214, 10, 0.5);
+            box-shadow: 0 6px 20px rgba(255, 183, 0, 0.3);
         }
 
-        .newsletter-description {
-            font-size: 12px;
+        .newsletter-note {
+            font-size: 11px;
             color: #999;
             margin-top: 10px;
+            text-align: left;
         }
 
         /* Footer */
-        .footer {
-            background: linear-gradient(135deg, rgba(0, 0, 0, 0.8), rgba(0, 29, 61, 0.6));
-            padding: 25px 20px;
+        .footer-section {
+            background: rgba(0, 53, 102, 0.6);
+            border: 2px solid rgba(255, 183, 0, 0.3);
+            border-radius: 12px;
+            margin: 20px;
+            padding: 15px;
             text-align: center;
-            border-top: 2px solid rgba(255, 214, 10, 0.3);
-            backdrop-filter: blur(15px);
+            backdrop-filter: blur(5px);
         }
 
-        .footer-text {
-            font-size: 14px;
-            color: #999;
-            font-weight: 500;
-            letter-spacing: 0.5px;
-            line-height: 1.6;
-        }
-
-        .footer-description {
+        .footer-content {
             font-size: 12px;
-            color: #666;
-            margin-top: 10px;
+            color: white;
+            font-weight: 500;
+            line-height: 1.4;
+        }
+
+        .footer-note {
+            font-size: 11px;
+            color: #999;
+            margin-top: 8px;
+            text-align: left;
         }
     </style>
 </head>
 <body>
-    <!-- Mobile Header -->
+    <!-- Header with Logo and Hamburger -->
     <header class="mobile-header">
-        <div class="logo">LOGO</div>
-        <button class="menu-toggle" onclick="toggleMenu()">
+        <div class="logo-box">LOGO</div>
+        <button class="hamburger-menu">
             <span></span>
             <span></span>
             <span></span>
         </button>
     </header>
-    <div class="nav-description">Logo a hamburger menu pro mobilní navigaci</div>
+    <div class="header-note">Logo a hamburger menu pro mobilní navigaci</div>
 
-    <!-- Main Banner -->
-    <section class="main-banner">
+    <!-- Banner Section -->
+    <section class="banner-section">
         <h1 class="banner-title">BANNER FESTIVALU</h1>
     </section>
-    <div class="banner-description">Hlavní vizuální prvek upravený pro mobilní zobrazení</div>
+    <div class="banner-note">Hlavní vizuální prvek upravený pro mobilní zobrazení</div>
 
-    <!-- Action Buttons -->
+    <!-- Main Action Buttons -->
     <div class="action-buttons">
-        <button class="action-btn" onclick="navigateTo('program')">PROGRAM FESTIVALU</button>
-        <button class="action-btn" onclick="navigateTo('tickets')">NÁKUP VSTUPENEK</button>
-        <button class="action-btn" onclick="navigateTo('map')">MAPA AREÁLU</button>
-        <button class="action-btn" onclick="navigateTo('myprogram')">MŮJ PROGRAM</button>
+        <a href="#" class="action-button">PROGRAM FESTIVALU</a>
+        <a href="#" class="action-button">NÁKUP VSTUPENEK</a>
+        <a href="#" class="action-button">MAPA AREÁLU</a>
+        <a href="#" class="action-button">MŮJ PROGRAM</a>
     </div>
-    <div class="buttons-description">Akční tlačítka s hlavními funkcemi aplikace</div>
+    <div class="buttons-note">Akční tlačítka s hlavními funkcemi aplikace</div>
 
-    <!-- Aktuality -->
-    <h2 class="section-title">AKTUALITY</h2>
-    <div class="aktuality-section">
-        <div class="aktuality-item">
-            <div class="aktuality-photo">FOTO</div>
-            <div class="aktuality-content">
-                <h3 class="aktuality-title">Nově potvrzení interpreti</h3>
-                <p class="aktuality-text">Informace o nově potvrzeném vystoupení populární kapely na hlavním pódiu v pátek večer.</p>
-                <button class="aktuality-more" onclick="showMore('interpreti')">VÍCE</button>
-            </div>
-        </div>
+    <!-- News Section -->
+    <h2 class="section-header">AKTUALITY</h2>
 
-        <div class="aktuality-item">
-            <div class="aktuality-photo">FOTO</div>
-            <div class="aktuality-content">
-                <h3 class="aktuality-title">Změny v programu</h3>
-                <p class="aktuality-text">Oznámení o změně času vystoupení kapely XYZ na Stage 2 v sobotu.</p>
-                <button class="aktuality-more" onclick="showMore('program')">VÍCE</button>
-            </div>
-        </div>
-    </div>
-    <div class="aktuality-description">Boxy aktualit s vertikálním rozložením pro mobilní zobrazení</div>
-
-    <!-- Hlavní interpreti -->
-    <h2 class="section-title">HLAVNÍ INTERPRETI</h2>
-    <div class="interpreti-section">
-        <div class="interpret-item">
-            <div class="interpret-photo">FOTO</div>
-            <div class="interpret-info">
-                <h3 class="interpret-name">INTERPRET 1</h3>
-                <p class="interpret-time">Pá 20:00 - Hlavní pódium</p>
-            </div>
-            <div class="interpret-actions">
-                <button class="interpret-btn" onclick="addToFavorites(1)" title="Přidat k oblíbeným">★</button>
-                <button class="interpret-btn" onclick="showInfo(1)" title="Více informací">i</button>
-            </div>
-        </div>
-
-        <div class="interpret-item">
-            <div class="interpret-photo">FOTO</div>
-            <div class="interpret-info">
-                <h3 class="interpret-name">INTERPRET 2</h3>
-                <p class="interpret-time">So 19:30 - Stage 2</p>
-            </div>
-            <div class="interpret-actions">
-                <button class="interpret-btn" onclick="addToFavorites(2)" title="Přidat k oblíbeným">★</button>
-                <button class="interpret-btn" onclick="showInfo(2)" title="Více informací">i</button>
-            </div>
-        </div>
-
-        <div class="interpret-item">
-            <div class="interpret-photo">FOTO</div>
-            <div class="interpret-info">
-                <h3 class="interpret-name">INTERPRET 3</h3>
-                <p class="interpret-time">So 21:00 - Hlavní pódium</p>
-            </div>
-            <div class="interpret-actions">
-                <button class="interpret-btn" onclick="addToFavorites(3)" title="Přidat k oblíbeným">★</button>
-                <button class="interpret-btn" onclick="showInfo(3)" title="Více informací">i</button>
+    <div class="news-item">
+        <div class="news-content">
+            <div class="news-photo-placeholder">FOTO</div>
+            <div class="news-details">
+                <h3 class="news-headline">Nově potvrzení interpreti</h3>
+                <p class="news-summary">Informace o nově potvrzeném vystoupení populární kapely na hlavním pódiu v pátek večer.</p>
+                <button class="news-link">VÍCE</button>
             </div>
         </div>
     </div>
 
-    <button class="show-more-btn" onclick="showAllInterpreti()">ZOBRAZIT VÍCE ↓</button>
-    <div class="interpreti-description">Seznam interpretů s optimalizovaným zobrazením pro mobilní verzi</div>
-
-    <!-- Newsletter -->
-    <div class="newsletter-section">
-        <h3 class="newsletter-title">PŘIHLASTE SE K ODBĚRU NOVINEK</h3>
-        <form class="newsletter-form" onsubmit="subscribeNewsletter(event)">
-            <input type="email" class="newsletter-input" placeholder="Váš e-mail" required>
-            <button type="submit" class="newsletter-submit">PŘIHLÁSIT SE</button>
-        </form>
-        <div class="newsletter-description">Formulář pro přihlášení k odběru novinek optimalizovaný pro mobil</div>
+    <div class="news-item">
+        <div class="news-content">
+            <div class="news-photo-placeholder">FOTO</div>
+            <div class="news-details">
+                <h3 class="news-headline">Změny v programu</h3>
+                <p class="news-summary">Oznámení o změně času vystoupení kapely XYZ na Stage 2 v sobotu.</p>
+                <button class="news-link">VÍCE</button>
+            </div>
+        </div>
     </div>
+
+    <div class="news-note">Boxy aktualit s vertikálním rozložením pro mobilní zobrazení</div>
+
+    <!-- Artists Section -->
+    <h2 class="section-header">HLAVNÍ INTERPRETI</h2>
+
+    <div class="artist-item">
+        <div class="artist-photo-placeholder">FOTO</div>
+        <div class="artist-details">
+            <h3 class="artist-name">INTERPRET 1</h3>
+            <p class="artist-schedule">Pá 20:00 - Hlavní pódium</p>
+        </div>
+        <div class="artist-controls">
+            <button class="control-icon">★</button>
+            <button class="control-icon">i</button>
+        </div>
+    </div>
+
+    <div class="artist-item">
+        <div class="artist-photo-placeholder">FOTO</div>
+        <div class="artist-details">
+            <h3 class="artist-name">INTERPRET 2</h3>
+            <p class="artist-schedule">So 19:30 - Stage 2</p>
+        </div>
+        <div class="artist-controls">
+            <button class="control-icon">★</button>
+            <button class="control-icon">i</button>
+        </div>
+    </div>
+
+    <div class="artist-item">
+        <div class="artist-photo-placeholder">FOTO</div>
+        <div class="artist-details">
+            <h3 class="artist-name">INTERPRET 3</h3>
+            <p class="artist-schedule">So 21:00 - Hlavní pódium</p>
+        </div>
+        <div class="artist-controls">
+            <button class="control-icon">★</button>
+            <button class="control-icon">i</button>
+        </div>
+    </div>
+
+    <button class="show-more-btn">ZOBRAZIT VÍCE ↓</button>
+    <div class="artists-note">Seznam interpretů s optimalizovaným zobrazením pro mobilní verzi</div>
 
     <!-- Bottom Navigation -->
-    <nav class="bottom-nav">
-        <div class="nav-item active" onclick="navigateBottom('home')">
+    <nav class="bottom-navigation">
+        <a href="#" class="nav-button active">
             <div class="nav-icon">🏠</div>
-            <div class="nav-label">DOMŮ</div>
-        </div>
-        <div class="nav-item" onclick="navigateBottom('program')">
+            <span class="nav-text">DOMŮ</span>
+        </a>
+        <a href="#" class="nav-button">
             <div class="nav-icon">📅</div>
-            <div class="nav-label">PROGRAM</div>
-        </div>
-        <div class="nav-item" onclick="navigateBottom('map')">
+            <span class="nav-text">PROGRAM</span>
+        </a>
+        <a href="#" class="nav-button">
             <div class="nav-icon">🗺️</div>
-            <div class="nav-label">MAPA</div>
-        </div>
-        <div class="nav-item" onclick="navigateBottom('profile')">
+            <span class="nav-text">MAPA</span>
+        </a>
+        <a href="#" class="nav-button">
             <div class="nav-icon">👤</div>
-            <div class="nav-label">PROFIL</div>
-        </div>
+            <span class="nav-text">PROFIL</span>
+        </a>
     </nav>
-    <div class="nav-description">Spodní navigace pro rychlý přístup k hlavním funkcím</div>
+    <div class="nav-note">Spodní navigace pro rychlý přístup k hlavním funkcím</div>
+
+    <!-- Newsletter Section -->
+    <div class="newsletter-section">
+        <h3 class="newsletter-title">PŘIHLASTE SE K ODBĚRU NOVINEK</h3>
+        <input type="email" class="newsletter-input" placeholder="Váš e-mail">
+        <button class="newsletter-submit">PŘIHLÁSIT SE</button>
+        <div class="newsletter-note">Formulář pro přihlášení k odběru novinek optimalizovaný pro mobil</div>
+    </div>
 
     <!-- Footer -->
-    <footer class="footer">
-        <div class="footer-text">
+    <footer class="footer-section">
+        <div class="footer-content">
             © 2025 Hudební festival<br>
             Kontakt | Podmínky | O nás
         </div>
-        <div class="footer-description">Patička s informacemi přizpůsobená pro mobilní zobrazení</div>
+        <div class="footer-note">Patička s informacemi přizpůsobená pro mobilní zobrazení</div>
     </footer>
 
     <script>
-        // Menu toggle functionality
-        function toggleMenu() {
-            const toggle = document.querySelector('.menu-toggle');
-            toggle.style.transform = toggle.style.transform === 'rotate(90deg)' ? 'rotate(0deg)' : 'rotate(90deg)';
-            
-            // Here you would typically show/hide a mobile menu
-            console.log('Menu toggled');
-            showNotification('Menu otevřeno');
-        }
+        // Hamburger menu functionality
+        document.querySelector('.hamburger-menu').addEventListener('click', function() {
+            console.log('Hamburger menu clicked');
+        });
 
-        // Navigation functions
-        function navigateTo(section) {
-            console.log('Navigating to:', section);
-            showNotification(`Přechod na ${section.toUpperCase()}`);
-            
-            // Visual feedback
-            event.target.style.transform = 'translateY(-4px) scale(1.02)';
-            setTimeout(() => {
-                event.target.style.transform = 'translateY(-2px) scale(1)';
-            }, 200);
-        }
-
-        function navigateBottom(section) {
-            // Remove active class from all nav items
-            document.querySelectorAll('.nav-item').forEach(item => {
-                item.classList.remove('active');
-            });
-            
-            // Add active class to clicked item
-            event.currentTarget.classList.add('active');
-            
-            console.log('Bottom nav:', section);
-            showNotification(`${section.toUpperCase()} vybrán`);
-        }
-
-        // Aktuality functions
-        function showMore(type) {
-            console.log('Show more:', type);
-            showNotification(`Zobrazuji více informací o ${type}`);
-            
-            // Visual feedback
-            event.target.style.transform = 'scale(0.95)';
-            setTimeout(() => {
-                event.target.style.transform = 'scale(1)';
-            }, 150);
-        }
-
-        // Interpreti functions
-        function addToFavorites(interpretId) {
-            console.log('Added to favorites:', interpretId);
-            showNotification(`Interpret ${interpretId} přidán k oblíbeným`);
-            
-            // Visual feedback
-            event.target.style.background = 'linear-gradient(45deg, #ffd60a, #ffb700)';
-            event.target.style.color = '#001d3d';
-            setTimeout(() => {
-                event.target.style.background = '';
-                event.target.style.color = '';
-            }, 1000);
-        }
-
-        function showInfo(interpretId) {
-            console.log('Show info for interpret:', interpretId);
-            showNotification(`Zobrazuji informace o interpretu ${interpretId}`);
-            
-            // Visual feedback
-            event.target.style.transform = 'scale(1.2) rotate(360deg)';
-            setTimeout(() => {
-                event.target.style.transform = 'scale(1)';
-            }, 300);
-        }
-
-        function showAllInterpreti() {
-            console.log('Show all interpreti');
-            showNotification('Načítám všechny interprety...');
-            
-            // Visual feedback
-            event.target.style.transform = 'translateY(-4px)';
-            setTimeout(() => {
-                event.target.style.transform = 'translateY(-2px)';
-            }, 200);
-        }
-
-        // Newsletter subscription
-        function subscribeNewsletter(event) {
-            event.preventDefault();
-            
-            const email = event.target.querySelector('.newsletter-input').value;
-            console.log('Newsletter subscription:', email);
-            
-            const submitBtn = event.target.querySelector('.newsletter-submit');
-            const originalText = submitBtn.textContent;
-            
-            submitBtn.textContent = 'PŘIHLAŠUJI...';
-            submitBtn.disabled = true;
-            
-            setTimeout(() => {
-                showNotification('Úspěšně přihlášeno k odběru novinek!');
-                event.target.reset();
-                submitBtn.textContent = originalText;
-                submitBtn.disabled = false;
-            }, 2000);
-        }
-
-        // Notification system
-        function showNotification(message) {
-            const notification = document.createElement('div');
-            notification.style.cssText = `
-                position: fixed;
-                top: 80px;
-                left: 20px;
-                right: 20px;
-                background: linear-gradient(45deg, #ffd60a, #ffb700);
-                color: #001d3d;
-                padding: 15px 20px;
-                border-radius: 10px;
-                font-weight: 700;
-                z-index: 1000;
-                box-shadow: 0 10px 25px rgba(255, 214, 10, 0.5);
-                animation: slideInDown 0.3s ease;
-                text-align: center;
-            `;
-            notification.textContent = message;
-            
-            document.body.appendChild(notification);
-            
-            setTimeout(() => {
-                notification.style.animation = 'slideOutUp 0.3s ease';
-                setTimeout(() => {
-                    notification.remove();
-                }, 300);
-            }, 3000);
-        }
-
-        // Add CSS for notification animations
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes slideInDown {
-                from { transform: translateY(-100%); opacity: 0; }
-                to { transform: translateY(0); opacity: 1; }
-            }
-            @keyframes slideOutUp {
-                from { transform: translateY(0); opacity: 1; }
-                to { transform: translateY(-100%); opacity: 0; }
-            }
-        `;
-        document.head.appendChild(style);
-
-        // Add touch interactions for mobile
-        document.querySelectorAll('.action-btn, .aktuality-item, .interpret-item').forEach(element => {
-            element.addEventListener('touchstart', function() {
-                this.style.transform = 'scale(0.98)';
-            });
-            
-            element.addEventListener('touchend', function() {
-                this.style.transform = '';
+        // Action buttons
+        document.querySelectorAll('.action-button').forEach(button => {
+            button.addEventListener('click', function() {
+                console.log('Action button clicked:', this.textContent);
             });
         });
 
-        // Auto-update time for interpreti (simulate live data)
-        setInterval(() => {
-            const timeElements = document.querySelectorAll('.interpret-time');
-            timeElements.forEach(element => {
-                if (Math.random() < 0.1) { // 10% chance to update
-                    element.style.color = '#ffd60a';
-                    setTimeout(() => {
-                        element.style.color = '#ccc';
-                    }, 1000);
-                }
+        // News more buttons
+        document.querySelectorAll('.news-link').forEach(button => {
+            button.addEventListener('click', function() {
+                console.log('News more button clicked');
             });
-        }, 10000);
-
-        // Swipe functionality for mobile
-        let startX = 0;
-        let startY = 0;
-        
-        document.addEventListener('touchstart', function(e) {
-            startX = e.touches[0].clientX;
-            startY = e.touches[0].clientY;
-        });
-        
-        document.addEventListener('touchend', function(e) {
-            if (!startX || !startY) return;
-            
-            let endX = e.changedTouches[0].clientX;
-            let endY = e.changedTouches[0].clientY;
-            
-            let diffX = startX - endX;
-            let diffY = startY - endY;
-            
-            if (Math.abs(diffX) > Math.abs(diffY)) {
-                if (Math.abs(diffX) > 50) {
-                    if (diffX > 0) {
-                        // Swipe left
-                        console.log('Swipe left detected');
-                    } else {
-                        // Swipe right
-                        console.log('Swipe right detected');
-                    }
-                }
-            }
-            
-            startX = 0;
-            startY = 0;
         });
 
-        // Initialize page
-        document.addEventListener('DOMContentLoaded', function() {
-            console.log('Mobile homepage loaded');
-            showNotification('Vítejte na Festival Alesto!');
+        // Artist control buttons
+        document.querySelectorAll('.control-icon').forEach(button => {
+            button.addEventListener('click', function() {
+                console.log('Artist control clicked:', this.textContent);
+            });
+        });
+
+        // Show more button
+        document.querySelector('.show-more-btn').addEventListener('click', function() {
+            console.log('Show more artists clicked');
+        });
+
+        // Newsletter form
+        document.querySelector('.newsletter-submit').addEventListener('click', function() {
+            const email = document.querySelector('.newsletter-input').value;
+            console.log('Newsletter signup:', email);
+        });
+
+        // Bottom navigation
+        document.querySelectorAll('.nav-button').forEach(button => {
+            button.addEventListener('click', function() {
+                document.querySelectorAll('.nav-button').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                console.log('Navigation clicked:', this.querySelector('.nav-text').textContent);
+            });
         });
     </script>
 </body>
